@@ -1,12 +1,11 @@
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-
-import javafx.scene.canvas.*;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
@@ -21,30 +20,32 @@ public class GameScene extends Pane implements Runnable {
     private ArrayList<Point> cell = new ArrayList<Point>(0);
     private int gameSceneWidth;
     private int gameSceneHeight;
-    private int CELL_SIZE = GameOfLife.getCellSize();
+
+    private int CELL_SIZE = 10;
+
     private int ANIMATION_SPEED = 20;
     private Canvas canvas = new Canvas(gameSceneWidth, gameSceneHeight);
+
+    private int ifAliveRuleOne = 3;
+    private int ifAliveRuleTwo = 2;
+    private int ifDeadRule = 3;
 
     private Label generationLabel;
     private int evolutionNum = 0;
 
-
     public GameScene() {
-
-
         gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
         gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
 
         generationLabel = new Label("Number of generation: " + evolutionNum);
         getChildren().add(generationLabel);
-
         getChildren().add(canvas);
 
         widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
                 gameSceneWidth = newSceneWidth.intValue();
-                gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE+1);
+                gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE + 1);
                 updateArraySize();
             }
         });
@@ -53,7 +54,7 @@ public class GameScene extends Pane implements Runnable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
                 gameSceneHeight = newSceneHeight.intValue();
-                gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE+1);
+                gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE + 1);
                 updateArraySize();
 
             }
@@ -75,13 +76,12 @@ public class GameScene extends Pane implements Runnable {
     }
 
 
-
     @Override
     protected void layoutChildren() {
         super.layoutChildren();
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        canvas.setWidth(gameSceneWidth - CELL_SIZE+1);
-        canvas.setHeight(gameSceneHeight - CELL_SIZE+1);
+        canvas.setWidth(gameSceneWidth - CELL_SIZE + 1);
+        canvas.setHeight(gameSceneHeight - CELL_SIZE + 1);
 
         generationLabel.setText("Number of generation: " + String.valueOf(evolutionNum));
 
@@ -97,24 +97,25 @@ public class GameScene extends Pane implements Runnable {
                         CELL_SIZE);
             }
         } catch (ConcurrentModificationException e) {
-        } catch (NullPointerException e ){
+        } catch (NullPointerException e) {
         }
 
         try {
-            for (int i = 0; i <= gameSceneWidth/CELL_SIZE; i++) {
+            for (int i = 0; i <= gameSceneWidth / CELL_SIZE; i++) {
                 gc.strokeLine(((i * CELL_SIZE) + CELL_SIZE),
                         CELL_SIZE,
                         (i * CELL_SIZE) + CELL_SIZE,
-                        CELL_SIZE + (CELL_SIZE * gameSceneHeight/CELL_SIZE));
+                        CELL_SIZE + (CELL_SIZE * gameSceneHeight / CELL_SIZE));
             }
 
-            for (int i = 0; i <= gameSceneHeight/CELL_SIZE; i++) {
+            for (int i = 0; i <= gameSceneHeight / CELL_SIZE; i++) {
                 gc.strokeLine(CELL_SIZE,
                         ((i * CELL_SIZE) + CELL_SIZE),
-                        CELL_SIZE * (gameSceneWidth/CELL_SIZE),
+                        CELL_SIZE * (gameSceneWidth / CELL_SIZE),
                         ((i * CELL_SIZE) + CELL_SIZE));
             }
-        } catch (NullPointerException e) {}
+        } catch (NullPointerException e) {
+        }
     }
 
 
@@ -137,7 +138,7 @@ public class GameScene extends Pane implements Runnable {
         ArrayList<Point> removeList = new ArrayList<Point>(0);
 
         for (Point current : cell) {
-            if ((current.x > gameSceneWidth/CELL_SIZE-3) || (current.y > gameSceneHeight/CELL_SIZE-3)) {
+            if ((current.x > gameSceneWidth / CELL_SIZE - 3) || (current.y > gameSceneHeight / CELL_SIZE - 3)) {
                 removeList.add(current);
             }
         }
@@ -145,68 +146,77 @@ public class GameScene extends Pane implements Runnable {
         requestLayout();
     }
 
-    private void resetBoard(){
+    private void resetBoard() {
         cell.clear();
     }
 
-    public void resetAll(){
+    public void resetAll() {
         cell.clear();
         evolutionNum = 0;
         requestLayout();
     }
 
+    public void setANIMATION_SPEED(int ANIMATION_SPEED) {
+        this.ANIMATION_SPEED = ANIMATION_SPEED;
+    }
+
+
+    public void setCELL_SIZE(int CELL_SIZE) {
+        this.CELL_SIZE = CELL_SIZE;
+    }
+
     @Override
     public void run() {
-
-        boolean[][] cellsBoard = new boolean[gameSceneWidth/CELL_SIZE+25][gameSceneHeight/CELL_SIZE+25];
-        try {
-            for (Point current : cell) {
-                cellsBoard[current.x + 1][current.y + 1] = true;
+        while (true) {
+            boolean[][] cellsBoard = new boolean[gameSceneWidth / CELL_SIZE + 25][gameSceneHeight / CELL_SIZE + 25];
+            try {
+                for (int i = 0; i < cell.size(); i++) {
+                    cellsBoard[cell.get(i).x + 1][cell.get(i).y + 1] = true;
+                }
+            } catch (ConcurrentModificationException e) {
+                System.out.println("Concurrent at thread start");
+            } catch (NullPointerException e) {
+                System.out.println("Nullpointer at thread start");
             }
-        }catch (ConcurrentModificationException e) {
-            System.out.println("Concurrent at thread start");
-        }catch (NullPointerException e){
-            System.out.println("Nullpointer at thread start");
-        };
 
-        ArrayList<Point> nextGeneration = new ArrayList<Point>(0);
+            ArrayList<Point> nextGeneration = new ArrayList<Point>(0);
 
-        for(int i = 1; i < cellsBoard.length-1; i++){
-            for(int j = 1; j < cellsBoard[0].length-1; j++){
-                int neighbours = 0;
-                if(cellsBoard[i-1][j-1]) neighbours++;
-                if(cellsBoard[i][j-1]) neighbours++;
-                if(cellsBoard[i+1][j-1]) neighbours++;
-                if(cellsBoard[i-1][j]) neighbours++;
-                if(cellsBoard[i+1][j]) neighbours++;
-                if(cellsBoard[i-1][j+1]) neighbours++;
-                if(cellsBoard[i][j+1]) neighbours++;
-                if(cellsBoard[i+1][j+1]) neighbours++;
-                if(cellsBoard[i][j]) {
-                    if ((neighbours == 2) || (neighbours == 3)) {
-                        nextGeneration.add(new Point(i - 1, j - 1));
-                    }
-                }else{
-                    if(neighbours == 3){
-                        nextGeneration.add(new Point(i - 1, j- 1));
+            for (int i = 1; i < cellsBoard.length - 1; i++) {
+                for (int j = 1; j < cellsBoard[0].length - 1; j++) {
+                    int neighbours = 0;
+                    if (cellsBoard[i - 1][j - 1]) neighbours++;
+                    if (cellsBoard[i][j - 1]) neighbours++;
+                    if (cellsBoard[i + 1][j - 1]) neighbours++;
+                    if (cellsBoard[i - 1][j]) neighbours++;
+                    if (cellsBoard[i + 1][j]) neighbours++;
+                    if (cellsBoard[i - 1][j + 1]) neighbours++;
+                    if (cellsBoard[i][j + 1]) neighbours++;
+                    if (cellsBoard[i + 1][j + 1]) neighbours++;
+                    if (cellsBoard[i][j]) {
+                        if ((neighbours == ifAliveRuleOne) || (neighbours == ifAliveRuleTwo)) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == ifDeadRule) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
                     }
                 }
             }
-        }
 
-        try {
-            evolutionNum++;
-            resetBoard();
-            cell.addAll(nextGeneration);
-            requestLayout();
-            Thread.sleep(1000 / ANIMATION_SPEED);
-            run();
+            try {
+                evolutionNum++;
+                resetBoard();
+                cell.addAll(nextGeneration);
+                requestLayout();
+                Thread.sleep(1000 / (ANIMATION_SPEED + 1));
 
-        } catch (InterruptedException e) {
+            } catch (InterruptedException e) {
 
-        } catch (StackOverflowError e){
+            } catch (StackOverflowError e) {
 
-            System.out.println("Overflow error");
+                System.out.println("Overflow error");
+            }
         }
     }
 }

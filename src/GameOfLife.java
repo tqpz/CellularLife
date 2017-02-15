@@ -1,17 +1,10 @@
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.*;
-import javafx.scene.shape.*;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -20,11 +13,11 @@ import javafx.stage.Stage;
 public class GameOfLife extends Application {
     private static final int PRIMARY_STAGE_HEIGHT = 600;
     private static final int PRIMARY_STAGE_WIDTH = 800;
-    private static final int CELL_SIZE = 10;
 
     private MenuBar menuBar;
-    private Menu fileMenu, gameMenu, optionMenu, loadMenu;
-    private MenuItem fm_exit, gm_start, gm_stop, gm_reset, om_speed, om_rules, lm_loadRule, lm_loadStruct;
+    private Menu fileMenu, gameMenu, rulesMenu, loadMenu, speedMenu, sizeMenu;
+    private MenuItem fm_exit, gm_start, gm_stop, gm_reset, rm_rules, lm_loadRule, lm_loadStruct;
+    private CustomMenuItem om_slider, sm_slider;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -33,11 +26,11 @@ public class GameOfLife extends Application {
 
         Thread test = new Thread(gameScene);
 
-
         primaryStage.setTitle("Game of Life");
 
         Scene scene = new Scene(root, PRIMARY_STAGE_WIDTH, PRIMARY_STAGE_HEIGHT);
-
+        primaryStage.setMinWidth(600);
+        primaryStage.setMinHeight(600);
 
 
         menuBar = new MenuBar();
@@ -57,13 +50,13 @@ public class GameOfLife extends Application {
         gm_start = new MenuItem("Start");
         gm_stop = new MenuItem("Stop");
         gm_reset = new MenuItem("Reset");
-        gameMenu.getItems().addAll(gm_start,gm_stop, gm_reset);
+        gameMenu.getItems().addAll(gm_start, gm_stop, gm_reset);
 
 
         gm_start.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public synchronized void handle(ActionEvent event) {
-                if(!test.isAlive())
+                if (!test.isAlive())
                     test.start();
                 else
                     test.resume();
@@ -74,7 +67,7 @@ public class GameOfLife extends Application {
             @Override
             public synchronized void handle(ActionEvent event) {
                 test.suspend();
-                }
+            }
         });
 
         gm_reset.setOnAction(new EventHandler<ActionEvent>() {
@@ -85,17 +78,70 @@ public class GameOfLife extends Application {
         });
 
 
-        optionMenu = new Menu("Options");
-        om_speed = new MenuItem("Speed");
-        om_rules = new MenuItem("Rules");
-        optionMenu.getItems().addAll(om_speed,om_rules);
+        rulesMenu = new Menu("Rules");
+        rm_rules = new MenuItem("Set rules");
+
+        rm_rules.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                BorderPane root1 = new BorderPane();
+                Stage stage = new Stage();
+                stage.setTitle("ABC");
+                stage.setScene(new Scene(root1, 200, 100));
+                stage.show();
+                // Hide this current window (if this is what you want)
+                //((Node)(event.getSource())).getScene().getWindow().hide();
+            }
+        });
+
+        rulesMenu.getItems().addAll(rm_rules);
 
         loadMenu = new Menu("Load");
         lm_loadRule = new MenuItem("Load rules");
         lm_loadStruct = new MenuItem("Load structures");
-        loadMenu.getItems().addAll(lm_loadRule,lm_loadStruct);
+        loadMenu.getItems().addAll(lm_loadRule, lm_loadStruct);
 
-        menuBar.getMenus().addAll(fileMenu, gameMenu, loadMenu, optionMenu);
+        speedMenu = new Menu("Speed");
+        Slider speedSlider = new Slider();
+        speedSlider.setMin(0);
+        speedSlider.setMax(40);
+        speedSlider.setValue(20);
+        //speedSlider.setShowTickLabels(true);
+        speedSlider.setShowTickMarks(true);
+        speedSlider.setMinorTickCount(20);
+        om_slider = new CustomMenuItem(speedSlider);
+        speedMenu.getItems().addAll(om_slider);
+
+        om_slider.setHideOnClick(false);
+
+        om_slider.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.setANIMATION_SPEED((int) speedSlider.getValue());
+            }
+        });
+
+        sizeMenu = new Menu("Size");
+        Slider sizeSlider = new Slider();
+        sizeSlider.setMin(2);
+        sizeSlider.setMax(100);
+        sizeSlider.setValue(10);
+        //speedSlider.setShowTickLabels(true);
+        sizeSlider.setShowTickMarks(true);
+        sizeSlider.setMinorTickCount(20);
+        sm_slider = new CustomMenuItem(sizeSlider);
+
+        sm_slider.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.setCELL_SIZE((int)sizeSlider.getValue());
+                gameScene.requestLayout();
+            }
+        });
+
+        sizeMenu.getItems().addAll(sm_slider);
+
+        menuBar.getMenus().addAll(fileMenu, gameMenu, loadMenu, rulesMenu, speedMenu, sizeMenu);
 
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 
@@ -111,13 +157,7 @@ public class GameOfLife extends Application {
         });
     }
 
-
-    public static int getCellSize() {
-        return CELL_SIZE;
-    }
-
-
-    public static void main(String[] args){
+    public static void main(String[] args) {
         launch(args);
     }
 }
