@@ -26,14 +26,29 @@ public class GameScene extends Pane implements Runnable {
     private int ANIMATION_SPEED = 20;
     private Canvas canvas = new Canvas(gameSceneWidth, gameSceneHeight);
 
-    private int ifAliveRuleOne = 3;
-    private int ifAliveRuleTwo = 2;
-    private int ifDeadRule = 3;
+    private boolean conwayRules, labirynth, seeds,
+            coral, highLife, replicator,
+            assimilation, amazing, walledCities,
+            coagulations, twoXtwo, dayAndNight,
+            amoeba, diamoeba, the34, longLife,
+            stains, gnarl, mystery;
+
+    private boolean[] rules = {conwayRules, labirynth, seeds,
+            coral, highLife, replicator,
+            assimilation, amazing, walledCities,
+            coagulations, twoXtwo, dayAndNight,
+            amoeba, diamoeba, the34, longLife,
+            stains, gnarl, mystery};
+
+//    private int s_0, s_1, s_2, s_3, s_4, s_5, s_6, s_7, s_8;
+//    private int b_0, b_1, b_2, b_3, b_4, b_5, b_6, b_7, b_8;
 
     private Label generationLabel;
     private int evolutionNum = 0;
 
     public GameScene() {
+        conwayRules = true;
+
         gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
         gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
 
@@ -156,6 +171,106 @@ public class GameScene extends Pane implements Runnable {
         requestLayout();
     }
 
+
+    public void setConwayRules(boolean conwayRules) {
+        this.conwayRules = conwayRules;
+    }
+
+    public void setLabirynth(boolean labirynth) {
+        this.labirynth = labirynth;
+    }
+
+    public void setSeeds(boolean seeds) {
+        this.seeds = seeds;
+    }
+
+    public void setCoral(boolean coral) {
+        this.coral = coral;
+    }
+
+    public void setHighLife(boolean highLife) {
+        this.highLife = highLife;
+    }
+
+    public void setReplicator(boolean replicator) {
+        this.replicator = replicator;
+    }
+
+    public void setAssimilation(boolean assimilation) {
+        this.assimilation = assimilation;
+    }
+
+    public void setAmazing(boolean amazing) {
+        this.amazing = amazing;
+    }
+
+    public void setWalledCities(boolean walledCities) {
+        this.walledCities = walledCities;
+    }
+
+    public void setCoagulations(boolean coagulations) {
+        this.coagulations = coagulations;
+    }
+
+    public void setTwoXtwo(boolean twoXtwo) {
+        this.twoXtwo = twoXtwo;
+    }
+
+    public void setDayAndNight(boolean dayAndNight) {
+        this.dayAndNight = dayAndNight;
+    }
+
+    public void setAmoeba(boolean amoeba) {
+        this.amoeba = amoeba;
+    }
+
+    public void setDiamoeba(boolean diamoeba) {
+        this.diamoeba = diamoeba;
+    }
+
+    public void setThe34(boolean the34) {
+        this.the34 = the34;
+    }
+
+    public void setLongLife(boolean longLife) {
+        this.longLife = longLife;
+    }
+
+    public void setStains(boolean stains) {
+        this.stains = stains;
+    }
+
+    public void setGnarl(boolean gnarl) {
+        this.gnarl = gnarl;
+    }
+
+    public void setMystery(boolean mystery) {
+        this.mystery = mystery;
+    }
+
+    public void resetRules() {
+        setConwayRules(false);
+        setLabirynth(false);
+        setSeeds(false);
+        setCoral(false);
+        setHighLife(false);
+        setReplicator(false);
+        setAssimilation(false);
+        setAmazing(false);
+        setWalledCities(false);
+        setCoagulations(false);
+        setTwoXtwo(false);
+        setDayAndNight(false);
+        setAmoeba(false);
+        setDiamoeba(false);
+        setThe34(false);
+        setLongLife(false);
+        setStains(false);
+        setGnarl(false);
+        setMystery(false);
+    }
+
+
     public void setANIMATION_SPEED(int ANIMATION_SPEED) {
         this.ANIMATION_SPEED = ANIMATION_SPEED;
     }
@@ -168,13 +283,13 @@ public class GameScene extends Pane implements Runnable {
     @Override
     public void run() {
         while (true) {
-            boolean[][] cellsBoard = new boolean[gameSceneWidth / CELL_SIZE + 25][gameSceneHeight / CELL_SIZE + 25];
+            boolean[][] cellsBoard = new boolean[gameSceneWidth / CELL_SIZE + 2][gameSceneHeight / CELL_SIZE + 2];
             try {
                 for (int i = 0; i < cell.size(); i++) {
                     cellsBoard[cell.get(i).x + 1][cell.get(i).y + 1] = true;
                 }
-            } catch (ConcurrentModificationException e) {
-                System.out.println("Concurrent at thread start");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Out of bounds at thread start");
             } catch (NullPointerException e) {
                 System.out.println("Nullpointer at thread start");
             }
@@ -192,13 +307,199 @@ public class GameScene extends Pane implements Runnable {
                     if (cellsBoard[i - 1][j + 1]) neighbours++;
                     if (cellsBoard[i][j + 1]) neighbours++;
                     if (cellsBoard[i + 1][j + 1]) neighbours++;
-                    if (cellsBoard[i][j]) {
-                        if ((neighbours == ifAliveRuleOne) || (neighbours == ifAliveRuleTwo)) {
-                            nextGeneration.add(new Point(i - 1, j - 1));
+
+                    if (conwayRules) {
+                        if (cellsBoard[i][j]) {
+                            if ((neighbours == 2) || (neighbours == 3)) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
                         }
-                    } else {
-                        if (neighbours == ifDeadRule) {
-                            nextGeneration.add(new Point(i - 1, j - 1));
+
+                    }
+
+                    if (labirynth) {
+                        if (cellsBoard[i][j]) {
+                            if ((neighbours >= 1) && (neighbours <= 5)) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+
+                    } else if (seeds) {
+                        if (!cellsBoard[i][j]) {
+                            if (neighbours == 2) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (coral) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours >= 4 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+
+                    } else if (highLife) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 2 || neighbours == 3) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3 || neighbours == 6) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+
+                    } else if (replicator) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 7) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 7) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+
+                    } else if (assimilation) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours >= 4 && neighbours <= 7) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours >= 3 && neighbours <= 5) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (amazing) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours >= 1 && neighbours <= 5) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (walledCities) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours >= 2 && neighbours <= 5) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours >= 4 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (coagulations) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 2 || neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3 || neighbours == 7 || neighbours == 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (twoXtwo) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 1 || neighbours == 2 || neighbours == 5) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3 || neighbours == 6) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (dayAndNight) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 3 || neighbours == 4 || neighbours >= 6 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3 || neighbours >= 6 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (amoeba) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3 || neighbours == 5 || neighbours == 7) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (diamoeba) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours >= 5 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (the34) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 3 || neighbours == 4) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3 || neighbours == 4) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (longLife) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 5) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours >= 3 && neighbours <= 5) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (stains) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 2 || neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3 || neighbours >= 6 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (gnarl) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 1) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 1) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (mystery) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 0 || neighbours >= 5 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3 || neighbours == 4 || neighbours == 5 || neighbours == 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
                         }
                     }
                 }

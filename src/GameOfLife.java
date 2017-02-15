@@ -16,7 +16,15 @@ public class GameOfLife extends Application {
 
     private MenuBar menuBar;
     private Menu fileMenu, gameMenu, rulesMenu, loadMenu, speedMenu, sizeMenu;
-    private MenuItem fm_exit, gm_start, gm_stop, gm_reset, rm_rules, lm_loadRule, lm_loadStruct;
+    private MenuItem fm_exit, gm_start, gm_stop, gm_reset,
+            lm_loadRule, lm_loadStruct,
+            rm_conwayRules, rm_labirynth, rm_seeds,
+            rm_coral, rm_highLife, rm_replicator,
+            rm_assimilation, rm_amazing, rm_walledCities,
+            rm_coagulations, rm_twoXtwo, rm_dayAndNight,
+            rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
+            rm_stains, rm_gnarl, rm_mystery;
+
     private CustomMenuItem om_slider, sm_slider;
 
     @Override
@@ -79,22 +87,184 @@ public class GameOfLife extends Application {
 
 
         rulesMenu = new Menu("Rules");
-        rm_rules = new MenuItem("Set rules");
+        rm_conwayRules = new MenuItem("Game of Life");
+        rm_labirynth = new MenuItem("Labirynth");
+        rm_seeds = new MenuItem("Seeds");
+        rm_coral = new MenuItem("Coral");
+        rm_highLife = new MenuItem("High Life");
+        rm_replicator = new MenuItem("Replicator");
+        rm_assimilation = new MenuItem("Assimilation");
+        rm_amazing = new MenuItem("Amazing");
+        rm_walledCities = new MenuItem("Walled Cities");
+        rm_coagulations = new MenuItem("Coagulations");
+        rm_twoXtwo = new MenuItem("2x2");
+        rm_dayAndNight = new MenuItem("Day and Night");
+        rm_amoeba = new MenuItem("Amoeba");
+        rm_diamoeba = new MenuItem("Diamoeba");
+        rm_the34 = new MenuItem("34");
+        rm_longLife = new MenuItem("Long Life");
+        rm_stains = new MenuItem("Stains");
+        rm_gnarl = new MenuItem("Gnarl");
+        rm_mystery = new MenuItem("Mystery");
 
-        rm_rules.setOnAction(new EventHandler<ActionEvent>() {
+        rm_conwayRules.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                BorderPane root1 = new BorderPane();
-                Stage stage = new Stage();
-                stage.setTitle("ABC");
-                stage.setScene(new Scene(root1, 200, 100));
-                stage.show();
-                // Hide this current window (if this is what you want)
-                //((Node)(event.getSource())).getScene().getWindow().hide();
+                gameScene.resetRules();
+                gameScene.setConwayRules(true);
             }
         });
 
-        rulesMenu.getItems().addAll(rm_rules);
+        rm_labirynth.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setLabirynth(true);
+            }
+        });
+
+        rm_seeds.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setSeeds(true);
+            }
+        });
+
+        rm_coral.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setCoral(true);
+            }
+        });
+
+        rm_highLife.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setHighLife(true);
+            }
+        });
+
+        rm_replicator.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setReplicator(true);
+            }
+        });
+
+        rm_assimilation.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setAssimilation(true);
+            }
+        });
+
+        rm_amazing.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setAmazing(true);
+            }
+        });
+
+        rm_walledCities.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setWalledCities(true);
+            }
+        });
+
+        rm_coagulations.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setCoagulations(true);
+            }
+        });
+
+        rm_twoXtwo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setTwoXtwo(true);
+            }
+        });
+
+        rm_dayAndNight.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setDayAndNight(true);
+            }
+        });
+
+        rm_amoeba.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setAmoeba(true);
+            }
+        });
+
+        rm_diamoeba.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setDiamoeba(true);
+            }
+        });
+
+        rm_the34.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setThe34(true);
+            }
+        });
+
+        rm_longLife.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setLongLife(true);
+            }
+        });
+
+        rm_stains.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setStains(true);
+            }
+        });
+
+        rm_gnarl.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setGnarl(true);
+            }
+        });
+
+        rm_mystery.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setMystery(true);
+            }
+        });
+
+        rulesMenu.getItems().addAll(rm_conwayRules, rm_labirynth, rm_seeds,
+                rm_coral, rm_highLife, rm_replicator,
+                rm_assimilation, rm_amazing, rm_walledCities,
+                rm_coagulations, rm_twoXtwo, rm_dayAndNight,
+                rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
+                rm_stains, rm_gnarl, rm_mystery);
 
         loadMenu = new Menu("Load");
         lm_loadRule = new MenuItem("Load rules");
@@ -134,7 +304,7 @@ public class GameOfLife extends Application {
         sm_slider.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.setCELL_SIZE((int)sizeSlider.getValue());
+                gameScene.setCELL_SIZE((int) sizeSlider.getValue());
                 gameScene.requestLayout();
             }
         });
