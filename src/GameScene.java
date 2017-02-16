@@ -28,17 +28,17 @@ public class GameScene extends Pane implements Runnable {
 
     private boolean conwayRules, labirynth, seeds,
             coral, highLife, replicator,
-            assimilation, amazing, walledCities,
+            assimilation, walledCities,
             coagulations, twoXtwo, dayAndNight,
             amoeba, diamoeba, the34, longLife,
-            stains, gnarl, mystery;
+            stains, gnarl, mystery, flakes;
 
     private boolean[] rules = {conwayRules, labirynth, seeds,
             coral, highLife, replicator,
-            assimilation, amazing, walledCities,
+            assimilation, walledCities,
             coagulations, twoXtwo, dayAndNight,
             amoeba, diamoeba, the34, longLife,
-            stains, gnarl, mystery};
+            stains, gnarl, mystery, flakes};
 
 //    private int s_0, s_1, s_2, s_3, s_4, s_5, s_6, s_7, s_8;
 //    private int b_0, b_1, b_2, b_3, b_4, b_5, b_6, b_7, b_8;
@@ -200,10 +200,6 @@ public class GameScene extends Pane implements Runnable {
         this.assimilation = assimilation;
     }
 
-    public void setAmazing(boolean amazing) {
-        this.amazing = amazing;
-    }
-
     public void setWalledCities(boolean walledCities) {
         this.walledCities = walledCities;
     }
@@ -248,6 +244,10 @@ public class GameScene extends Pane implements Runnable {
         this.mystery = mystery;
     }
 
+    public void setFlakes(boolean flakes) {
+        this.flakes = flakes;
+    }
+
     public void resetRules() {
         setConwayRules(false);
         setLabirynth(false);
@@ -256,7 +256,6 @@ public class GameScene extends Pane implements Runnable {
         setHighLife(false);
         setReplicator(false);
         setAssimilation(false);
-        setAmazing(false);
         setWalledCities(false);
         setCoagulations(false);
         setTwoXtwo(false);
@@ -319,9 +318,7 @@ public class GameScene extends Pane implements Runnable {
                             }
                         }
 
-                    }
-
-                    if (labirynth) {
+                    }else if (labirynth) {
                         if (cellsBoard[i][j]) {
                             if ((neighbours >= 1) && (neighbours <= 5)) {
                                 nextGeneration.add(new Point(i - 1, j - 1));
@@ -378,16 +375,6 @@ public class GameScene extends Pane implements Runnable {
                             }
                         } else {
                             if (neighbours >= 3 && neighbours <= 5) {
-                                nextGeneration.add(new Point(i - 1, j - 1));
-                            }
-                        }
-                    } else if (amazing) {
-                        if (cellsBoard[i][j]) {
-                            if (neighbours >= 1 && neighbours <= 5) {
-                                nextGeneration.add(new Point(i - 1, j - 1));
-                            }
-                        } else {
-                            if (neighbours == 3) {
                                 nextGeneration.add(new Point(i - 1, j - 1));
                             }
                         }
@@ -498,6 +485,16 @@ public class GameScene extends Pane implements Runnable {
                             }
                         } else {
                             if (neighbours == 3 || neighbours == 4 || neighbours == 5 || neighbours == 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (flakes) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours >= 0 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 3) {
                                 nextGeneration.add(new Point(i - 1, j - 1));
                             }
                         }

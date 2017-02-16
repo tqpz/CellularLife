@@ -20,10 +20,10 @@ public class GameOfLife extends Application {
             lm_loadRule, lm_loadStruct,
             rm_conwayRules, rm_labirynth, rm_seeds,
             rm_coral, rm_highLife, rm_replicator,
-            rm_assimilation, rm_amazing, rm_walledCities,
+            rm_assimilation, rm_walledCities,
             rm_coagulations, rm_twoXtwo, rm_dayAndNight,
             rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
-            rm_stains, rm_gnarl, rm_mystery;
+            rm_stains, rm_gnarl, rm_mystery, rm_flakes;
 
     private CustomMenuItem om_slider, sm_slider;
 
@@ -88,13 +88,12 @@ public class GameOfLife extends Application {
 
         rulesMenu = new Menu("Rules");
         rm_conwayRules = new MenuItem("Game of Life");
-        rm_labirynth = new MenuItem("Labirynth");
+        rm_labirynth = new MenuItem("Maze");
         rm_seeds = new MenuItem("Seeds");
         rm_coral = new MenuItem("Coral");
         rm_highLife = new MenuItem("High Life");
         rm_replicator = new MenuItem("Replicator");
         rm_assimilation = new MenuItem("Assimilation");
-        rm_amazing = new MenuItem("Amazing");
         rm_walledCities = new MenuItem("Walled Cities");
         rm_coagulations = new MenuItem("Coagulations");
         rm_twoXtwo = new MenuItem("2x2");
@@ -106,6 +105,7 @@ public class GameOfLife extends Application {
         rm_stains = new MenuItem("Stains");
         rm_gnarl = new MenuItem("Gnarl");
         rm_mystery = new MenuItem("Mystery");
+        rm_flakes = new MenuItem("Flakes");
 
         rm_conwayRules.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -160,14 +160,6 @@ public class GameOfLife extends Application {
             public void handle(ActionEvent event) {
                 gameScene.resetRules();
                 gameScene.setAssimilation(true);
-            }
-        });
-
-        rm_amazing.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setAmazing(true);
             }
         });
 
@@ -259,12 +251,20 @@ public class GameOfLife extends Application {
             }
         });
 
+        rm_flakes.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.resetRules();
+                gameScene.setFlakes(true);
+            }
+        });
+
         rulesMenu.getItems().addAll(rm_conwayRules, rm_labirynth, rm_seeds,
                 rm_coral, rm_highLife, rm_replicator,
-                rm_assimilation, rm_amazing, rm_walledCities,
+                rm_assimilation, rm_walledCities,
                 rm_coagulations, rm_twoXtwo, rm_dayAndNight,
                 rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
-                rm_stains, rm_gnarl, rm_mystery);
+                rm_stains, rm_gnarl, rm_mystery, rm_flakes);
 
         loadMenu = new Menu("Load");
         lm_loadRule = new MenuItem("Load rules");
