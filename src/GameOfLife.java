@@ -7,13 +7,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-/**
- * Created by Mateusz on 11.02.2017.
- */
 public class GameOfLife extends Application {
+    //set primary window size
     private static final int PRIMARY_STAGE_HEIGHT = 600;
     private static final int PRIMARY_STAGE_WIDTH = 800;
 
+    //create Menu bar objects - they are representing clickable items on menubar
     private MenuBar menuBar;
     private Menu fileMenu, gameMenu, rulesMenu, loadMenu, speedMenu, sizeMenu;
     private MenuItem fm_exit, gm_start, gm_stop, gm_reset,
@@ -25,6 +24,7 @@ public class GameOfLife extends Application {
             rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
             rm_stains, rm_gnarl, rm_mystery, rm_flakes;
 
+    //create slider objects
     private CustomMenuItem om_slider, sm_slider;
 
     @Override
@@ -32,15 +32,18 @@ public class GameOfLife extends Application {
         BorderPane root = new BorderPane();
         GameScene gameScene = new GameScene();
 
+        //create simulation thread
         Thread test = new Thread(gameScene);
 
+        //set window title
         primaryStage.setTitle("Game of Life");
 
+        //create scene, set minimal height and width
         Scene scene = new Scene(root, PRIMARY_STAGE_WIDTH, PRIMARY_STAGE_HEIGHT);
         primaryStage.setMinWidth(600);
         primaryStage.setMinHeight(600);
 
-
+        //initialize "file" drop-down menu items and add eventhandlers
         menuBar = new MenuBar();
 
         fileMenu = new Menu("File");
@@ -54,13 +57,14 @@ public class GameOfLife extends Application {
             }
         });
 
+        //initialize "Game" menu item, add drop-down menu items and event handlers
         gameMenu = new Menu("Game");
         gm_start = new MenuItem("Start");
         gm_stop = new MenuItem("Stop");
         gm_reset = new MenuItem("Reset");
         gameMenu.getItems().addAll(gm_start, gm_stop, gm_reset);
 
-
+        //operations on simulation thread
         gm_start.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public synchronized void handle(ActionEvent event) {
@@ -85,7 +89,7 @@ public class GameOfLife extends Application {
             }
         });
 
-
+        //initialize all "Rules" menu items and add on click event handlers
         rulesMenu = new Menu("Rules");
         rm_conwayRules = new MenuItem("Game of Life");
         rm_labirynth = new MenuItem("Maze");
@@ -107,6 +111,7 @@ public class GameOfLife extends Application {
         rm_mystery = new MenuItem("Mystery");
         rm_flakes = new MenuItem("Flakes");
 
+        //on click all rules ale set to false and afterwards choosen rule is set true
         rm_conwayRules.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -259,6 +264,7 @@ public class GameOfLife extends Application {
             }
         });
 
+        //add initialized items to menubar
         rulesMenu.getItems().addAll(rm_conwayRules, rm_labirynth, rm_seeds,
                 rm_coral, rm_highLife, rm_replicator,
                 rm_assimilation, rm_walledCities,
@@ -266,11 +272,13 @@ public class GameOfLife extends Application {
                 rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
                 rm_stains, rm_gnarl, rm_mystery, rm_flakes);
 
+        //initialize and add "Load" menu items
         loadMenu = new Menu("Load");
         lm_loadRule = new MenuItem("Load rules");
         lm_loadStruct = new MenuItem("Load structures");
         loadMenu.getItems().addAll(lm_loadRule, lm_loadStruct);
 
+        //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
         speedSlider.setMin(0);
@@ -291,6 +299,7 @@ public class GameOfLife extends Application {
             }
         });
 
+        //initialize slider that is responsible for grid size
         sizeMenu = new Menu("Size");
         Slider sizeSlider = new Slider();
         sizeSlider.setMin(2);
@@ -308,18 +317,22 @@ public class GameOfLife extends Application {
             }
         });
 
+        //add items to menu
         sizeMenu.getItems().addAll(sm_slider);
 
         menuBar.getMenus().addAll(fileMenu, gameMenu, loadMenu, rulesMenu, speedMenu, sizeMenu);
 
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 
+        //set posiotion of components in the window
         root.setTop(menuBar);
         root.setCenter(gameScene);
 
+        //set primary scene and show it
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        //exit window on close request
         primaryStage.setOnCloseRequest(e -> {
             Platform.exit();
             System.exit(0);

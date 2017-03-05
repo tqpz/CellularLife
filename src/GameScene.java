@@ -12,20 +12,19 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
-
-/**
- * Created by Mateusz on 11.02.2017.
- */
 public class GameScene extends Pane implements Runnable {
-    private ArrayList<Point> cell = new ArrayList<Point>(0);
+    private ArrayList<Point> cell = new ArrayList<Point>(0); //this array is representing all alive cells on board
     private int gameSceneWidth;
     private int gameSceneHeight;
 
-    private int CELL_SIZE = 10;
+    private int CELL_SIZE = 10; //size of one cell
 
-    private int ANIMATION_SPEED = 20;
+    private int ANIMATION_SPEED = 20; //speed of animation
+
+    //create canvas with width and height of window
     private Canvas canvas = new Canvas(gameSceneWidth, gameSceneHeight);
 
+    //create boolean variables representing every rule
     private boolean conwayRules, labirynth, seeds,
             coral, highLife, replicator,
             assimilation, walledCities,
@@ -33,36 +32,33 @@ public class GameScene extends Pane implements Runnable {
             amoeba, diamoeba, the34, longLife,
             stains, gnarl, mystery, flakes;
 
-    private boolean[] rules = {conwayRules, labirynth, seeds,
-            coral, highLife, replicator,
-            assimilation, walledCities,
-            coagulations, twoXtwo, dayAndNight,
-            amoeba, diamoeba, the34, longLife,
-            stains, gnarl, mystery, flakes};
-
 //    private int s_0, s_1, s_2, s_3, s_4, s_5, s_6, s_7, s_8;
 //    private int b_0, b_1, b_2, b_3, b_4, b_5, b_6, b_7, b_8;
 
+    //create label that shows number of evolution
     private Label generationLabel;
     private int evolutionNum = 0;
 
+    //create label that shows number of alive cells
     private Label aliveCellsOnBoard;
 
     public GameScene() {
-        conwayRules = true;
+        conwayRules = true; //initially set conway rules true
 
-
+        //set width and height perfectly fit on scene even with user resize operation
         gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
         gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
 
+        //setup labels indicating generation and alive cells numbers
         generationLabel = new Label("Number of generation: " + evolutionNum);
         getChildren().add(generationLabel);
 
         aliveCellsOnBoard = new Label("Number of alive cells: " + cell.size());
-        aliveCellsOnBoard.setLayoutX(160);
+        aliveCellsOnBoard.setLayoutX(160); // position of alive cells label
         getChildren().add(aliveCellsOnBoard);
-        getChildren().add(canvas);
+        getChildren().add(canvas); //add canvas to pane
 
+        //create listeners of resize operation
         widthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
@@ -82,6 +78,7 @@ public class GameScene extends Pane implements Runnable {
             }
         });
 
+        //create click listener - on click add alive cell
         addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -89,6 +86,7 @@ public class GameScene extends Pane implements Runnable {
             }
         });
 
+        //create drag listerer - as above
         addEventHandler(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -98,6 +96,7 @@ public class GameScene extends Pane implements Runnable {
     }
 
 
+    //this method is responsible for refreshing view, on every next generation this method is called
     @Override
     protected void layoutChildren() {
         super.layoutChildren();
@@ -108,10 +107,11 @@ public class GameScene extends Pane implements Runnable {
         generationLabel.setText("Number of generation: " + String.valueOf(evolutionNum));
         aliveCellsOnBoard.setText("Number of alive cells: " + cell.size());
 
-        gc.clearRect(0, 0, getWidth(), getHeight());
+        gc.clearRect(0, 0, getWidth(), getHeight()); //clear canvas after each generation
         gc.setLineWidth(0.2);
 
         try {
+            //iterate through cell array and set its color, size and shape
             for (Point newPoint : cell) {
                 gc.setFill(Color.FIREBRICK);
                 gc.fillRect(CELL_SIZE + (CELL_SIZE * newPoint.x),
@@ -123,7 +123,10 @@ public class GameScene extends Pane implements Runnable {
         } catch (NullPointerException e) {
         }
 
+        /*this block is responsible for painting grid,
+         grid is drawn regardless of cell*/
         try {
+            //create lines horizontally
             for (int i = 0; i <= gameSceneWidth / CELL_SIZE; i++) {
                 gc.strokeLine(((i * CELL_SIZE) + CELL_SIZE),
                         CELL_SIZE,
@@ -131,6 +134,7 @@ public class GameScene extends Pane implements Runnable {
                         CELL_SIZE + (CELL_SIZE * gameSceneHeight / CELL_SIZE));
             }
 
+            //create lines vertically
             for (int i = 0; i <= gameSceneHeight / CELL_SIZE; i++) {
                 gc.strokeLine(CELL_SIZE,
                         ((i * CELL_SIZE) + CELL_SIZE),
@@ -141,7 +145,7 @@ public class GameScene extends Pane implements Runnable {
         }
     }
 
-
+    //on call add cell to a cell list
     public void addPoint(int x, int y) {
         if (!cell.contains(new Point(x, y))) {
             cell.add(new Point(x, y));
@@ -149,6 +153,7 @@ public class GameScene extends Pane implements Runnable {
         requestLayout();
     }
 
+    //mouse click indicates values of x and y
     public void addPoint(MouseEvent me) {
         int x = (int) me.getX() / CELL_SIZE - 1;
         int y = (int) me.getY() / CELL_SIZE - 1;
@@ -157,6 +162,8 @@ public class GameScene extends Pane implements Runnable {
         }
     }
 
+    //this method is called when user is resizing window, if there were alive
+    // cells on position which is not existing after resize - delete that cells
     private void updateArraySize() {
         ArrayList<Point> removeList = new ArrayList<Point>(0);
 
@@ -169,17 +176,19 @@ public class GameScene extends Pane implements Runnable {
         requestLayout();
     }
 
+    //clear alive cells - remove all points from list
     private void resetBoard() {
         cell.clear();
     }
 
+    //this method is called when user clicks on reset menu item
     public void resetAll() {
-        cell.clear();
-        evolutionNum = 0;
-        requestLayout();
+        cell.clear(); //clears layout
+        evolutionNum = 0; // set evolution number to 0
+        requestLayout(); //force to refresh window
     }
 
-
+    //create rules setters
     public void setConwayRules(boolean conwayRules) {
         this.conwayRules = conwayRules;
     }
@@ -256,6 +265,7 @@ public class GameScene extends Pane implements Runnable {
         this.flakes = flakes;
     }
 
+    //this method is called when user is changing rule to another
     public void resetRules() {
         setConwayRules(false);
         setLabirynth(false);
@@ -277,20 +287,26 @@ public class GameScene extends Pane implements Runnable {
         setMystery(false);
     }
 
-
+    //this method is connected to speed slider item
     public void setANIMATION_SPEED(int ANIMATION_SPEED) {
         this.ANIMATION_SPEED = ANIMATION_SPEED;
     }
 
-
+    //this method is connected to size slider item
     public void setCELL_SIZE(int CELL_SIZE) {
         this.CELL_SIZE = CELL_SIZE;
     }
 
+    //thread run method - this is executed on thread start
     @Override
     public void run() {
         while (true) {
+            //create boolean 2D array representing grid
+            //this array is created to capture better performance
             boolean[][] cellsBoard = new boolean[gameSceneWidth / CELL_SIZE + 2][gameSceneHeight / CELL_SIZE + 2];
+
+            //  this for iterates through cell list
+            // if there are cells - sets their position in bool array
             try {
                 for (int i = 0; i < cell.size(); i++) {
                     cellsBoard[cell.get(i).x + 1][cell.get(i).y + 1] = true;
@@ -301,11 +317,15 @@ public class GameScene extends Pane implements Runnable {
                 System.out.println("Nullpointer at thread start");
             }
 
+            //create array that contains points wchich are added in next generation
             ArrayList<Point> nextGeneration = new ArrayList<Point>(0);
 
+            //nested for loop iterating through all board
             for (int i = 1; i < cellsBoard.length - 1; i++) {
                 for (int j = 1; j < cellsBoard[0].length - 1; j++) {
-                    int neighbours = 0;
+                    int neighbours = 0; //variable contains number of neighbours of the cell
+
+                    //checking every cell in the Moore neighbourhood
                     if (cellsBoard[i - 1][j - 1]) neighbours++;
                     if (cellsBoard[i][j - 1]) neighbours++;
                     if (cellsBoard[i + 1][j - 1]) neighbours++;
@@ -315,6 +335,8 @@ public class GameScene extends Pane implements Runnable {
                     if (cellsBoard[i][j + 1]) neighbours++;
                     if (cellsBoard[i + 1][j + 1]) neighbours++;
 
+                    //this conditional statements are representing chosen rule by the user
+                    //if some rule is chosen apply their transfer function
                     if (conwayRules) {
                         if (cellsBoard[i][j]) {
                             if ((neighbours == 2) || (neighbours == 3)) {
@@ -510,12 +532,13 @@ public class GameScene extends Pane implements Runnable {
                 }
             }
 
+
             try {
-                evolutionNum++;
-                resetBoard();
-                cell.addAll(nextGeneration);
-                requestLayout();
-                Thread.sleep(1000 / (ANIMATION_SPEED + 1));
+                evolutionNum++; //increment generation variable
+                resetBoard(); //clear existing cells
+                cell.addAll(nextGeneration); //add next generation to main cell list
+                requestLayout(); //show it on screen
+                Thread.sleep(1000 / (ANIMATION_SPEED + 1)); //sleep thread every x seconds - here is set animation speed
 
             } catch (InterruptedException e) {
 
