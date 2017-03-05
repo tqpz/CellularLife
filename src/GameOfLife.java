@@ -296,7 +296,6 @@ public class GameOfLife extends Application {
         sizeSlider.setMin(2);
         sizeSlider.setMax(100);
         sizeSlider.setValue(10);
-        //speedSlider.setShowTickLabels(true);
         sizeSlider.setShowTickMarks(true);
         sizeSlider.setMinorTickCount(20);
         sm_slider = new CustomMenuItem(sizeSlider);

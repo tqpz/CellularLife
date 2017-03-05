@@ -46,14 +46,21 @@ public class GameScene extends Pane implements Runnable {
     private Label generationLabel;
     private int evolutionNum = 0;
 
+    private Label aliveCellsOnBoard;
+
     public GameScene() {
         conwayRules = true;
+
 
         gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
         gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
 
         generationLabel = new Label("Number of generation: " + evolutionNum);
         getChildren().add(generationLabel);
+
+        aliveCellsOnBoard = new Label("Number of alive cells: " + cell.size());
+        aliveCellsOnBoard.setLayoutX(160);
+        getChildren().add(aliveCellsOnBoard);
         getChildren().add(canvas);
 
         widthProperty().addListener(new ChangeListener<Number>() {
@@ -99,6 +106,7 @@ public class GameScene extends Pane implements Runnable {
         canvas.setHeight(gameSceneHeight - CELL_SIZE + 1);
 
         generationLabel.setText("Number of generation: " + String.valueOf(evolutionNum));
+        aliveCellsOnBoard.setText("Number of alive cells: " + cell.size());
 
         gc.clearRect(0, 0, getWidth(), getHeight());
         gc.setLineWidth(0.2);
@@ -318,7 +326,7 @@ public class GameScene extends Pane implements Runnable {
                             }
                         }
 
-                    }else if (labirynth) {
+                    } else if (labirynth) {
                         if (cellsBoard[i][j]) {
                             if ((neighbours >= 1) && (neighbours <= 5)) {
                                 nextGeneration.add(new Point(i - 1, j - 1));
