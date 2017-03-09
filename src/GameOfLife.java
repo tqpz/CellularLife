@@ -14,15 +14,16 @@ public class GameOfLife extends Application {
 
     //create Menu bar objects - they are representing clickable items on menubar
     private MenuBar menuBar;
-    private Menu fileMenu, gameMenu, rulesMenu, loadMenu, speedMenu, sizeMenu;
+    private Menu fileMenu, gameMenu, rulesMenu, structuresMenu, speedMenu, sizeMenu;
     private MenuItem fm_exit, gm_start, gm_stop, gm_reset,
-            lm_loadRule, lm_loadStruct,
             rm_conwayRules, rm_labirynth, rm_seeds,
             rm_coral, rm_highLife, rm_replicator,
             rm_assimilation, rm_walledCities,
             rm_coagulations, rm_twoXtwo, rm_dayAndNight,
             rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
             rm_stains, rm_gnarl, rm_mystery, rm_flakes;
+
+    private MenuItem s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship, s_gliderGun;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -273,10 +274,48 @@ public class GameOfLife extends Application {
                 rm_stains, rm_gnarl, rm_mystery, rm_flakes);
 
         //initialize and add "Load" menu items
-        loadMenu = new Menu("Load");
-        lm_loadRule = new MenuItem("Load rules");
-        lm_loadStruct = new MenuItem("Load structures");
-        loadMenu.getItems().addAll(lm_loadRule, lm_loadStruct);
+        structuresMenu = new Menu("Structures");
+        s_glider = new MenuItem("Glider");
+        s_acorn = new MenuItem("Acorn");
+        s_Rpentomino = new MenuItem("R-pentomino");
+        s_lightweightSpaceship = new MenuItem("Lightweight Spaceship");
+        s_gliderGun = new MenuItem("Glider Gun");
+        structuresMenu.getItems().addAll(s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship, s_gliderGun);
+
+        s_Rpentomino.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.s_Rpentomino(100, 100);
+            }
+        });
+
+        s_glider.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.s_gliderAdd(10, 10);
+            }
+        });
+
+        s_acorn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.s_acorn(100, 100);
+            }
+        });
+
+        s_lightweightSpaceship.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.s_lightweightSpaceship(20, 20);
+            }
+        });
+
+        s_gliderGun.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.s_gliderGun(30,30);
+            }
+        });
 
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
@@ -320,7 +359,7 @@ public class GameOfLife extends Application {
         //add items to menu
         sizeMenu.getItems().addAll(sm_slider);
 
-        menuBar.getMenus().addAll(fileMenu, gameMenu, loadMenu, rulesMenu, speedMenu, sizeMenu);
+        menuBar.getMenus().addAll(fileMenu, gameMenu, structuresMenu, rulesMenu, speedMenu, sizeMenu);
 
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 

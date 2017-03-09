@@ -32,6 +32,8 @@ public class GameScene extends Pane implements Runnable {
             amoeba, diamoeba, the34, longLife,
             stains, gnarl, mystery, flakes;
 
+    private boolean devmode;
+
 //    private int s_0, s_1, s_2, s_3, s_4, s_5, s_6, s_7, s_8;
 //    private int b_0, b_1, b_2, b_3, b_4, b_5, b_6, b_7, b_8;
 
@@ -43,7 +45,8 @@ public class GameScene extends Pane implements Runnable {
     private Label aliveCellsOnBoard;
 
     public GameScene() {
-        conwayRules = true; //initially set conway rules true
+        conwayRules = true; //initially set conway rules
+        devmode = true;
 
         //set width and height perfectly fit on scene even with user resize operation
         gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
@@ -160,6 +163,9 @@ public class GameScene extends Pane implements Runnable {
         if ((x >= 0) && (x < gameSceneWidth) && (y >= 0) && (y < gameSceneHeight)) {
             addPoint(x, y);
         }
+
+        if(devmode)
+            System.out.println("X: " + x + " Y: " + y);
     }
 
     //this method is called when user is resizing window, if there were alive
@@ -285,6 +291,88 @@ public class GameScene extends Pane implements Runnable {
         setStains(false);
         setGnarl(false);
         setMystery(false);
+    }
+
+    public void s_gliderAdd(int x, int y) {
+        cell.add(new Point(x, y - 1));
+        cell.add(new Point(x + 1, y));
+        cell.add(new Point(x - 1, y + 1));
+        cell.add(new Point(x, y + 1));
+        cell.add(new Point(x + 1, y + 1));
+        requestLayout();
+    }
+
+    public void s_acorn(int x, int y) {
+        cell.add(new Point(x - 1, y - 1));
+        cell.add(new Point(x + 1, y));
+        cell.add(new Point(x - 2, y + 1));
+        cell.add(new Point(x - 1, y + 1));
+        cell.add(new Point(x + 2, y + 1));
+        cell.add(new Point(x + 3, y + 1));
+        cell.add(new Point(x + 4, y + 1));
+        requestLayout();
+    }
+
+    public void s_Rpentomino(int x, int y) {
+        cell.add(new Point(x, y - 1));
+        cell.add(new Point(x + 1, y - 1));
+        cell.add(new Point(x - 1, y));
+        cell.add(new Point(x, y));
+        cell.add(new Point(x, y + 1));
+        requestLayout();
+    }
+
+    public void s_lightweightSpaceship(int x, int y) {
+        cell.add(new Point(x + 1, y - 1));
+        cell.add(new Point(x + 1, y));
+        cell.add(new Point(x + 1, y + 1));
+        cell.add(new Point(x, y + 1));
+        cell.add(new Point(x - 1, y + 1));
+        cell.add(new Point(x - 2, y + 1));
+        cell.add(new Point(x - 3, y));
+        cell.add(new Point(x - 3, y - 2));
+        cell.add(new Point(x, y - 2));
+        requestLayout();
+    }
+
+    public void s_gliderGun(int x, int y) {
+        cell.add(new Point(x, y));
+        cell.add(new Point(x + 1, y));
+        cell.add(new Point(x + 1, y + 1));
+        cell.add(new Point(x, y + 1));
+        cell.add(new Point(x + 10, y));
+        cell.add(new Point(x + 10, y + 1));
+        cell.add(new Point(x + 10, y + 2));
+        cell.add(new Point(x + 11, y - 1));
+        cell.add(new Point(x + 11, y + 3));
+        cell.add(new Point(x + 12, y - 2));
+        cell.add(new Point(x + 13, y - 2));
+        cell.add(new Point(x + 12, y + 4));
+        cell.add(new Point(x + 13, y + 4));
+        cell.add(new Point(x + 14, y + 1));
+        cell.add(new Point(x + 15, y - 1));
+        cell.add(new Point(x + 15, y + 3));
+        cell.add(new Point(x + 16, y));
+        cell.add(new Point(x + 16, y + 1));
+        cell.add(new Point(x + 16, y + 2));
+        cell.add(new Point(x + 17, y + 1));
+        cell.add(new Point(x + 20, y));
+        cell.add(new Point(x + 21, y));
+        cell.add(new Point(x + 21, y - 1));
+        cell.add(new Point(x + 20, y - 1));
+        cell.add(new Point(x + 20, y - 2));
+        cell.add(new Point(x + 21, y - 2));
+        cell.add(new Point(x + 22, y - 3));
+        cell.add(new Point(x + 22, y + 1));
+        cell.add(new Point(x + 24, y - 3));
+        cell.add(new Point(x + 24, y - 4));
+        cell.add(new Point(x + 24, y + 1));
+        cell.add(new Point(x + 24, y + 2));
+        cell.add(new Point(x + 34, y - 2));
+        cell.add(new Point(x + 34, y - 1));
+        cell.add(new Point(x + 35, y - 1));
+        cell.add(new Point(x + 35, y - 2));
+        requestLayout();
     }
 
     //this method is connected to speed slider item
