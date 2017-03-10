@@ -291,56 +291,56 @@ public class GameOfLife extends Application {
         s_Rpentomino.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_Rpentomino(100, 100);
+                gameScene.s_Rpentomino(gameScene.getxClick(), gameScene.getyClick());
             }
         });
 
         s_glider.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_gliderAdd(10, 10);
+                gameScene.s_gliderAdd(gameScene.getxClick(), gameScene.getyClick()+1);
             }
         });
 
         s_acorn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_acorn(100, 100);
+                gameScene.s_acorn(gameScene.getxClick()-1, gameScene.getyClick());
             }
         });
 
         s_lightweightSpaceship.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_lightweightSpaceship(20, 20);
+                gameScene.s_lightweightSpaceship(gameScene.getxClick()-1, gameScene.getyClick());
             }
         });
 
         s_gliderGun.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_gliderGun(30,30);
+                gameScene.s_gliderGun(gameScene.getxClick(), gameScene.getyClick());
             }
         });
 
         s_pulsar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_pulsar(30,30);
+                gameScene.s_pulsar(gameScene.getxClick(), gameScene.getyClick()-2);
             }
         });
 
         s_dart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_dart(2,2);
+                gameScene.s_dart(gameScene.getxClick()-1, gameScene.getyClick());
             }
         });
 
         s_puffer1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_puffer1(10,10);
+                gameScene.s_puffer1(gameScene.getxClick(), gameScene.getyClick()+2);
             }
         });
 

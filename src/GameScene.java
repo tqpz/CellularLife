@@ -43,6 +43,8 @@ public class GameScene extends Pane implements Runnable {
 
     //create label that shows number of alive cells
     private Label aliveCellsOnBoard;
+    private int xClick;
+    private int yClick;
 
     public GameScene() {
         conwayRules = true; //initially set conway rules
@@ -160,8 +162,8 @@ public class GameScene extends Pane implements Runnable {
     public void addPoint(MouseEvent me) {
         int x = (int) me.getX() / CELL_SIZE - 1;
         int y = (int) me.getY() / CELL_SIZE - 1;
-        int firstX = 0;
-        int firstY = 0;
+        xClick = x;
+        yClick = y;
         if ((x >= 0) && (x < gameSceneWidth) && (y >= 0) && (y < gameSceneHeight)) {
             addPoint(x, y);
         }
@@ -518,7 +520,13 @@ public class GameScene extends Pane implements Runnable {
         requestLayout();
     }
 
+    public int getxClick() {
+        return xClick;
+    }
 
+    public int getyClick() {
+        return yClick;
+    }
     //this method is connected to speed slider item
     public void setANIMATION_SPEED(int ANIMATION_SPEED) {
         this.ANIMATION_SPEED = ANIMATION_SPEED;
