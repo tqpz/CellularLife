@@ -160,12 +160,15 @@ public class GameScene extends Pane implements Runnable {
     public void addPoint(MouseEvent me) {
         int x = (int) me.getX() / CELL_SIZE - 1;
         int y = (int) me.getY() / CELL_SIZE - 1;
+        int firstX = 0;
+        int firstY = 0;
         if ((x >= 0) && (x < gameSceneWidth) && (y >= 0) && (y < gameSceneHeight)) {
             addPoint(x, y);
         }
 
-        if(devmode)
-            System.out.println("X: " + x + " Y: " + y);
+        if (devmode) {
+            System.out.println("cell.add(new Point(x + " + x + ", y + " + y + "));");
+        }
     }
 
     //this method is called when user is resizing window, if there were alive
@@ -322,6 +325,7 @@ public class GameScene extends Pane implements Runnable {
         requestLayout();
     }
 
+
     public void s_lightweightSpaceship(int x, int y) {
         cell.add(new Point(x + 1, y - 1));
         cell.add(new Point(x + 1, y));
@@ -374,6 +378,60 @@ public class GameScene extends Pane implements Runnable {
         cell.add(new Point(x + 35, y - 2));
         requestLayout();
     }
+
+    public void s_pulsar(int x, int y) {
+        cell.add(new Point(x, y + 2));
+        cell.add(new Point(x, y + 3));
+        cell.add(new Point(x, y + 4));
+        cell.add(new Point(x + 2, y + 5));
+        cell.add(new Point(x + 3, y + 5));
+        cell.add(new Point(x + 4, y + 5));
+        cell.add(new Point(x + 5, y + 4));
+        cell.add(new Point(x + 5, y + 3));
+        cell.add(new Point(x + 5, y + 2));
+        cell.add(new Point(x + 4, y));
+        cell.add(new Point(x + 3, y));
+        cell.add(new Point(x + 2, y));
+        cell.add(new Point(x + 2, y + 7));
+        cell.add(new Point(x + 3, y + 7));
+        cell.add(new Point(x + 4, y + 7));
+        cell.add(new Point(x + 5, y + 8));
+        cell.add(new Point(x + 5, y + 9));
+        cell.add(new Point(x + 5, y + 10));
+        cell.add(new Point(x + 7, y + 2));
+        cell.add(new Point(x + 7, y + 3));
+        cell.add(new Point(x + 7, y + 4));
+        cell.add(new Point(x + 8, y + 5));
+        cell.add(new Point(x + 9, y + 5));
+        cell.add(new Point(x + 10, y + 5));
+        cell.add(new Point(x + 8, y + 7));
+        cell.add(new Point(x + 9, y + 7));
+        cell.add(new Point(x + 10, y + 7));
+        cell.add(new Point(x + 8, y + 7));
+        cell.add(new Point(x + 7, y + 8));
+        cell.add(new Point(x + 7, y + 9));
+        cell.add(new Point(x + 7, y + 10));
+        cell.add(new Point(x + 8, y));
+        cell.add(new Point(x + 9, y));
+        cell.add(new Point(x + 10, y));
+        cell.add(new Point(x + 12, y + 4));
+        cell.add(new Point(x + 12, y + 3));
+        cell.add(new Point(x + 12, y + 2));
+        cell.add(new Point(x + 12, y + 8));
+        cell.add(new Point(x + 12, y + 9));
+        cell.add(new Point(x + 12, y + 10));
+        cell.add(new Point(x + 8, y + 12));
+        cell.add(new Point(x + 9, y + 12));
+        cell.add(new Point(x + 10, y + 12));
+        cell.add(new Point(x + 4, y + 12));
+        cell.add(new Point(x + 3, y + 12));
+        cell.add(new Point(x + 2, y + 12));
+        cell.add(new Point(x, y + 8));
+        cell.add(new Point(x, y + 9));
+        cell.add(new Point(x, y + 10));
+        requestLayout();
+    }
+
 
     //this method is connected to speed slider item
     public void setANIMATION_SPEED(int ANIMATION_SPEED) {

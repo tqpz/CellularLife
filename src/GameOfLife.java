@@ -23,7 +23,8 @@ public class GameOfLife extends Application {
             rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
             rm_stains, rm_gnarl, rm_mystery, rm_flakes;
 
-    private MenuItem s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship, s_gliderGun;
+    private MenuItem s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship,
+            s_gliderGun, s_pulsar;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -280,7 +281,9 @@ public class GameOfLife extends Application {
         s_Rpentomino = new MenuItem("R-pentomino");
         s_lightweightSpaceship = new MenuItem("Lightweight Spaceship");
         s_gliderGun = new MenuItem("Glider Gun");
-        structuresMenu.getItems().addAll(s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship, s_gliderGun);
+        s_pulsar = new MenuItem("Pulsar");
+        structuresMenu.getItems().addAll(s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship,
+                s_gliderGun, s_pulsar);
 
         s_Rpentomino.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -314,6 +317,13 @@ public class GameOfLife extends Application {
             @Override
             public void handle(ActionEvent event) {
                 gameScene.s_gliderGun(30,30);
+            }
+        });
+
+        s_pulsar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                gameScene.s_pulsar(30,30);
             }
         });
 
