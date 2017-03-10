@@ -470,6 +470,54 @@ public class GameScene extends Pane implements Runnable {
         requestLayout();
     }
 
+    public void s_puffer1(int x, int y){
+        cell.add(new Point(x + 0, y + 2));
+        cell.add(new Point(x + 0, y + 6));
+        cell.add(new Point(x + 0, y + 7));
+        cell.add(new Point(x + 1, y + 3));
+        cell.add(new Point(x + 2, y + 3));
+        cell.add(new Point(x + 3, y + 3));
+        cell.add(new Point(x + 4, y + 3));
+        cell.add(new Point(x + 5, y + 3));
+        cell.add(new Point(x + 6, y + 3));
+        cell.add(new Point(x + 6, y + 2));
+        cell.add(new Point(x + 6, y + 1));
+        cell.add(new Point(x + 5, y + 0));
+        cell.add(new Point(x + 1, y + 6));
+        cell.add(new Point(x + 1, y + 7));
+        cell.add(new Point(x + 2, y + 6));
+        cell.add(new Point(x + 4, y + 8));
+        cell.add(new Point(x + 4, y + 9));
+        cell.add(new Point(x + 5, y + 9));
+        cell.add(new Point(x + 5, y + 10));
+        cell.add(new Point(x + 5, y + 11));
+        cell.add(new Point(x + 4, y + 11));
+        cell.add(new Point(x + 6, y + 10));
+        cell.add(new Point(x + 4, y + 15));
+        cell.add(new Point(x + 5, y + 15));
+        cell.add(new Point(x + 5, y + 16));
+        cell.add(new Point(x + 6, y + 16));
+        cell.add(new Point(x + 5, y + 17));
+        cell.add(new Point(x + 4, y + 17));
+        cell.add(new Point(x + 4, y + 18));
+        cell.add(new Point(x + 1, y + 19));
+        cell.add(new Point(x + 0, y + 19));
+        cell.add(new Point(x + 0, y + 20));
+        cell.add(new Point(x + 1, y + 20));
+        cell.add(new Point(x + 2, y + 20));
+        cell.add(new Point(x + 0, y + 24));
+        cell.add(new Point(x + 1, y + 23));
+        cell.add(new Point(x + 2, y + 23));
+        cell.add(new Point(x + 3, y + 23));
+        cell.add(new Point(x + 4, y + 23));
+        cell.add(new Point(x + 5, y + 23));
+        cell.add(new Point(x + 6, y + 23));
+        cell.add(new Point(x + 6, y + 24));
+        cell.add(new Point(x + 6, y + 25));
+        cell.add(new Point(x + 5, y + 26));
+        requestLayout();
+    }
+
 
     //this method is connected to speed slider item
     public void setANIMATION_SPEED(int ANIMATION_SPEED) {
