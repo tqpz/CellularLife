@@ -15,13 +15,17 @@ public class GameOfLife extends Application {
     //create Menu bar objects - they are representing clickable items on menubar
     private MenuBar menuBar;
     private Menu fileMenu, gameMenu, rulesMenu, structuresMenu, speedMenu, sizeMenu;
-    private MenuItem fm_exit, gm_start, gm_stop, gm_reset,
+    private ToggleGroup rulesGroup = new ToggleGroup();
+
+    private RadioMenuItem
             rm_conwayRules, rm_labirynth, rm_seeds,
             rm_coral, rm_highLife, rm_replicator,
             rm_assimilation, rm_walledCities,
             rm_coagulations, rm_twoXtwo, rm_dayAndNight,
             rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
             rm_stains, rm_gnarl, rm_mystery, rm_flakes;
+
+    private MenuItem fm_exit, gm_start, gm_stop, gm_reset;
 
     private MenuItem s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship,
             s_gliderGun, s_pulsar, s_dart, s_puffer1;
@@ -93,25 +97,65 @@ public class GameOfLife extends Application {
 
         //initialize all "Rules" menu items and add on click event handlers
         rulesMenu = new Menu("Rules");
-        rm_conwayRules = new MenuItem("Game of Life");
-        rm_labirynth = new MenuItem("Maze");
-        rm_seeds = new MenuItem("Seeds");
-        rm_coral = new MenuItem("Coral");
-        rm_highLife = new MenuItem("High Life");
-        rm_replicator = new MenuItem("Replicator");
-        rm_assimilation = new MenuItem("Assimilation");
-        rm_walledCities = new MenuItem("Walled Cities");
-        rm_coagulations = new MenuItem("Coagulations");
-        rm_twoXtwo = new MenuItem("2x2");
-        rm_dayAndNight = new MenuItem("Day and Night");
-        rm_amoeba = new MenuItem("Amoeba");
-        rm_diamoeba = new MenuItem("Diamoeba");
-        rm_the34 = new MenuItem("34");
-        rm_longLife = new MenuItem("Long Life");
-        rm_stains = new MenuItem("Stains");
-        rm_gnarl = new MenuItem("Gnarl");
-        rm_mystery = new MenuItem("Mystery");
-        rm_flakes = new MenuItem("Flakes");
+
+        rm_conwayRules = new RadioMenuItem("Game of Life");
+        rm_conwayRules.setToggleGroup(rulesGroup);
+        rm_conwayRules.setSelected(true);
+
+        rm_labirynth = new RadioMenuItem("Maze");
+        rm_labirynth.setToggleGroup(rulesGroup);
+
+        rm_seeds = new RadioMenuItem("Seeds");
+        rm_seeds.setToggleGroup(rulesGroup);
+
+        rm_coral = new RadioMenuItem("Coral");
+        rm_coral.setToggleGroup(rulesGroup);
+
+        rm_highLife = new RadioMenuItem("High Life");
+        rm_highLife.setToggleGroup(rulesGroup);
+
+        rm_replicator = new RadioMenuItem("Replicator");
+        rm_replicator.setToggleGroup(rulesGroup);
+
+        rm_assimilation = new RadioMenuItem("Assimilation");
+        rm_assimilation.setToggleGroup(rulesGroup);
+
+        rm_walledCities = new RadioMenuItem("Walled Cities");
+        rm_walledCities.setToggleGroup(rulesGroup);
+
+        rm_coagulations = new RadioMenuItem("Coagulations");
+        rm_coagulations.setToggleGroup(rulesGroup);
+
+        rm_twoXtwo = new RadioMenuItem("2x2");
+        rm_twoXtwo.setToggleGroup(rulesGroup);
+
+        rm_dayAndNight = new RadioMenuItem("Day and Night");
+        rm_dayAndNight.setToggleGroup(rulesGroup);
+
+        rm_amoeba = new RadioMenuItem("Amoeba");
+        rm_amoeba.setToggleGroup(rulesGroup);
+
+        rm_diamoeba = new RadioMenuItem("Diamoeba");
+        rm_diamoeba.setToggleGroup(rulesGroup);
+
+        rm_the34 = new RadioMenuItem("34");
+        rm_the34.setToggleGroup(rulesGroup);
+
+        rm_longLife = new RadioMenuItem("Long Life");
+        rm_longLife.setToggleGroup(rulesGroup);
+
+        rm_stains = new RadioMenuItem("Stains");
+        rm_stains.setToggleGroup(rulesGroup);
+
+        rm_gnarl = new RadioMenuItem("Gnarl");
+        rm_gnarl.setToggleGroup(rulesGroup);
+
+        rm_mystery = new RadioMenuItem("Mystery");
+        rm_mystery.setToggleGroup(rulesGroup);
+
+        rm_flakes = new RadioMenuItem("Flakes");
+        rm_flakes.setToggleGroup(rulesGroup);
+
 
         //on click all rules ale set to false and afterwards choosen rule is set true
         rm_conwayRules.setOnAction(new EventHandler<ActionEvent>() {
@@ -274,7 +318,14 @@ public class GameOfLife extends Application {
                 rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
                 rm_stains, rm_gnarl, rm_mystery, rm_flakes);
 
-        //initialize and add "Load" menu items
+        //initialize and add "Structures" menu items
+        Menu s_oscilators = new Menu("Oscillators");
+        Menu s_stillLifes = new Menu("Still lifes");
+        Menu s_spaceships = new Menu("Spaceships");
+        Menu s_puffers = new Menu("Puffers");
+        Menu s_methuselah = new Menu("Methuselah");
+        Menu s_guns = new Menu("Guns");
+
         structuresMenu = new Menu("Structures");
         s_glider = new MenuItem("Glider");
         s_acorn = new MenuItem("Acorn");
@@ -285,8 +336,14 @@ public class GameOfLife extends Application {
         s_dart = new MenuItem("Dart");
         s_puffer1 = new MenuItem("Puffer1");
 
-        structuresMenu.getItems().addAll(s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship,
-                s_gliderGun, s_pulsar, s_dart, s_puffer1);
+        s_oscilators.getItems().addAll(s_pulsar);
+        s_spaceships.getItems().addAll(s_glider, s_lightweightSpaceship, s_dart);
+        s_stillLifes.getItems().addAll();
+        s_methuselah.getItems().addAll(s_Rpentomino, s_acorn);
+        s_puffers.getItems().addAll(s_puffer1);
+        s_guns.getItems().addAll(s_gliderGun);
+
+        structuresMenu.getItems().addAll(s_oscilators, s_spaceships, s_stillLifes, s_methuselah, s_puffers, s_guns);
 
         s_Rpentomino.setOnAction(new EventHandler<ActionEvent>() {
             @Override
