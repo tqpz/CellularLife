@@ -432,6 +432,44 @@ public class GameScene extends Pane implements Runnable {
         requestLayout();
     }
 
+    public void s_dart(int x, int y){
+        cell.add(new Point(x + 0, y + 1));
+        cell.add(new Point(x + 0, y + 3));
+        cell.add(new Point(x + 0, y + 4));
+        cell.add(new Point(x + 0, y + 6));
+        cell.add(new Point(x + 1, y + 6));
+        cell.add(new Point(x + 2, y + 6));
+        cell.add(new Point(x + 3, y + 6));
+        cell.add(new Point(x + 4, y + 5));
+        cell.add(new Point(x + 4, y + 4));
+        cell.add(new Point(x + 3, y + 2));
+        cell.add(new Point(x + 2, y + 2));
+        cell.add(new Point(x + 2, y + 1));
+        cell.add(new Point(x + 1, y + 0));
+        cell.add(new Point(x + 0, y + 8));
+        cell.add(new Point(x + 1, y + 8));
+        cell.add(new Point(x + 2, y + 8));
+        cell.add(new Point(x + 3, y + 8));
+        cell.add(new Point(x + 4, y + 9));
+        cell.add(new Point(x + 4, y + 10));
+        cell.add(new Point(x + 0, y + 10));
+        cell.add(new Point(x + 0, y + 11));
+        cell.add(new Point(x + 0, y + 13));
+        cell.add(new Point(x + 1, y + 14));
+        cell.add(new Point(x + 2, y + 13));
+        cell.add(new Point(x + 2, y + 12));
+        cell.add(new Point(x + 3, y + 12));
+        cell.add(new Point(x + 6, y + 6));
+        cell.add(new Point(x + 6, y + 7));
+        cell.add(new Point(x + 6, y + 8));
+        cell.add(new Point(x + 7, y + 5));
+        cell.add(new Point(x + 7, y + 9));
+        cell.add(new Point(x + 8, y + 6));
+        cell.add(new Point(x + 8, y + 8));
+        cell.add(new Point(x + 9, y + 7));
+        requestLayout();
+    }
+
 
     //this method is connected to speed slider item
     public void setANIMATION_SPEED(int ANIMATION_SPEED) {
