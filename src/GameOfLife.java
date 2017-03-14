@@ -30,7 +30,8 @@ public class GameOfLife extends Application {
     private MenuItem s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship,
             s_gliderGun, s_pulsar, s_dart, s_puffer1, s_loaf,
             s_pond, s_elevener, s_honeycomb, s_paperclip,
-            s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse;
+            s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse,
+            s_pentadecathlon;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -349,8 +350,9 @@ public class GameOfLife extends Application {
         s_spiral = new MenuItem("Spiral");
         s_lake2 = new MenuItem("Lake 2");
         s_mickeyMouse = new MenuItem("Mickey Mouse");
+        s_pentadecathlon = new MenuItem("Pentadecathlon");
 
-        s_oscilators.getItems().addAll(s_pulsar);
+        s_oscilators.getItems().addAll(s_pulsar, s_pentadecathlon);
         s_spaceships.getItems().addAll(s_glider, s_lightweightSpaceship, s_dart);
         s_stillLifes.getItems().addAll(s_loaf, s_pond, s_elevener, s_honeycomb,
                 s_paperclip, s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse);
@@ -388,7 +390,7 @@ public class GameOfLife extends Application {
 
         s_moose.setOnAction(event -> struct.moose(gameScene.getxClick(), gameScene.getyClick()));
 
-        s_eater2.setOnAction(event -> struct.eater2(gameScene.getxClick(), gameScene.getyClick()));
+        s_eater2.setOnAction(event -> struct.eater2(gameScene.getxClick()-1, gameScene.getyClick()-1));
 
         s_spiral.setOnAction(event -> struct.spiral(gameScene.getxClick(), gameScene.getyClick()));
 
@@ -396,6 +398,7 @@ public class GameOfLife extends Application {
 
         s_mickeyMouse.setOnAction(event -> struct.mickeyMouse(gameScene.getxClick() - 1, gameScene.getyClick()));
 
+        s_pentadecathlon.setOnAction(event -> struct.pentadecathlon(gameScene.getxClick(), gameScene.getyClick()-1));
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();

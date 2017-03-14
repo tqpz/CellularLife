@@ -7,8 +7,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fd60eb5-8784-47bc-a05c-671e285c517e" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$26.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$27.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$28.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$29.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$30.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$31.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$32.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$33.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$34.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$35.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$36.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$37.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$38.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$39.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$40.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$41.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$42.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$24.class" afterPath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$24.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$25.class" afterPath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$25.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife.class" afterPath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameOfLife.java" afterPath="$PROJECT_DIR$/src/GameOfLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScene.java" afterPath="$PROJECT_DIR$/src/GameScene.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Structure.java" afterPath="$PROJECT_DIR$/src/Structure.java" />
     </list>
     <ignored path="GameOfLife.iws" />
@@ -29,14 +49,14 @@
     <favorites_list name="GameOfLife" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.66187596">
+    <splitter split-orientation="horizontal" split-proportion="0.46596065">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/GameOfLife.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-5478">
-                  <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+                <state relative-caret-position="1029">
+                  <caret line="400" column="114" selection-start-line="400" selection-start-column="114" selection-end-line="400" selection-end-column="114" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -47,8 +67,8 @@
           <file leaf-file-name="GameScene.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/GameScene.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-172">
-                  <caret line="179" column="65" selection-start-line="179" selection-start-column="65" selection-end-line="179" selection-end-column="65" />
+                <state relative-caret-position="4165">
+                  <caret line="287" column="27" selection-start-line="287" selection-start-column="27" selection-end-line="287" selection-end-column="27" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#7256#7257#0" expanded="true" />
@@ -84,8 +104,8 @@
           <file leaf-file-name="Structure.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Structure.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="456">
-                  <caret line="418" column="17" selection-start-line="418" selection-start-column="17" selection-end-line="418" selection-end-column="17" />
+                <state relative-caret-position="429">
+                  <caret line="443" column="0" selection-start-line="443" selection-start-column="0" selection-end-line="443" selection-end-column="0" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#231#238#0" expanded="true" />
@@ -421,7 +441,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2415459" sideWeight="0.5181543" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18196458" sideWeight="0.48184568" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.030595813" sideWeight="0.48184568" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14901665" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -1008,21 +1028,11 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa0.839/GameScene.java" />
-    <entry file="file://$PROJECT_DIR$/src/GameScene.java">
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_101/javafx-src.zip!/javafx/event/EventHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-172">
-          <caret line="179" column="65" selection-start-line="179" selection-start-column="65" selection-end-line="179" selection-end-column="65" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#7256#7257#0" expanded="true" />
-            <element signature="e#7284#7285#0" expanded="true" />
-            <element signature="e#10181#10182#0" expanded="true" />
-            <element signature="e#10208#10209#0" expanded="true" />
-            <element signature="e#10319#10320#0" expanded="true" />
-            <element signature="e#10373#10374#0" expanded="true" />
-            <element signature="e#10471#10472#0" expanded="true" />
-            <element signature="e#10513#10514#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="327">
+          <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1037,18 +1047,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_101/javafx-src.zip!/javafx/event/EventHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/GameScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
-          <folding />
+        <state relative-caret-position="4165">
+          <caret line="287" column="27" selection-start-line="287" selection-start-column="27" selection-end-line="287" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#7256#7257#0" expanded="true" />
+            <element signature="e#7284#7285#0" expanded="true" />
+            <element signature="e#10181#10182#0" expanded="true" />
+            <element signature="e#10208#10209#0" expanded="true" />
+            <element signature="e#10319#10320#0" expanded="true" />
+            <element signature="e#10373#10374#0" expanded="true" />
+            <element signature="e#10471#10472#0" expanded="true" />
+            <element signature="e#10513#10514#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameOfLife.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5478">
-          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        <state relative-caret-position="1029">
+          <caret line="400" column="114" selection-start-line="400" selection-start-column="114" selection-end-line="400" selection-end-column="114" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

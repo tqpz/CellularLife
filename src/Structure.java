@@ -441,4 +441,22 @@ public class Structure {
         aliveCells.add(new Point(x + 5, y + 6));
         scene.requestLayout();
     }
+
+    public void pentadecathlon(int x, int y){
+        aliveCells.add(new Point(x + 0, y + 1));
+        aliveCells.add(new Point(x + 1, y + 1));
+        aliveCells.add(new Point(x + 2, y + 0));
+        aliveCells.add(new Point(x + 2, y + 2));
+        aliveCells.add(new Point(x + 3, y + 1));
+        aliveCells.add(new Point(x + 4, y + 1));
+        aliveCells.add(new Point(x + 5, y + 1));
+        aliveCells.add(new Point(x + 6, y + 1));
+        aliveCells.add(new Point(x + 7, y + 0));
+        aliveCells.add(new Point(x + 7, y + 0));
+        aliveCells.add(new Point(x + 7, y + 0));
+        aliveCells.add(new Point(x + 7, y + 2));
+        aliveCells.add(new Point(x + 8, y + 1));
+        aliveCells.add(new Point(x + 9, y + 1));
+        scene.requestLayout();
+    }
 }
