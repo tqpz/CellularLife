@@ -38,6 +38,8 @@ public class GameOfLife extends Application {
         BorderPane root = new BorderPane();
         GameScene gameScene = new GameScene();
 
+        Structure struct = new Structure(gameScene, gameScene.getCell());
+
         //create simulation thread
         Thread test = new Thread(gameScene);
 
@@ -348,56 +350,56 @@ public class GameOfLife extends Application {
         s_Rpentomino.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_Rpentomino(gameScene.getxClick(), gameScene.getyClick());
+                struct.Rpentomino(gameScene.getxClick(), gameScene.getyClick());
             }
         });
 
         s_glider.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_gliderAdd(gameScene.getxClick(), gameScene.getyClick()+1);
+                struct.glider(gameScene.getxClick(), gameScene.getyClick()+1);
             }
         });
 
         s_acorn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_acorn(gameScene.getxClick()-1, gameScene.getyClick());
+                struct.acorn(gameScene.getxClick()-1, gameScene.getyClick());
             }
         });
 
         s_lightweightSpaceship.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_lightweightSpaceship(gameScene.getxClick()-1, gameScene.getyClick());
+                struct.lightweightSpaceship(gameScene.getxClick()-1, gameScene.getyClick());
             }
         });
 
         s_gliderGun.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_gliderGun(gameScene.getxClick(), gameScene.getyClick());
+                struct.gliderGun(gameScene.getxClick(), gameScene.getyClick());
             }
         });
 
         s_pulsar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_pulsar(gameScene.getxClick(), gameScene.getyClick()-2);
+                struct.pulsar(gameScene.getxClick(), gameScene.getyClick()-2);
             }
         });
 
         s_dart.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_dart(gameScene.getxClick()-1, gameScene.getyClick());
+                struct.dart(gameScene.getxClick()-1, gameScene.getyClick());
             }
         });
 
         s_puffer1.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.s_puffer1(gameScene.getxClick(), gameScene.getyClick()+2);
+                struct.puffer1(gameScene.getxClick(), gameScene.getyClick()+2);
             }
         });
 

@@ -14,6 +14,7 @@ import java.util.ConcurrentModificationException;
 
 public class GameScene extends Pane implements Runnable {
     private ArrayList<Point> cell = new ArrayList<Point>(0); //this array is representing all alive cells on board
+
     private int gameSceneWidth;
     private int gameSceneHeight;
 
@@ -298,235 +299,22 @@ public class GameScene extends Pane implements Runnable {
         setMystery(false);
     }
 
-    public void s_gliderAdd(int x, int y) {
-        cell.add(new Point(x, y - 1));
-        cell.add(new Point(x + 1, y));
-        cell.add(new Point(x - 1, y + 1));
-        cell.add(new Point(x, y + 1));
-        cell.add(new Point(x + 1, y + 1));
-        requestLayout();
-    }
 
-    public void s_acorn(int x, int y) {
-        cell.add(new Point(x - 1, y - 1));
-        cell.add(new Point(x + 1, y));
-        cell.add(new Point(x - 2, y + 1));
-        cell.add(new Point(x - 1, y + 1));
-        cell.add(new Point(x + 2, y + 1));
-        cell.add(new Point(x + 3, y + 1));
-        cell.add(new Point(x + 4, y + 1));
-        requestLayout();
-    }
-
-    public void s_Rpentomino(int x, int y) {
-        cell.add(new Point(x, y - 1));
-        cell.add(new Point(x + 1, y - 1));
-        cell.add(new Point(x - 1, y));
-        cell.add(new Point(x, y));
-        cell.add(new Point(x, y + 1));
-        requestLayout();
-    }
-
-
-    public void s_lightweightSpaceship(int x, int y) {
-        cell.add(new Point(x + 1, y - 1));
-        cell.add(new Point(x + 1, y));
-        cell.add(new Point(x + 1, y + 1));
-        cell.add(new Point(x, y + 1));
-        cell.add(new Point(x - 1, y + 1));
-        cell.add(new Point(x - 2, y + 1));
-        cell.add(new Point(x - 3, y));
-        cell.add(new Point(x - 3, y - 2));
-        cell.add(new Point(x, y - 2));
-        requestLayout();
-    }
-
-    public void s_gliderGun(int x, int y) {
-        cell.add(new Point(x, y));
-        cell.add(new Point(x + 1, y));
-        cell.add(new Point(x + 1, y + 1));
-        cell.add(new Point(x, y + 1));
-        cell.add(new Point(x + 10, y));
-        cell.add(new Point(x + 10, y + 1));
-        cell.add(new Point(x + 10, y + 2));
-        cell.add(new Point(x + 11, y - 1));
-        cell.add(new Point(x + 11, y + 3));
-        cell.add(new Point(x + 12, y - 2));
-        cell.add(new Point(x + 13, y - 2));
-        cell.add(new Point(x + 12, y + 4));
-        cell.add(new Point(x + 13, y + 4));
-        cell.add(new Point(x + 14, y + 1));
-        cell.add(new Point(x + 15, y - 1));
-        cell.add(new Point(x + 15, y + 3));
-        cell.add(new Point(x + 16, y));
-        cell.add(new Point(x + 16, y + 1));
-        cell.add(new Point(x + 16, y + 2));
-        cell.add(new Point(x + 17, y + 1));
-        cell.add(new Point(x + 20, y));
-        cell.add(new Point(x + 21, y));
-        cell.add(new Point(x + 21, y - 1));
-        cell.add(new Point(x + 20, y - 1));
-        cell.add(new Point(x + 20, y - 2));
-        cell.add(new Point(x + 21, y - 2));
-        cell.add(new Point(x + 22, y - 3));
-        cell.add(new Point(x + 22, y + 1));
-        cell.add(new Point(x + 24, y - 3));
-        cell.add(new Point(x + 24, y - 4));
-        cell.add(new Point(x + 24, y + 1));
-        cell.add(new Point(x + 24, y + 2));
-        cell.add(new Point(x + 34, y - 2));
-        cell.add(new Point(x + 34, y - 1));
-        cell.add(new Point(x + 35, y - 1));
-        cell.add(new Point(x + 35, y - 2));
-        requestLayout();
-    }
-
-    public void s_pulsar(int x, int y) {
-        cell.add(new Point(x, y + 2));
-        cell.add(new Point(x, y + 3));
-        cell.add(new Point(x, y + 4));
-        cell.add(new Point(x + 2, y + 5));
-        cell.add(new Point(x + 3, y + 5));
-        cell.add(new Point(x + 4, y + 5));
-        cell.add(new Point(x + 5, y + 4));
-        cell.add(new Point(x + 5, y + 3));
-        cell.add(new Point(x + 5, y + 2));
-        cell.add(new Point(x + 4, y));
-        cell.add(new Point(x + 3, y));
-        cell.add(new Point(x + 2, y));
-        cell.add(new Point(x + 2, y + 7));
-        cell.add(new Point(x + 3, y + 7));
-        cell.add(new Point(x + 4, y + 7));
-        cell.add(new Point(x + 5, y + 8));
-        cell.add(new Point(x + 5, y + 9));
-        cell.add(new Point(x + 5, y + 10));
-        cell.add(new Point(x + 7, y + 2));
-        cell.add(new Point(x + 7, y + 3));
-        cell.add(new Point(x + 7, y + 4));
-        cell.add(new Point(x + 8, y + 5));
-        cell.add(new Point(x + 9, y + 5));
-        cell.add(new Point(x + 10, y + 5));
-        cell.add(new Point(x + 8, y + 7));
-        cell.add(new Point(x + 9, y + 7));
-        cell.add(new Point(x + 10, y + 7));
-        cell.add(new Point(x + 8, y + 7));
-        cell.add(new Point(x + 7, y + 8));
-        cell.add(new Point(x + 7, y + 9));
-        cell.add(new Point(x + 7, y + 10));
-        cell.add(new Point(x + 8, y));
-        cell.add(new Point(x + 9, y));
-        cell.add(new Point(x + 10, y));
-        cell.add(new Point(x + 12, y + 4));
-        cell.add(new Point(x + 12, y + 3));
-        cell.add(new Point(x + 12, y + 2));
-        cell.add(new Point(x + 12, y + 8));
-        cell.add(new Point(x + 12, y + 9));
-        cell.add(new Point(x + 12, y + 10));
-        cell.add(new Point(x + 8, y + 12));
-        cell.add(new Point(x + 9, y + 12));
-        cell.add(new Point(x + 10, y + 12));
-        cell.add(new Point(x + 4, y + 12));
-        cell.add(new Point(x + 3, y + 12));
-        cell.add(new Point(x + 2, y + 12));
-        cell.add(new Point(x, y + 8));
-        cell.add(new Point(x, y + 9));
-        cell.add(new Point(x, y + 10));
-        requestLayout();
-    }
-
-    public void s_dart(int x, int y){
-        cell.add(new Point(x + 0, y + 1));
-        cell.add(new Point(x + 0, y + 3));
-        cell.add(new Point(x + 0, y + 4));
-        cell.add(new Point(x + 0, y + 6));
-        cell.add(new Point(x + 1, y + 6));
-        cell.add(new Point(x + 2, y + 6));
-        cell.add(new Point(x + 3, y + 6));
-        cell.add(new Point(x + 4, y + 5));
-        cell.add(new Point(x + 4, y + 4));
-        cell.add(new Point(x + 3, y + 2));
-        cell.add(new Point(x + 2, y + 2));
-        cell.add(new Point(x + 2, y + 1));
-        cell.add(new Point(x + 1, y + 0));
-        cell.add(new Point(x + 0, y + 8));
-        cell.add(new Point(x + 1, y + 8));
-        cell.add(new Point(x + 2, y + 8));
-        cell.add(new Point(x + 3, y + 8));
-        cell.add(new Point(x + 4, y + 9));
-        cell.add(new Point(x + 4, y + 10));
-        cell.add(new Point(x + 0, y + 10));
-        cell.add(new Point(x + 0, y + 11));
-        cell.add(new Point(x + 0, y + 13));
-        cell.add(new Point(x + 1, y + 14));
-        cell.add(new Point(x + 2, y + 13));
-        cell.add(new Point(x + 2, y + 12));
-        cell.add(new Point(x + 3, y + 12));
-        cell.add(new Point(x + 6, y + 6));
-        cell.add(new Point(x + 6, y + 7));
-        cell.add(new Point(x + 6, y + 8));
-        cell.add(new Point(x + 7, y + 5));
-        cell.add(new Point(x + 7, y + 9));
-        cell.add(new Point(x + 8, y + 6));
-        cell.add(new Point(x + 8, y + 8));
-        cell.add(new Point(x + 9, y + 7));
-        requestLayout();
-    }
-
-    public void s_puffer1(int x, int y){
-        cell.add(new Point(x + 0, y + 2));
-        cell.add(new Point(x + 0, y + 6));
-        cell.add(new Point(x + 0, y + 7));
-        cell.add(new Point(x + 1, y + 3));
-        cell.add(new Point(x + 2, y + 3));
-        cell.add(new Point(x + 3, y + 3));
-        cell.add(new Point(x + 4, y + 3));
-        cell.add(new Point(x + 5, y + 3));
-        cell.add(new Point(x + 6, y + 3));
-        cell.add(new Point(x + 6, y + 2));
-        cell.add(new Point(x + 6, y + 1));
-        cell.add(new Point(x + 5, y + 0));
-        cell.add(new Point(x + 1, y + 6));
-        cell.add(new Point(x + 1, y + 7));
-        cell.add(new Point(x + 2, y + 6));
-        cell.add(new Point(x + 4, y + 8));
-        cell.add(new Point(x + 4, y + 9));
-        cell.add(new Point(x + 5, y + 9));
-        cell.add(new Point(x + 5, y + 10));
-        cell.add(new Point(x + 5, y + 11));
-        cell.add(new Point(x + 4, y + 11));
-        cell.add(new Point(x + 6, y + 10));
-        cell.add(new Point(x + 4, y + 15));
-        cell.add(new Point(x + 5, y + 15));
-        cell.add(new Point(x + 5, y + 16));
-        cell.add(new Point(x + 6, y + 16));
-        cell.add(new Point(x + 5, y + 17));
-        cell.add(new Point(x + 4, y + 17));
-        cell.add(new Point(x + 4, y + 18));
-        cell.add(new Point(x + 1, y + 19));
-        cell.add(new Point(x + 0, y + 19));
-        cell.add(new Point(x + 0, y + 20));
-        cell.add(new Point(x + 1, y + 20));
-        cell.add(new Point(x + 2, y + 20));
-        cell.add(new Point(x + 0, y + 24));
-        cell.add(new Point(x + 1, y + 23));
-        cell.add(new Point(x + 2, y + 23));
-        cell.add(new Point(x + 3, y + 23));
-        cell.add(new Point(x + 4, y + 23));
-        cell.add(new Point(x + 5, y + 23));
-        cell.add(new Point(x + 6, y + 23));
-        cell.add(new Point(x + 6, y + 24));
-        cell.add(new Point(x + 6, y + 25));
-        cell.add(new Point(x + 5, y + 26));
-        requestLayout();
-    }
-
+    //get last clicked x coordinate
     public int getxClick() {
         return xClick;
     }
 
+    //get last clicked y coordinate
     public int getyClick() {
         return yClick;
     }
+
+
+    public ArrayList<Point> getCell() {
+        return cell;
+    }
+
     //this method is connected to speed slider item
     public void setANIMATION_SPEED(int ANIMATION_SPEED) {
         this.ANIMATION_SPEED = ANIMATION_SPEED;
