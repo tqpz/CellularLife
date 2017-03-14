@@ -51,6 +51,9 @@ public class GameScene extends Pane implements Runnable {
         conwayRules = true; //initially set conway rules
         devmode = true;
 
+        xClick = 1;
+        yClick = 1;
+
         //set width and height perfectly fit on scene even with user resize operation
         gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
         gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
@@ -170,7 +173,7 @@ public class GameScene extends Pane implements Runnable {
         }
 
         if (devmode) {
-            System.out.println("cell.add(new Point(x + " + x + ", y + " + y + "));");
+            System.out.println("aliveCells.add(new Point(x + " + x + ", y + " + y + "));");
         }
     }
 
@@ -197,6 +200,9 @@ public class GameScene extends Pane implements Runnable {
     public void resetAll() {
         cell.clear(); //clears layout
         evolutionNum = 0; // set evolution number to 0
+        if (devmode){
+            System.out.println("___________________");
+        }
         requestLayout(); //force to refresh window
     }
 

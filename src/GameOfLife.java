@@ -28,7 +28,9 @@ public class GameOfLife extends Application {
     private MenuItem fm_exit, gm_start, gm_stop, gm_reset;
 
     private MenuItem s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship,
-            s_gliderGun, s_pulsar, s_dart, s_puffer1;
+            s_gliderGun, s_pulsar, s_dart, s_puffer1, s_loaf,
+            s_pond, s_elevener, s_honeycomb, s_paperclip,
+            s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -337,71 +339,62 @@ public class GameOfLife extends Application {
         s_pulsar = new MenuItem("Pulsar");
         s_dart = new MenuItem("Dart");
         s_puffer1 = new MenuItem("Puffer1");
+        s_loaf = new MenuItem("Loaf");
+        s_pond = new MenuItem("Pond");
+        s_elevener = new MenuItem("Elevener");
+        s_honeycomb = new MenuItem("Honeycomb");
+        s_paperclip = new MenuItem("Paperclip");
+        s_moose = new MenuItem("Moose");
+        s_eater2 = new MenuItem("Eater 2");
+        s_spiral = new MenuItem("Spiral");
+        s_lake2 = new MenuItem("Lake 2");
+        s_mickeyMouse = new MenuItem("Mickey Mouse");
 
         s_oscilators.getItems().addAll(s_pulsar);
         s_spaceships.getItems().addAll(s_glider, s_lightweightSpaceship, s_dart);
-        s_stillLifes.getItems().addAll();
+        s_stillLifes.getItems().addAll(s_loaf, s_pond, s_elevener, s_honeycomb,
+                s_paperclip, s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse);
         s_methuselah.getItems().addAll(s_Rpentomino, s_acorn);
         s_puffers.getItems().addAll(s_puffer1);
         s_guns.getItems().addAll(s_gliderGun);
 
         structuresMenu.getItems().addAll(s_oscilators, s_spaceships, s_stillLifes, s_methuselah, s_puffers, s_guns);
 
-        s_Rpentomino.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                struct.Rpentomino(gameScene.getxClick(), gameScene.getyClick());
-            }
-        });
+        s_Rpentomino.setOnAction(event -> struct.Rpentomino(gameScene.getxClick(), gameScene.getyClick()));
 
-        s_glider.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                struct.glider(gameScene.getxClick(), gameScene.getyClick()+1);
-            }
-        });
+        s_glider.setOnAction(event -> struct.glider(gameScene.getxClick(), gameScene.getyClick() + 1));
 
-        s_acorn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                struct.acorn(gameScene.getxClick()-1, gameScene.getyClick());
-            }
-        });
+        s_acorn.setOnAction(event -> struct.acorn(gameScene.getxClick() - 1, gameScene.getyClick()));
 
-        s_lightweightSpaceship.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                struct.lightweightSpaceship(gameScene.getxClick()-1, gameScene.getyClick());
-            }
-        });
+        s_lightweightSpaceship.setOnAction(event -> struct.lightweightSpaceship(gameScene.getxClick() - 1, gameScene.getyClick()));
 
-        s_gliderGun.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                struct.gliderGun(gameScene.getxClick(), gameScene.getyClick());
-            }
-        });
+        s_gliderGun.setOnAction(event -> struct.gliderGun(gameScene.getxClick(), gameScene.getyClick()));
 
-        s_pulsar.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                struct.pulsar(gameScene.getxClick(), gameScene.getyClick()-2);
-            }
-        });
+        s_pulsar.setOnAction(event -> struct.pulsar(gameScene.getxClick(), gameScene.getyClick() - 2));
 
-        s_dart.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                struct.dart(gameScene.getxClick()-1, gameScene.getyClick());
-            }
-        });
+        s_dart.setOnAction(event -> struct.dart(gameScene.getxClick() - 1, gameScene.getyClick()));
 
-        s_puffer1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                struct.puffer1(gameScene.getxClick(), gameScene.getyClick()+2);
-            }
-        });
+        s_puffer1.setOnAction(event -> struct.puffer1(gameScene.getxClick(), gameScene.getyClick() + 2));
+
+        s_loaf.setOnAction(event -> struct.loaf(gameScene.getxClick() - 1, gameScene.getyClick()));
+
+        s_pond.setOnAction(event -> struct.pond(gameScene.getxClick() - 1, gameScene.getyClick()));
+
+        s_elevener.setOnAction(event -> struct.elevener(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_honeycomb.setOnAction(event -> struct.honeycomb(gameScene.getxClick() - 2, gameScene.getyClick()));
+
+        s_paperclip.setOnAction(event -> struct.paperclip(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_moose.setOnAction(event -> struct.moose(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_eater2.setOnAction(event -> struct.eater2(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_spiral.setOnAction(event -> struct.spiral(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_lake2.setOnAction(event -> struct.lake2(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_mickeyMouse.setOnAction(event -> struct.mickeyMouse(gameScene.getxClick() - 1, gameScene.getyClick()));
 
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
