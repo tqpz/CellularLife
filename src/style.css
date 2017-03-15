@@ -1,0 +1,10 @@
+.color-button{
+    -fx-background-color: null;
+    -fx-background: white;
+}
+
+
+.menu-button:showing {
+    -fx-background: white;
+    -fx-background-color: null;
+}

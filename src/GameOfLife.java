@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GameOfLife extends Application {
@@ -14,7 +15,7 @@ public class GameOfLife extends Application {
 
     //create Menu bar objects - they are representing clickable items on menubar
     private MenuBar menuBar;
-    private Menu fileMenu, gameMenu, rulesMenu, structuresMenu, speedMenu, sizeMenu;
+    private Menu fileMenu, gameMenu, rulesMenu, structuresMenu, speedMenu, sizeMenu, colorMenu;
     private ToggleGroup rulesGroup = new ToggleGroup();
 
     private RadioMenuItem
@@ -31,7 +32,7 @@ public class GameOfLife extends Application {
             s_gliderGun, s_pulsar, s_dart, s_puffer1, s_loaf,
             s_pond, s_elevener, s_honeycomb, s_paperclip,
             s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse,
-            s_pentadecathlon;
+            s_pentadecathlon, m_palette;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -390,7 +391,7 @@ public class GameOfLife extends Application {
 
         s_moose.setOnAction(event -> struct.moose(gameScene.getxClick(), gameScene.getyClick()));
 
-        s_eater2.setOnAction(event -> struct.eater2(gameScene.getxClick()-1, gameScene.getyClick()-1));
+        s_eater2.setOnAction(event -> struct.eater2(gameScene.getxClick() - 1, gameScene.getyClick() - 1));
 
         s_spiral.setOnAction(event -> struct.spiral(gameScene.getxClick(), gameScene.getyClick()));
 
@@ -398,7 +399,7 @@ public class GameOfLife extends Application {
 
         s_mickeyMouse.setOnAction(event -> struct.mickeyMouse(gameScene.getxClick() - 1, gameScene.getyClick()));
 
-        s_pentadecathlon.setOnAction(event -> struct.pentadecathlon(gameScene.getxClick(), gameScene.getyClick()-1));
+        s_pentadecathlon.setOnAction(event -> struct.pentadecathlon(gameScene.getxClick(), gameScene.getyClick() - 1));
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
@@ -420,7 +421,7 @@ public class GameOfLife extends Application {
             }
         });
 
-        //initialize slider that is responsible for grid size
+        //initialize slider responsible for grid size
         sizeMenu = new Menu("Size");
         Slider sizeSlider = new Slider();
         sizeSlider.setMin(2);
@@ -438,10 +439,20 @@ public class GameOfLife extends Application {
             }
         });
 
+        //create ColorPicker and add it to menubar with css styling
+        root.getStylesheets().addAll("style.css");
+        ColorPicker colorPicker = new ColorPicker();
+        colorPicker.setValue(Color.FIREBRICK);
+        colorPicker.setOnAction(event -> gameScene.setCellColor(colorPicker.getValue()));
+        colorPicker.getStyleClass().add("button");
+        colorPicker.getStyleClass().add("color-button");
+        colorPicker.setPrefSize(30,10);
+        colorMenu = new Menu(null, colorPicker);
+
         //add items to menu
         sizeMenu.getItems().addAll(sm_slider);
 
-        menuBar.getMenus().addAll(fileMenu, gameMenu, structuresMenu, rulesMenu, speedMenu, sizeMenu);
+        menuBar.getMenus().addAll(fileMenu, gameMenu, structuresMenu, rulesMenu, speedMenu, sizeMenu, colorMenu);
 
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 

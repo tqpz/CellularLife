@@ -44,10 +44,13 @@ public class GameScene extends Pane implements Runnable {
 
     //create label that shows number of alive cells
     private Label aliveCellsOnBoard;
+
+    private Color cellColor;
     private int xClick;
     private int yClick;
 
     public GameScene() {
+        cellColor = Color.FIREBRICK;
         conwayRules = true; //initially set conway rules
         devmode = true;
 
@@ -122,7 +125,7 @@ public class GameScene extends Pane implements Runnable {
         try {
             //iterate through cell array and set its color, size and shape
             for (Point newPoint : cell) {
-                gc.setFill(Color.FIREBRICK);
+                gc.setFill(cellColor);
                 gc.fillRect(CELL_SIZE + (CELL_SIZE * newPoint.x),
                         CELL_SIZE + (CELL_SIZE * newPoint.y),
                         CELL_SIZE,
@@ -329,6 +332,11 @@ public class GameScene extends Pane implements Runnable {
     //this method is connected to size slider item
     public void setCELL_SIZE(int CELL_SIZE) {
         this.CELL_SIZE = CELL_SIZE;
+    }
+
+    public void setCellColor(Color cellColor) {
+        this.cellColor = cellColor;
+        requestLayout();
     }
 
     //thread run method - this is executed on thread start
