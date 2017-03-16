@@ -33,7 +33,7 @@ public class GameOfLife extends Application {
             s_pond, s_elevener, s_honeycomb, s_paperclip,
             s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse,
             s_pentadecathlon, s_galaxy, s_pinwheel, s_sixBits,
-            s_gabrielsp138, s_archimsp144, s_78P70;
+            s_gabrielsp138, s_archimsp144, s_78P70, s_p60hassler;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -360,9 +360,11 @@ public class GameOfLife extends Application {
         s_gabrielsp138 = new MenuItem("Gabriel's p138");
         s_archimsp144 = new MenuItem("Archim's p144");
         s_78P70 = new MenuItem("78P70");
+        s_p60hassler = new MenuItem("P60 hassler");
 
         s_oscilators.getItems().addAll(s_pulsar, s_pentadecathlon, s_galaxy,
-                s_pinwheel, s_sixBits, s_gabrielsp138, s_archimsp144, s_78P70);
+                s_pinwheel, s_sixBits, s_gabrielsp138, s_archimsp144, s_78P70,
+                s_p60hassler);
         s_spaceships.getItems().addAll(s_glider, s_lightweightSpaceship, s_dart);
         s_stillLifes.getItems().addAll(s_loaf, s_pond, s_elevener, s_honeycomb,
                 s_paperclip, s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse);
@@ -421,6 +423,9 @@ public class GameOfLife extends Application {
         s_archimsp144.setOnAction(event -> struct.archimsp144(gameScene.getxClick(), gameScene.getyClick()));
 
         s_78P70.setOnAction(event -> struct.seven_eight_p_seven_zero(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_p60hassler.setOnAction(event -> struct.p60_hassler(gameScene.getxClick(), gameScene.getyClick()));
+
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
