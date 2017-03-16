@@ -34,7 +34,7 @@ public class GameOfLife extends Application {
             s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse,
             s_pentadecathlon, s_galaxy, s_pinwheel, s_sixBits,
             s_gabrielsp138, s_archimsp144, s_78P70, s_p60hassler,
-            s_70P2H1V01, s_sparky;
+            s_70P2H1V01, s_sparky, s_backrake1;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -366,6 +366,8 @@ public class GameOfLife extends Application {
         s_70P2H1V01 = new MenuItem("70P2H1V01");
         s_sparky = new MenuItem("Sparky");
 
+        s_backrake1 = new MenuItem("Backrake1");
+
         s_oscilators.getItems().addAll(s_pulsar, s_pentadecathlon, s_galaxy,
                 s_pinwheel, s_sixBits, s_gabrielsp138, s_archimsp144, s_78P70,
                 s_p60hassler);
@@ -374,7 +376,7 @@ public class GameOfLife extends Application {
         s_stillLifes.getItems().addAll(s_loaf, s_pond, s_elevener, s_honeycomb,
                 s_paperclip, s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse);
         s_methuselah.getItems().addAll(s_Rpentomino, s_acorn);
-        s_puffers.getItems().addAll(s_puffer1);
+        s_puffers.getItems().addAll(s_puffer1, s_backrake1);
         s_guns.getItems().addAll(s_gliderGun);
 
         structuresMenu.getItems().addAll(s_oscilators, s_spaceships, s_stillLifes, s_methuselah, s_puffers, s_guns);
@@ -434,6 +436,8 @@ public class GameOfLife extends Application {
         s_70P2H1V01.setOnAction(event -> struct.seven_0P2H1V01(gameScene.getxClick(), gameScene.getyClick()));
 
         s_sparky.setOnAction(event -> struct.sparky(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_backrake1.setOnAction(event -> struct.backrake1(gameScene.getxClick(), gameScene.getyClick()));
 
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
