@@ -8,10 +8,3 @@
     -fx-background: white;
     -fx-background-color: null;
 }
-
-/*
-.menu-bar .menu-button:hover, .menu-button:focused, .menu-button:showing {
-    -fx-background: white;
-    -fx-background-color: darkgreen;
-    -fx-text-fill: -fx-selection-bar-text;
-}*/

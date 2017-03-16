@@ -32,7 +32,8 @@ public class GameOfLife extends Application {
             s_gliderGun, s_pulsar, s_dart, s_puffer1, s_loaf,
             s_pond, s_elevener, s_honeycomb, s_paperclip,
             s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse,
-            s_pentadecathlon, m_palette;
+            s_pentadecathlon, s_galaxy, s_pinwheel, s_sixBits,
+            s_gabrielsp138, s_archimsp144, s_78P70;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -351,9 +352,17 @@ public class GameOfLife extends Application {
         s_spiral = new MenuItem("Spiral");
         s_lake2 = new MenuItem("Lake 2");
         s_mickeyMouse = new MenuItem("Mickey Mouse");
-        s_pentadecathlon = new MenuItem("Pentadecathlon");
 
-        s_oscilators.getItems().addAll(s_pulsar, s_pentadecathlon);
+        s_pentadecathlon = new MenuItem("Pentadecathlon");
+        s_galaxy = new MenuItem("Galaxy");
+        s_pinwheel = new MenuItem("Pinwheel");
+        s_sixBits = new MenuItem("6Bits");
+        s_gabrielsp138 = new MenuItem("Gabriel's p138");
+        s_archimsp144 = new MenuItem("Archim's p144");
+        s_78P70 = new MenuItem("78P70");
+
+        s_oscilators.getItems().addAll(s_pulsar, s_pentadecathlon, s_galaxy,
+                s_pinwheel, s_sixBits, s_gabrielsp138, s_archimsp144, s_78P70);
         s_spaceships.getItems().addAll(s_glider, s_lightweightSpaceship, s_dart);
         s_stillLifes.getItems().addAll(s_loaf, s_pond, s_elevener, s_honeycomb,
                 s_paperclip, s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse);
@@ -400,6 +409,18 @@ public class GameOfLife extends Application {
         s_mickeyMouse.setOnAction(event -> struct.mickeyMouse(gameScene.getxClick() - 1, gameScene.getyClick()));
 
         s_pentadecathlon.setOnAction(event -> struct.pentadecathlon(gameScene.getxClick(), gameScene.getyClick() - 1));
+
+        s_galaxy.setOnAction(event -> struct.galaxy(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_pinwheel.setOnAction(event -> struct.pinwheel(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_sixBits.setOnAction(event -> struct.sixBits(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_gabrielsp138.setOnAction(event -> struct.gabrielsp138(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_archimsp144.setOnAction(event -> struct.archimsp144(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_78P70.setOnAction(event -> struct.seven_eight_p_seven_zero(gameScene.getxClick(), gameScene.getyClick()));
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
@@ -446,7 +467,7 @@ public class GameOfLife extends Application {
         colorPicker.setOnAction(event -> gameScene.setCellColor(colorPicker.getValue()));
         colorPicker.getStyleClass().add("button");
         colorPicker.getStyleClass().add("color-button");
-        colorPicker.setPrefSize(30,10);
+        colorPicker.setPrefSize(30, 10);
         colorMenu = new Menu(null, colorPicker);
 
         //add items to menu
