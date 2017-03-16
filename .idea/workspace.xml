@@ -34,8 +34,8 @@
           <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/GameOfLife.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="226">
-                  <caret line="426" column="108" selection-start-line="426" selection-start-column="108" selection-end-line="426" selection-end-column="108" />
+                <state relative-caret-position="311">
+                  <caret line="429" column="72" selection-start-line="429" selection-start-column="72" selection-end-line="429" selection-end-column="72" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -56,7 +56,7 @@
           <file leaf-file-name="GameScene.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/GameScene.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="153">
+                <state relative-caret-position="-153">
                   <caret line="133" column="39" selection-start-line="133" selection-start-column="39" selection-end-line="133" selection-end-column="39" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -68,7 +68,7 @@
           <file leaf-file-name="Structure.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Structure.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1297">
+                <state relative-caret-position="277">
                   <caret line="647" column="30" selection-start-line="647" selection-start-column="30" selection-end-line="647" selection-end-column="30" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -84,8 +84,8 @@
           <file leaf-file-name="Structure.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/Structure.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="464">
-                  <caret line="887" column="30" selection-start-line="887" selection-start-column="30" selection-end-line="887" selection-end-column="30" />
+                <state relative-caret-position="346">
+                  <caret line="1080" column="5" selection-start-line="1080" selection-start-column="5" selection-end-line="1080" selection-end-column="5" />
                   <folding>
                     <element signature="imports" expanded="true" />
                   </folding>
@@ -119,8 +119,8 @@
         <option value="$PROJECT_DIR$/src/ColorChooserSample.java" />
         <option value="$PROJECT_DIR$/src/GameScene.java" />
         <option value="$PROJECT_DIR$/src/style.css" />
-        <option value="$PROJECT_DIR$/src/Structure.java" />
         <option value="$PROJECT_DIR$/src/GameOfLife.java" />
+        <option value="$PROJECT_DIR$/src/Structure.java" />
       </list>
     </option>
   </component>
@@ -459,7 +459,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26086956" sideWeight="0.5212443" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11111111" sideWeight="0.47875568" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11433172" sideWeight="0.47875568" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14901665" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -945,18 +945,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="-153">
           <caret line="133" column="39" selection-start-line="133" selection-start-column="39" selection-end-line="133" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Structure.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1297">
-          <caret line="647" column="30" selection-start-line="647" selection-start-column="30" selection-end-line="647" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -965,8 +955,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameOfLife.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="426" column="108" selection-start-line="426" selection-start-column="108" selection-end-line="426" selection-end-column="108" />
+        <state relative-caret-position="311">
+          <caret line="429" column="72" selection-start-line="429" selection-start-column="72" selection-end-line="429" selection-end-column="72" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Structure.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="1080" column="5" selection-start-line="1080" selection-start-column="5" selection-end-line="1080" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
