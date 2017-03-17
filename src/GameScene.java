@@ -31,7 +31,7 @@ public class GameScene extends Pane implements Runnable {
             assimilation, walledCities,
             coagulations, twoXtwo, dayAndNight,
             amoeba, diamoeba, the34, longLife,
-            stains, gnarl, mystery, flakes;
+            stains, gnarl, mystery, flakes, spiralGrowth;
 
     private boolean devmode;
 
@@ -203,7 +203,7 @@ public class GameScene extends Pane implements Runnable {
     public void resetAll() {
         cell.clear(); //clears layout
         evolutionNum = 0; // set evolution number to 0
-        if (devmode){
+        if (devmode) {
             System.out.println("___________________");
         }
         requestLayout(); //force to refresh window
@@ -284,6 +284,10 @@ public class GameScene extends Pane implements Runnable {
 
     public void setFlakes(boolean flakes) {
         this.flakes = flakes;
+    }
+
+    public void setSpiralGrowth(boolean spiralGrowth) {
+        this.spiralGrowth = spiralGrowth;
     }
 
     //this method is called when user is changing rule to another
@@ -567,6 +571,16 @@ public class GameScene extends Pane implements Runnable {
                             }
                         } else {
                             if (neighbours == 3) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        }
+                    } else if (spiralGrowth) {
+                        if (cellsBoard[i][j]) {
+                            if (neighbours == 1 || neighbours >= 5 && neighbours <= 8) {
+                                nextGeneration.add(new Point(i - 1, j - 1));
+                            }
+                        } else {
+                            if (neighbours == 8 || neighbours >= 3 && neighbours <= 6) {
                                 nextGeneration.add(new Point(i - 1, j - 1));
                             }
                         }

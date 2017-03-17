@@ -1471,5 +1471,52 @@ public class Structure {
         scene.requestLayout();
     }
 
+    public void spiralGrowth(int x, int y){
+        aliveCells.add(new Point(x + 19, y + 24));
+        aliveCells.add(new Point(x + 19, y + 25));
+        aliveCells.add(new Point(x + 20, y + 25));
+        aliveCells.add(new Point(x + 20, y + 26));
+        aliveCells.add(new Point(x + 21, y + 26));
+        aliveCells.add(new Point(x + 21, y + 24));
+        aliveCells.add(new Point(x + 21, y + 23));
+        aliveCells.add(new Point(x + 23, y + 24));
+        aliveCells.add(new Point(x + 23, y + 23));
+        aliveCells.add(new Point(x + 69, y + 63));
+        aliveCells.add(new Point(x + 70, y + 64));
+        aliveCells.add(new Point(x + 70, y + 65));
+        aliveCells.add(new Point(x + 71, y + 65));
+        aliveCells.add(new Point(x + 72, y + 65));
+        aliveCells.add(new Point(x + 72, y + 64));
+        aliveCells.add(new Point(x + 72, y + 63));
+        aliveCells.add(new Point(x + 73, y + 63));
+        aliveCells.add(new Point(x + 73, y + 66));
+        scene.requestLayout();
+    }
+
+    public void pufferTrain(int x, int y){
+        aliveCells.add(new Point(x + 6, y + 1));
+        aliveCells.add(new Point(x + 7, y + 2));
+        aliveCells.add(new Point(x + 7, y + 3));
+        aliveCells.add(new Point(x + 7, y + 4));
+        aliveCells.add(new Point(x + 6, y + 4));
+        aliveCells.add(new Point(x + 5, y + 4));
+        aliveCells.add(new Point(x + 4, y + 4));
+        aliveCells.add(new Point(x + 3, y + 3));
+        aliveCells.add(new Point(x + 3, y + 8));
+        aliveCells.add(new Point(x + 4, y + 9));
+        aliveCells.add(new Point(x + 5, y + 9));
+        aliveCells.add(new Point(x + 5, y + 10));
+        aliveCells.add(new Point(x + 5, y + 11));
+        aliveCells.add(new Point(x + 4, y + 12));
+        aliveCells.add(new Point(x + 6, y + 15));
+        aliveCells.add(new Point(x + 7, y + 16));
+        aliveCells.add(new Point(x + 7, y + 17));
+        aliveCells.add(new Point(x + 7, y + 18));
+        aliveCells.add(new Point(x + 6, y + 18));
+        aliveCells.add(new Point(x + 5, y + 18));
+        aliveCells.add(new Point(x + 4, y + 18));
+        aliveCells.add(new Point(x + 3, y + 17));
+        scene.requestLayout();
+    }
 
 }

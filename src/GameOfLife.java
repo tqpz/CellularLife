@@ -24,7 +24,8 @@ public class GameOfLife extends Application {
             rm_assimilation, rm_walledCities,
             rm_coagulations, rm_twoXtwo, rm_dayAndNight,
             rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
-            rm_stains, rm_gnarl, rm_mystery, rm_flakes;
+            rm_stains, rm_gnarl, rm_mystery, rm_flakes,
+            rm_spiralGrowth;
 
     private MenuItem fm_exit, gm_start, gm_stop, gm_reset;
 
@@ -35,7 +36,7 @@ public class GameOfLife extends Application {
             s_pentadecathlon, s_galaxy, s_pinwheel, s_sixBits,
             s_gabrielsp138, s_archimsp144, s_78P70, s_p60hassler,
             s_70P2H1V01, s_sparky, s_backrake1, s_blinkerPuffer,
-            s_spacefiller;
+            s_spacefiller, s_pufferTrain;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -65,12 +66,7 @@ public class GameOfLife extends Application {
         fm_exit = new MenuItem("Exit");
         fileMenu.getItems().add(fm_exit);
 
-        fm_exit.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
-            @Override
-            public void handle(javafx.event.ActionEvent event) {
-                primaryStage.close();
-            }
-        });
+        fm_exit.setOnAction(event -> primaryStage.close());
 
         //initialize "Game" menu item, add drop-down menu items and event handlers
         gameMenu = new Menu("Game");
@@ -97,12 +93,7 @@ public class GameOfLife extends Application {
             }
         });
 
-        gm_reset.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetAll();
-            }
-        });
+        gm_reset.setOnAction(event -> gameScene.resetAll());
 
         //initialize all "Rules" menu items and add on click event handlers
         rulesMenu = new Menu("Rules");
@@ -165,158 +156,110 @@ public class GameOfLife extends Application {
         rm_flakes = new RadioMenuItem("Flakes");
         rm_flakes.setToggleGroup(rulesGroup);
 
+        rm_spiralGrowth = new RadioMenuItem("Spiral Growth");
+        rm_spiralGrowth.setToggleGroup(rulesGroup);
+
 
         //on click all rules ale set to false and afterwards choosen rule is set true
-        rm_conwayRules.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setConwayRules(true);
-            }
+        rm_conwayRules.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setConwayRules(true);
         });
 
-        rm_labirynth.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setLabirynth(true);
-            }
+        rm_labirynth.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setLabirynth(true);
         });
 
-        rm_seeds.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setSeeds(true);
-            }
+        rm_seeds.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setSeeds(true);
         });
 
-        rm_coral.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setCoral(true);
-            }
+        rm_coral.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setCoral(true);
         });
 
-        rm_highLife.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setHighLife(true);
-            }
+        rm_highLife.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setHighLife(true);
         });
 
-        rm_replicator.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setReplicator(true);
-            }
+        rm_replicator.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setReplicator(true);
         });
 
-        rm_assimilation.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setAssimilation(true);
-            }
+        rm_assimilation.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setAssimilation(true);
         });
 
-        rm_walledCities.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setWalledCities(true);
-            }
+        rm_walledCities.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setWalledCities(true);
         });
 
-        rm_coagulations.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setCoagulations(true);
-            }
+        rm_coagulations.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setCoagulations(true);
         });
 
-        rm_twoXtwo.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setTwoXtwo(true);
-            }
+        rm_twoXtwo.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setTwoXtwo(true);
         });
 
-        rm_dayAndNight.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setDayAndNight(true);
-            }
+        rm_dayAndNight.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setDayAndNight(true);
         });
 
-        rm_amoeba.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setAmoeba(true);
-            }
+        rm_amoeba.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setAmoeba(true);
         });
 
-        rm_diamoeba.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setDiamoeba(true);
-            }
+        rm_diamoeba.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setDiamoeba(true);
         });
 
-        rm_the34.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setThe34(true);
-            }
+        rm_the34.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setThe34(true);
         });
 
-        rm_longLife.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setLongLife(true);
-            }
+        rm_longLife.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setLongLife(true);
         });
 
-        rm_stains.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setStains(true);
-            }
+        rm_stains.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setStains(true);
         });
 
-        rm_gnarl.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setGnarl(true);
-            }
+        rm_gnarl.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setGnarl(true);
         });
 
-        rm_mystery.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setMystery(true);
-            }
+        rm_mystery.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setMystery(true);
         });
 
-        rm_flakes.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.resetRules();
-                gameScene.setFlakes(true);
-            }
+        rm_flakes.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setFlakes(true);
+        });
+
+        rm_spiralGrowth.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setSpiralGrowth(true);
+            struct.spiralGrowth(gameScene.getxClick() - 1, gameScene.getyClick());
         });
 
         //add initialized items to menubar
@@ -325,7 +268,7 @@ public class GameOfLife extends Application {
                 rm_assimilation, rm_walledCities,
                 rm_coagulations, rm_twoXtwo, rm_dayAndNight,
                 rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
-                rm_stains, rm_gnarl, rm_mystery, rm_flakes);
+                rm_stains, rm_gnarl, rm_mystery, rm_flakes, rm_spiralGrowth);
 
         //initialize and add "Structures" menu items
         Menu s_oscilators = new Menu("Oscillators");
@@ -370,6 +313,7 @@ public class GameOfLife extends Application {
         s_backrake1 = new MenuItem("Backrake1");
         s_blinkerPuffer = new MenuItem("Blinker puffer");
         s_spacefiller = new MenuItem("Spacefiller");
+        s_pufferTrain = new MenuItem("Puffer train");
 
         s_oscilators.getItems().addAll(s_pulsar, s_pentadecathlon, s_galaxy,
                 s_pinwheel, s_sixBits, s_gabrielsp138, s_archimsp144, s_78P70,
@@ -380,7 +324,7 @@ public class GameOfLife extends Application {
                 s_paperclip, s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse);
         s_methuselah.getItems().addAll(s_Rpentomino, s_acorn);
         s_puffers.getItems().addAll(s_puffer1, s_backrake1, s_blinkerPuffer,
-                s_spacefiller);
+                s_spacefiller, s_pufferTrain);
         s_guns.getItems().addAll(s_gliderGun);
 
         structuresMenu.getItems().addAll(s_oscilators, s_spaceships, s_stillLifes, s_methuselah, s_puffers, s_guns);
@@ -447,11 +391,13 @@ public class GameOfLife extends Application {
 
         s_spacefiller.setOnAction(event -> struct.spacefiller(gameScene.getxClick(), gameScene.getyClick()));
 
+        s_pufferTrain.setOnAction(event -> struct.pufferTrain(gameScene.getxClick(), gameScene.getyClick()));
+
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
         speedSlider.setMin(0);
-        speedSlider.setMax(40);
+        speedSlider.setMax(60);
         speedSlider.setValue(20);
         //speedSlider.setShowTickLabels(true);
         speedSlider.setShowTickMarks(true);
@@ -471,7 +417,7 @@ public class GameOfLife extends Application {
         //initialize slider responsible for grid size
         sizeMenu = new Menu("Size");
         Slider sizeSlider = new Slider();
-        sizeSlider.setMin(2);
+        sizeSlider.setMin(1);
         sizeSlider.setMax(100);
         sizeSlider.setValue(10);
         sizeSlider.setShowTickMarks(true);
