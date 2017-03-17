@@ -38,7 +38,9 @@ public class GameOfLife extends Application {
             s_pentadecathlon, s_galaxy, s_pinwheel, s_sixBits,
             s_gabrielsp138, s_archimsp144, s_78P70, s_p60hassler,
             s_70P2H1V01, s_sparky, s_backrake1, s_blinkerPuffer,
-            s_spacefiller, s_pufferTrain;
+            s_spacefiller, s_pufferTrain, s_bloom, s_lidka,
+            s_naturalLWSS, s_rabbits17423, s_rabbits17465,
+            s_rabbits, s_pulsars;
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
@@ -319,6 +321,14 @@ public class GameOfLife extends Application {
         s_spacefiller = new MenuItem("Spacefiller");
         s_pufferTrain = new MenuItem("Puffer train");
 
+        s_bloom = new MenuItem("Bloom");
+        s_lidka = new MenuItem("Lidka precedessor");
+        s_naturalLWSS = new MenuItem("Natural LWSS");
+        s_rabbits17423 = new MenuItem("Rabbits relation 17423");
+        s_rabbits17465 = new MenuItem("Rabbits relation 17465");
+        s_rabbits = new MenuItem("Rabbits");
+        s_pulsars = new MenuItem("Pulsars");
+
         s_oscilators.getItems().addAll(s_pulsar, s_pentadecathlon, s_galaxy,
                 s_pinwheel, s_sixBits, s_gabrielsp138, s_archimsp144, s_78P70,
                 s_p60hassler);
@@ -326,7 +336,8 @@ public class GameOfLife extends Application {
                 s_70P2H1V01, s_sparky);
         s_stillLifes.getItems().addAll(s_loaf, s_pond, s_elevener, s_honeycomb,
                 s_paperclip, s_moose, s_eater2, s_spiral, s_lake2, s_mickeyMouse);
-        s_methuselah.getItems().addAll(s_Rpentomino, s_acorn);
+        s_methuselah.getItems().addAll(s_Rpentomino, s_acorn, s_bloom, s_lidka,
+                s_naturalLWSS, s_rabbits17423, s_rabbits17465, s_rabbits, s_pulsars);
         s_puffers.getItems().addAll(s_puffer1, s_backrake1, s_blinkerPuffer,
                 s_spacefiller, s_pufferTrain);
         s_guns.getItems().addAll(s_gliderGun);
@@ -397,11 +408,26 @@ public class GameOfLife extends Application {
 
         s_pufferTrain.setOnAction(event -> struct.pufferTrain(gameScene.getxClick(), gameScene.getyClick()));
 
+        s_bloom.setOnAction(event -> struct.bloom(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_lidka.setOnAction(event -> struct.lidka(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_naturalLWSS.setOnAction(event -> struct.naturalLWSS(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_rabbits17423.setOnAction(event -> struct.rabbits17423(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_rabbits17465.setOnAction(event -> struct.rabbits17465(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_rabbits.setOnAction(event -> struct.rabbits(gameScene.getxClick(), gameScene.getyClick()));
+
+        s_pulsars.setOnAction(event -> struct.pulsars(gameScene.getxClick()-1, gameScene.getyClick()-1));
+
+
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
         speedSlider.setMin(0);
-        speedSlider.setMax(60);
+        speedSlider.setMax(120);
         speedSlider.setValue(20);
         //speedSlider.setShowTickLabels(true);
         speedSlider.setShowTickMarks(true);

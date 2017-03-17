@@ -1519,4 +1519,133 @@ public class Structure {
         scene.requestLayout();
     }
 
+    public void bloom(int x, int y){
+        aliveCells.add(new Point(x + 1, y + 1));
+        aliveCells.add(new Point(x + 2, y + 2));
+        aliveCells.add(new Point(x + 3, y + 2));
+        aliveCells.add(new Point(x + 3, y + 2));
+        aliveCells.add(new Point(x + 4, y + 2));
+        aliveCells.add(new Point(x + 5, y + 2));
+        aliveCells.add(new Point(x + 3, y + 3));
+        aliveCells.add(new Point(x + 4, y + 3));
+        aliveCells.add(new Point(x + 12, y + 2));
+        aliveCells.add(new Point(x + 12, y + 1));
+        aliveCells.add(new Point(x + 12, y + 3));
+        aliveCells.add(new Point(x + 11, y + 4));
+        aliveCells.add(new Point(x + 11, y + 5));
+        aliveCells.add(new Point(x + 9, y + 5));
+        scene.requestLayout();
+    }
+
+    public void lidka(int x, int y){
+        aliveCells.add(new Point(x + 3, y + 4));
+        aliveCells.add(new Point(x + 4, y + 3));
+        aliveCells.add(new Point(x + 5, y + 4));
+        aliveCells.add(new Point(x + 4, y + 5));
+        aliveCells.add(new Point(x + 7, y + 17));
+        aliveCells.add(new Point(x + 8, y + 17));
+        aliveCells.add(new Point(x + 9, y + 17));
+        aliveCells.add(new Point(x + 8, y + 15));
+        aliveCells.add(new Point(x + 9, y + 15));
+        aliveCells.add(new Point(x + 9, y + 15));
+        aliveCells.add(new Point(x + 9, y + 14));
+        aliveCells.add(new Point(x + 11, y + 15));
+        aliveCells.add(new Point(x + 11, y + 14));
+        aliveCells.add(new Point(x + 11, y + 13));
+        scene.requestLayout();
+    }
+
+    public void naturalLWSS(int x, int y){
+        aliveCells.add(new Point(x + 3, y + 5));
+        aliveCells.add(new Point(x + 4, y + 6));
+        aliveCells.add(new Point(x + 4, y + 7));
+        aliveCells.add(new Point(x + 5, y + 6));
+        aliveCells.add(new Point(x + 6, y + 7));
+        aliveCells.add(new Point(x + 6, y + 4));
+        aliveCells.add(new Point(x + 7, y + 3));
+        aliveCells.add(new Point(x + 8, y + 3));
+        aliveCells.add(new Point(x + 9, y + 3));
+        aliveCells.add(new Point(x + 9, y + 3));
+        aliveCells.add(new Point(x + 9, y + 5));
+        aliveCells.add(new Point(x + 8, y + 6));
+        aliveCells.add(new Point(x + 10, y + 6));
+        scene.requestLayout();
+    }
+    public void rabbits17423(int x, int y){
+        aliveCells.add(new Point(x + 2, y + 3));
+        aliveCells.add(new Point(x + 3, y + 3));
+        aliveCells.add(new Point(x + 3, y + 2));
+        aliveCells.add(new Point(x + 2, y + 5));
+        aliveCells.add(new Point(x + 2, y + 6));
+        aliveCells.add(new Point(x + 2, y + 7));
+        aliveCells.add(new Point(x + 5, y + 3));
+        aliveCells.add(new Point(x + 5, y + 5));
+        aliveCells.add(new Point(x + 6, y + 4));
+        aliveCells.add(new Point(x + 7, y + 4));
+        scene.requestLayout();
+    }
+    public void rabbits17465(int x, int y){
+        aliveCells.add(new Point(x + 2, y + 2));
+        aliveCells.add(new Point(x + 2, y + 3));
+        aliveCells.add(new Point(x + 2, y + 4));
+        aliveCells.add(new Point(x + 3, y + 5));
+        aliveCells.add(new Point(x + 4, y + 4));
+        aliveCells.add(new Point(x + 4, y + 2));
+        aliveCells.add(new Point(x + 5, y + 2));
+        aliveCells.add(new Point(x + 6, y + 2));
+        aliveCells.add(new Point(x + 7, y + 3));
+        aliveCells.add(new Point(x + 6, y + 4));
+        aliveCells.add(new Point(x + 6, y + 5));
+        scene.requestLayout();
+    }
+    public void rabbits(int x, int y){
+        aliveCells.add(new Point(x + 2, y + 3));
+        aliveCells.add(new Point(x + 2, y + 4));
+        aliveCells.add(new Point(x + 3, y + 4));
+        aliveCells.add(new Point(x + 4, y + 4));
+        aliveCells.add(new Point(x + 3, y + 5));
+        aliveCells.add(new Point(x + 6, y + 3));
+        aliveCells.add(new Point(x + 7, y + 3));
+        aliveCells.add(new Point(x + 8, y + 3));
+        aliveCells.add(new Point(x + 7, y + 4));
+        scene.requestLayout();
+    }
+
+    public void pulsars(int x, int y){
+        aliveCells.add(new Point(x + 1, y + 1));
+        aliveCells.add(new Point(x + 1, y + 2));
+        aliveCells.add(new Point(x + 1, y + 3));
+        aliveCells.add(new Point(x + 2, y + 2));
+        aliveCells.add(new Point(x + 3, y + 2));
+        aliveCells.add(new Point(x + 3, y + 1));
+        aliveCells.add(new Point(x + 3, y + 3));
+        aliveCells.add(new Point(x + 4, y + 4));
+        aliveCells.add(new Point(x + 4, y + 5));
+        aliveCells.add(new Point(x + 3, y + 6));
+        aliveCells.add(new Point(x + 3, y + 7));
+        aliveCells.add(new Point(x + 2, y + 7));
+        aliveCells.add(new Point(x + 1, y + 7));
+        aliveCells.add(new Point(x + 1, y + 8));
+        aliveCells.add(new Point(x + 2, y + 8));
+        aliveCells.add(new Point(x + 2, y + 8));
+        aliveCells.add(new Point(x + 1, y + 6));
+        aliveCells.add(new Point(x + 1, y + 5));
+        aliveCells.add(new Point(x + 5, y + 3));
+        aliveCells.add(new Point(x + 5, y + 2));
+        aliveCells.add(new Point(x + 6, y + 2));
+        aliveCells.add(new Point(x + 6, y + 2));
+        aliveCells.add(new Point(x + 7, y + 1));
+        aliveCells.add(new Point(x + 8, y + 1));
+        aliveCells.add(new Point(x + 7, y + 3));
+        aliveCells.add(new Point(x + 8, y + 4));
+        aliveCells.add(new Point(x + 7, y + 5));
+        aliveCells.add(new Point(x + 6, y + 5));
+        aliveCells.add(new Point(x + 8, y + 6));
+        aliveCells.add(new Point(x + 8, y + 7));
+        aliveCells.add(new Point(x + 8, y + 8));
+        aliveCells.add(new Point(x + 7, y + 7));
+        aliveCells.add(new Point(x + 6, y + 7));
+        aliveCells.add(new Point(x + 6, y + 8));
+        scene.requestLayout();
+    }
 }
