@@ -343,6 +343,7 @@ public class GameScene extends Pane implements Runnable {
         requestLayout();
     }
 
+
     //thread run method - this is executed on thread start
     @Override
     public void run() {

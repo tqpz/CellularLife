@@ -4,12 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GameOfLife extends Application {
     //set primary window size
+
     private static final int PRIMARY_STAGE_HEIGHT = 600;
     private static final int PRIMARY_STAGE_WIDTH = 800;
 
@@ -43,6 +45,8 @@ public class GameOfLife extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.getIcons().add(new Image("file:img/logo.png"));
+
         BorderPane root = new BorderPane();
         GameScene gameScene = new GameScene();
 
