@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GameOfLife extends Application {
@@ -344,7 +343,9 @@ public class GameOfLife extends Application {
 
         structuresMenu.getItems().addAll(s_oscilators, s_spaceships, s_stillLifes, s_methuselah, s_puffers, s_guns);
 
-        s_Rpentomino.setOnAction(event -> struct.Rpentomino(gameScene.getxClick(), gameScene.getyClick()));
+        s_Rpentomino.setOnAction(event -> {
+            struct.Rpentomino(gameScene.getxClick(), gameScene.getyClick());
+        });
 
         s_glider.setOnAction(event -> struct.glider(gameScene.getxClick(), gameScene.getyClick() + 1));
 
@@ -420,7 +421,7 @@ public class GameOfLife extends Application {
 
         s_rabbits.setOnAction(event -> struct.rabbits(gameScene.getxClick(), gameScene.getyClick()));
 
-        s_pulsars.setOnAction(event -> struct.pulsars(gameScene.getxClick()-1, gameScene.getyClick()-1));
+        s_pulsars.setOnAction(event -> struct.pulsars(gameScene.getxClick() - 1, gameScene.getyClick() - 1));
 
 
         //initialize slider that indicates speed of simulation
@@ -430,8 +431,8 @@ public class GameOfLife extends Application {
         speedSlider.setMax(60);
         speedSlider.setValue(20);
         //speedSlider.setShowTickLabels(true);
-        speedSlider.setShowTickMarks(true);
-        speedSlider.setMinorTickCount(20);
+        // speedSlider.setShowTickMarks(true);
+        //speedSlider.setMinorTickCount(20);
         om_slider = new CustomMenuItem(speedSlider);
         speedMenu.getItems().addAll(om_slider);
 
@@ -448,10 +449,10 @@ public class GameOfLife extends Application {
         sizeMenu = new Menu("Size");
         Slider sizeSlider = new Slider();
         sizeSlider.setMin(1);
-        sizeSlider.setMax(100);
+        sizeSlider.setMax(30);
         sizeSlider.setValue(10);
-        sizeSlider.setShowTickMarks(true);
-        sizeSlider.setMinorTickCount(20);
+        //sizeSlider.setShowTickMarks(true);
+        //sizeSlider.setMinorTickCount(20);
         sm_slider = new CustomMenuItem(sizeSlider);
 
         sm_slider.setOnAction(new EventHandler<ActionEvent>() {
@@ -465,7 +466,7 @@ public class GameOfLife extends Application {
         //create ColorPicker and add it to menubar with css styling
         root.getStylesheets().addAll("style.css");
         ColorPicker colorPicker = new ColorPicker();
-        colorPicker.setValue(Color.FIREBRICK);
+        colorPicker.setValue(gameScene.getCellColor());
         colorPicker.setOnAction(event -> gameScene.setCellColor(colorPicker.getValue()));
         colorPicker.getStyleClass().add("button");
         colorPicker.getStyleClass().add("color-button");

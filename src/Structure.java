@@ -10,7 +10,7 @@ public class Structure {
     private Pane scene;
     private ArrayList<Point> aliveCells = new ArrayList<Point>(0);
 
-    public Structure(Pane scene, ArrayList<Point> aliveCells){
+    public Structure(Pane scene, ArrayList<Point> aliveCells) {
         this.scene = scene;
         this.aliveCells = aliveCells;
     }
@@ -151,7 +151,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void dart(int x, int y){
+    public void dart(int x, int y) {
         aliveCells.add(new Point(x + 0, y + 1));
         aliveCells.add(new Point(x + 0, y + 3));
         aliveCells.add(new Point(x + 0, y + 4));
@@ -189,7 +189,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void puffer1(int x, int y){
+    public void puffer1(int x, int y) {
         aliveCells.add(new Point(x + 0, y + 2));
         aliveCells.add(new Point(x + 0, y + 6));
         aliveCells.add(new Point(x + 0, y + 7));
@@ -237,7 +237,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void loaf(int x, int y){
+    public void loaf(int x, int y) {
         aliveCells.add(new Point(x + 0, y + 1));
         aliveCells.add(new Point(x + 1, y + 2));
         aliveCells.add(new Point(x + 2, y + 3));
@@ -248,7 +248,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void pond(int x, int y){
+    public void pond(int x, int y) {
         aliveCells.add(new Point(x + 0, y + 1));
         aliveCells.add(new Point(x + 1, y + 0));
         aliveCells.add(new Point(x + 2, y + 0));
@@ -381,6 +381,7 @@ public class Structure {
         aliveCells.add(new Point(x + 0, y + 6));
         scene.requestLayout();
     }
+
     public void lake2(int x, int y) {
         aliveCells.add(new Point(x + 4, y + 0));
         aliveCells.add(new Point(x + 5, y + 0));
@@ -442,7 +443,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void pentadecathlon(int x, int y){
+    public void pentadecathlon(int x, int y) {
         aliveCells.add(new Point(x + 0, y + 1));
         aliveCells.add(new Point(x + 1, y + 1));
         aliveCells.add(new Point(x + 2, y + 0));
@@ -460,7 +461,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void galaxy(int x, int y){
+    public void galaxy(int x, int y) {
         aliveCells.add(new Point(x + 0, y + 0));
         aliveCells.add(new Point(x + 0, y + 1));
         aliveCells.add(new Point(x + 0, y + 2));
@@ -514,7 +515,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void pinwheel(int x, int y){
+    public void pinwheel(int x, int y) {
         aliveCells.add(new Point(x + 0, y + 4));
         aliveCells.add(new Point(x + 1, y + 4));
         aliveCells.add(new Point(x + 1, y + 5));
@@ -553,7 +554,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void sixBits(int x, int y){
+    public void sixBits(int x, int y) {
         aliveCells.add(new Point(x + 1, y + 19));
         aliveCells.add(new Point(x + 2, y + 19));
         aliveCells.add(new Point(x + 3, y + 18));
@@ -606,7 +607,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void gabrielsp138(int x, int y){
+    public void gabrielsp138(int x, int y) {
         aliveCells.add(new Point(x + 9, y + 1));
         aliveCells.add(new Point(x + 10, y + 1));
         aliveCells.add(new Point(x + 11, y + 1));
@@ -648,7 +649,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void archimsp144(int x, int y){
+    public void archimsp144(int x, int y) {
         aliveCells.add(new Point(x + 1, y + 1));
         aliveCells.add(new Point(x + 2, y + 1));
         aliveCells.add(new Point(x + 2, y + 2));
@@ -695,7 +696,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void seven_eight_p_seven_zero(int x, int y){
+    public void seven_eight_p_seven_zero(int x, int y) {
         aliveCells.add(new Point(x + 6, y + 1));
         aliveCells.add(new Point(x + 6, y + 2));
         aliveCells.add(new Point(x + 7, y + 2));
@@ -777,7 +778,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void p60_hassler(int x, int y){
+    public void p60_hassler(int x, int y) {
         aliveCells.add(new Point(x + 14, y + 1));
         aliveCells.add(new Point(x + 15, y + 1));
         aliveCells.add(new Point(x + 16, y + 2));
@@ -888,7 +889,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void seven_0P2H1V01(int x, int y){
+    public void seven_0P2H1V01(int x, int y) {
         aliveCells.add(new Point(x + 1, y + 1));
         aliveCells.add(new Point(x + 1, y + 2));
         aliveCells.add(new Point(x + 2, y + 2));
@@ -975,7 +976,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void sparky(int x, int y){
+    public void sparky(int x, int y) {
         aliveCells.add(new Point(x + 5, y + 9));
         aliveCells.add(new Point(x + 4, y + 2));
         aliveCells.add(new Point(x + 5, y + 2));
@@ -1080,7 +1081,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void backrake1(int x, int y){
+    public void backrake1(int x, int y) {
         aliveCells.add(new Point(x + 11, y + 1));
         aliveCells.add(new Point(x + 11, y + 2));
         aliveCells.add(new Point(x + 11, y + 2));
@@ -1173,7 +1174,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void blinkerPuffer(int x, int y){
+    public void blinkerPuffer(int x, int y) {
         aliveCells.add(new Point(x + 1, y + 2));
         aliveCells.add(new Point(x + 1, y + 2));
         aliveCells.add(new Point(x + 1, y + 2));
@@ -1263,7 +1264,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void spacefiller(int x, int y){
+    public void spacefiller(int x, int y) {
         aliveCells.add(new Point(x + 2, y + 2));
         aliveCells.add(new Point(x + 2, y + 3));
         aliveCells.add(new Point(x + 2, y + 4));
@@ -1471,7 +1472,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void spiralGrowth(int x, int y){
+    public void spiralGrowth(int x, int y) {
         aliveCells.add(new Point(x + 19, y + 24));
         aliveCells.add(new Point(x + 19, y + 25));
         aliveCells.add(new Point(x + 20, y + 25));
@@ -1493,7 +1494,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void pufferTrain(int x, int y){
+    public void pufferTrain(int x, int y) {
         aliveCells.add(new Point(x + 6, y + 1));
         aliveCells.add(new Point(x + 7, y + 2));
         aliveCells.add(new Point(x + 7, y + 3));
@@ -1519,7 +1520,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void bloom(int x, int y){
+    public void bloom(int x, int y) {
         aliveCells.add(new Point(x + 1, y + 1));
         aliveCells.add(new Point(x + 2, y + 2));
         aliveCells.add(new Point(x + 3, y + 2));
@@ -1537,7 +1538,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void lidka(int x, int y){
+    public void lidka(int x, int y) {
         aliveCells.add(new Point(x + 3, y + 4));
         aliveCells.add(new Point(x + 4, y + 3));
         aliveCells.add(new Point(x + 5, y + 4));
@@ -1555,7 +1556,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void naturalLWSS(int x, int y){
+    public void naturalLWSS(int x, int y) {
         aliveCells.add(new Point(x + 3, y + 5));
         aliveCells.add(new Point(x + 4, y + 6));
         aliveCells.add(new Point(x + 4, y + 7));
@@ -1571,7 +1572,8 @@ public class Structure {
         aliveCells.add(new Point(x + 10, y + 6));
         scene.requestLayout();
     }
-    public void rabbits17423(int x, int y){
+
+    public void rabbits17423(int x, int y) {
         aliveCells.add(new Point(x + 2, y + 3));
         aliveCells.add(new Point(x + 3, y + 3));
         aliveCells.add(new Point(x + 3, y + 2));
@@ -1584,7 +1586,8 @@ public class Structure {
         aliveCells.add(new Point(x + 7, y + 4));
         scene.requestLayout();
     }
-    public void rabbits17465(int x, int y){
+
+    public void rabbits17465(int x, int y) {
         aliveCells.add(new Point(x + 2, y + 2));
         aliveCells.add(new Point(x + 2, y + 3));
         aliveCells.add(new Point(x + 2, y + 4));
@@ -1598,7 +1601,8 @@ public class Structure {
         aliveCells.add(new Point(x + 6, y + 5));
         scene.requestLayout();
     }
-    public void rabbits(int x, int y){
+
+    public void rabbits(int x, int y) {
         aliveCells.add(new Point(x + 2, y + 3));
         aliveCells.add(new Point(x + 2, y + 4));
         aliveCells.add(new Point(x + 3, y + 4));
@@ -1611,7 +1615,7 @@ public class Structure {
         scene.requestLayout();
     }
 
-    public void pulsars(int x, int y){
+    public void pulsars(int x, int y) {
         aliveCells.add(new Point(x + 1, y + 1));
         aliveCells.add(new Point(x + 1, y + 2));
         aliveCells.add(new Point(x + 1, y + 3));

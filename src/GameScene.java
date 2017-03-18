@@ -1,6 +1,5 @@
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -50,9 +49,9 @@ public class GameScene extends Pane implements Runnable {
     private int yClick;
 
     public GameScene() {
-        cellColor = Color.FIREBRICK;
+        cellColor = Color.web("#1a3399");
         conwayRules = true; //initially set conway rules
-        devmode = true;
+        devmode = false;
 
         xClick = 1;
         yClick = 1;
@@ -80,30 +79,20 @@ public class GameScene extends Pane implements Runnable {
             }
         });
 
-        heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-                gameSceneHeight = newSceneHeight.intValue();
-                gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE + 1);
-                updateArraySize();
+        heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
+            gameSceneHeight = newSceneHeight.intValue();
+            gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE + 1);
+            updateArraySize();
 
-            }
         });
 
         //create click listener - on click add alive cell
-        addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                addPoint(event);
-            }
-        });
+        addEventHandler(MouseEvent.MOUSE_CLICKED, event -> addPoint(event));
 
         //create drag listerer - as above
-        addEventHandler(MouseEvent.MOUSE_DRAGGED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                addPoint(event);
-            }
+        addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
+            addPoint(event);
+
         });
     }
 
@@ -210,88 +199,88 @@ public class GameScene extends Pane implements Runnable {
     }
 
     //create rules setters
-    public void setConwayRules(boolean conwayRules) {
+    void setConwayRules(boolean conwayRules) {
         this.conwayRules = conwayRules;
     }
 
-    public void setLabirynth(boolean labirynth) {
+    void setLabirynth(boolean labirynth) {
         this.labirynth = labirynth;
     }
 
-    public void setSeeds(boolean seeds) {
+    void setSeeds(boolean seeds) {
         this.seeds = seeds;
     }
 
-    public void setCoral(boolean coral) {
+    void setCoral(boolean coral) {
         this.coral = coral;
     }
 
-    public void setHighLife(boolean highLife) {
+    void setHighLife(boolean highLife) {
         this.highLife = highLife;
     }
 
-    public void setReplicator(boolean replicator) {
+    void setReplicator(boolean replicator) {
         this.replicator = replicator;
     }
 
-    public void setAssimilation(boolean assimilation) {
+    void setAssimilation(boolean assimilation) {
         this.assimilation = assimilation;
     }
 
-    public void setWalledCities(boolean walledCities) {
+    void setWalledCities(boolean walledCities) {
         this.walledCities = walledCities;
     }
 
-    public void setCoagulations(boolean coagulations) {
+    void setCoagulations(boolean coagulations) {
         this.coagulations = coagulations;
     }
 
-    public void setTwoXtwo(boolean twoXtwo) {
+    void setTwoXtwo(boolean twoXtwo) {
         this.twoXtwo = twoXtwo;
     }
 
-    public void setDayAndNight(boolean dayAndNight) {
+    void setDayAndNight(boolean dayAndNight) {
         this.dayAndNight = dayAndNight;
     }
 
-    public void setAmoeba(boolean amoeba) {
+    void setAmoeba(boolean amoeba) {
         this.amoeba = amoeba;
     }
 
-    public void setDiamoeba(boolean diamoeba) {
+    void setDiamoeba(boolean diamoeba) {
         this.diamoeba = diamoeba;
     }
 
-    public void setThe34(boolean the34) {
+    void setThe34(boolean the34) {
         this.the34 = the34;
     }
 
-    public void setLongLife(boolean longLife) {
+    void setLongLife(boolean longLife) {
         this.longLife = longLife;
     }
 
-    public void setStains(boolean stains) {
+    void setStains(boolean stains) {
         this.stains = stains;
     }
 
-    public void setGnarl(boolean gnarl) {
+    void setGnarl(boolean gnarl) {
         this.gnarl = gnarl;
     }
 
-    public void setMystery(boolean mystery) {
+    void setMystery(boolean mystery) {
         this.mystery = mystery;
     }
 
-    public void setFlakes(boolean flakes) {
+    void setFlakes(boolean flakes) {
         this.flakes = flakes;
     }
 
-    public void setSpiralGrowth(boolean spiralGrowth) {
+    void setSpiralGrowth(boolean spiralGrowth) {
         this.spiralGrowth = spiralGrowth;
     }
 
     //this method is called when user is changing rule to another
-    public void resetRules() {
+    void resetRules() {
         setConwayRules(false);
         setLabirynth(false);
         setSeeds(false);
@@ -314,33 +303,37 @@ public class GameScene extends Pane implements Runnable {
 
 
     //get last clicked x coordinate
-    public int getxClick() {
+    int getxClick() {
         return xClick;
     }
 
     //get last clicked y coordinate
-    public int getyClick() {
+    int getyClick() {
         return yClick;
     }
 
 
-    public ArrayList<Point> getCell() {
+    ArrayList<Point> getCell() {
         return cell;
     }
 
     //this method is connected to speed slider item
-    public void setANIMATION_SPEED(int ANIMATION_SPEED) {
+    void setANIMATION_SPEED(int ANIMATION_SPEED) {
         this.ANIMATION_SPEED = ANIMATION_SPEED;
     }
 
     //this method is connected to size slider item
-    public void setCELL_SIZE(int CELL_SIZE) {
+    void setCELL_SIZE(int CELL_SIZE) {
         this.CELL_SIZE = CELL_SIZE;
     }
 
-    public void setCellColor(Color cellColor) {
+    void setCellColor(Color cellColor) {
         this.cellColor = cellColor;
         requestLayout();
+    }
+
+    public Color getCellColor() {
+        return cellColor;
     }
 
 
@@ -591,11 +584,11 @@ public class GameScene extends Pane implements Runnable {
 
             int speed = 130;
 
-            if((ANIMATION_SPEED + 1)-cell.size()/4000 > 0 && cell.size() < 180000 ) {
+            if ((ANIMATION_SPEED + 1) - cell.size() / 4000 > 0 && cell.size() < 180000) {
                 speed = 1000 / ((ANIMATION_SPEED + 1) - cell.size() / 4000);
-            }else if(cell.size() >= 180000 && cell.size() <= 300000){
+            } else if (cell.size() >= 180000 && cell.size() <= 300000) {
                 speed = 100;
-            }else if (cell.size() > 370000){
+            } else if (cell.size() > 370000) {
                 speed = 160;
             }
 
@@ -612,8 +605,6 @@ public class GameScene extends Pane implements Runnable {
             } catch (StackOverflowError e) {
 
                 System.out.println("Overflow error");
-            } catch (ArithmeticException e){
-
             }
         }
     }
