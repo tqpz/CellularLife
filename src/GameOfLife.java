@@ -427,7 +427,7 @@ public class GameOfLife extends Application {
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
         speedSlider.setMin(0);
-        speedSlider.setMax(120);
+        speedSlider.setMax(60);
         speedSlider.setValue(20);
         //speedSlider.setShowTickLabels(true);
         speedSlider.setShowTickMarks(true);
