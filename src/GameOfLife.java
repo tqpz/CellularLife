@@ -19,6 +19,7 @@ public class GameOfLife extends Application {
     private MenuBar menuBar;
     private Menu fileMenu, gameMenu, rulesMenu, structuresMenu, speedMenu, sizeMenu, colorMenu;
     private ToggleGroup rulesGroup = new ToggleGroup();
+    private boolean paused;
 
     private RadioMenuItem
             rm_conwayRules, rm_labirynth, rm_seeds,
@@ -62,8 +63,15 @@ public class GameOfLife extends Application {
         //set window title
         primaryStage.setTitle("Game of Life");
 
-        gameScene.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> test.suspend());
-        gameScene.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> test.resume());
+        gameScene.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            test.suspend();
+        });
+
+        gameScene.addEventHandler(MouseEvent.MOUSE_RELEASED, event ->{
+            if(!paused) {
+                test.resume();
+            }
+        });
 
         //create scene, set minimal height and width
         Scene scene = new Scene(root, PRIMARY_STAGE_WIDTH, PRIMARY_STAGE_HEIGHT);
@@ -90,10 +98,13 @@ public class GameOfLife extends Application {
         gm_start.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public synchronized void handle(ActionEvent event) {
-                if (!test.isAlive())
+                if (!test.isAlive()) {
                     test.start();
-                else
+                    paused = false;
+                }else {
                     test.resume();
+                    paused = false;
+                }
             }
         });
 
@@ -101,6 +112,7 @@ public class GameOfLife extends Application {
             @Override
             public synchronized void handle(ActionEvent event) {
                 test.suspend();
+                paused = true;
             }
         });
 
@@ -454,7 +466,7 @@ public class GameOfLife extends Application {
         //initialize slider responsible for grid size
         sizeMenu = new Menu("Size");
         Slider sizeSlider = new Slider();
-        sizeSlider.setMin(1);
+        sizeSlider.setMin(2);
         sizeSlider.setMax(30);
         sizeSlider.setValue(10);
         //sizeSlider.setShowTickMarks(true);

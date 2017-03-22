@@ -585,12 +585,13 @@ public class GameScene extends Pane implements Runnable {
             int speed = 130;
 
             if ((ANIMATION_SPEED + 1) - cell.size() / 4000 > 0 && cell.size() < 180000) {
-                speed = 1000 / ((ANIMATION_SPEED + 1) - cell.size() / 4000);
+                speed = 1000 / ((ANIMATION_SPEED + 1) - cell.size() / 4000) - CELL_SIZE*2;
             } else if (cell.size() >= 180000 && cell.size() <= 300000) {
                 speed = 100;
             } else if (cell.size() > 370000) {
                 speed = 160;
             }
+
 
             try {
                 evolutionNum++; //increment generation variable
@@ -598,8 +599,6 @@ public class GameScene extends Pane implements Runnable {
                 cell.addAll(nextGeneration); //add next generation to main cell list
                 requestLayout(); //show it on screen
                 Thread.sleep(speed); //sleep thread every x seconds - here is set animation speed
-
-
             } catch (InterruptedException e) {
 
             } catch (StackOverflowError e) {
