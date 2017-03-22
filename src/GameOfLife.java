@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -48,6 +49,8 @@ public class GameOfLife extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.getIcons().add(new Image("file:img/logo.png"));
 
+
+
         BorderPane root = new BorderPane();
         GameScene gameScene = new GameScene();
 
@@ -58,6 +61,9 @@ public class GameOfLife extends Application {
 
         //set window title
         primaryStage.setTitle("Game of Life");
+
+        gameScene.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> test.suspend());
+        gameScene.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> test.resume());
 
         //create scene, set minimal height and width
         Scene scene = new Scene(root, PRIMARY_STAGE_WIDTH, PRIMARY_STAGE_HEIGHT);
