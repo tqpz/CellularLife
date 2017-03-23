@@ -49,27 +49,26 @@ public class GameOfLife extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.getIcons().add(new Image("file:img/logo.png"));
-
-
+        paused = true;
 
         BorderPane root = new BorderPane();
         GameScene gameScene = new GameScene();
 
         Structure struct = new Structure(gameScene, gameScene.getCell());
 
-        //create simulation thread
-        Thread test = new Thread(gameScene);
-
         //set window title
         primaryStage.setTitle("Game of Life");
 
         gameScene.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
-            test.suspend();
+            // test.suspend();
+            gameScene.getTimer().stop();
+            //paused = true;
         });
 
-        gameScene.addEventHandler(MouseEvent.MOUSE_RELEASED, event ->{
-            if(!paused) {
-                test.resume();
+        gameScene.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
+            if (!paused) {
+                //test.resume();
+                gameScene.getTimer().start();
             }
         });
 
@@ -98,21 +97,16 @@ public class GameOfLife extends Application {
         gm_start.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public synchronized void handle(ActionEvent event) {
-                if (!test.isAlive()) {
-                    test.start();
-                    paused = false;
-                }else {
-                    test.resume();
-                    paused = false;
-                }
+                paused = false;
+                gameScene.startAnimation(gameScene.timer);
             }
         });
 
         gm_stop.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public synchronized void handle(ActionEvent event) {
-                test.suspend();
                 paused = true;
+                gameScene.getTimer().stop();
             }
         });
 
@@ -446,7 +440,7 @@ public class GameOfLife extends Application {
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
         speedSlider.setMin(0);
-        speedSlider.setMax(60);
+        speedSlider.setMax(120);
         speedSlider.setValue(20);
         //speedSlider.setShowTickLabels(true);
         // speedSlider.setShowTickMarks(true);
@@ -466,7 +460,7 @@ public class GameOfLife extends Application {
         //initialize slider responsible for grid size
         sizeMenu = new Menu("Size");
         Slider sizeSlider = new Slider();
-        sizeSlider.setMin(2);
+        sizeSlider.setMin(1);
         sizeSlider.setMax(30);
         sizeSlider.setValue(10);
         //sizeSlider.setShowTickMarks(true);
