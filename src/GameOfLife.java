@@ -1,7 +1,9 @@
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -52,6 +54,7 @@ public class GameOfLife extends Application {
         paused = true;
 
         BorderPane root = new BorderPane();
+
         GameScene gameScene = new GameScene();
 
         Structure struct = new Structure(gameScene, gameScene.getCell());
@@ -79,6 +82,13 @@ public class GameOfLife extends Application {
 
         //initialize "file" drop-down menu items and add eventhandlers
         menuBar = new MenuBar();
+
+        gameScene.setOnMouseExited(event -> gameScene.getTimer().stop());
+        gameScene.setOnMouseEntered(event -> {
+            if(!paused)
+                gameScene.getTimer().start();
+        });
+
 
         fileMenu = new Menu("File");
         fm_exit = new MenuItem("Exit");
@@ -439,8 +449,8 @@ public class GameOfLife extends Application {
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
-        speedSlider.setMin(0);
-        speedSlider.setMax(120);
+        speedSlider.setMin(1);
+        speedSlider.setMax(100);
         speedSlider.setValue(20);
         //speedSlider.setShowTickLabels(true);
         // speedSlider.setShowTickMarks(true);
@@ -453,7 +463,8 @@ public class GameOfLife extends Application {
         om_slider.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                gameScene.setANIMATION_SPEED((int) speedSlider.getValue());
+                gameScene.setANIMATION_SPEED((int)
+                        speedSlider.getValue());
             }
         });
 
@@ -461,9 +472,10 @@ public class GameOfLife extends Application {
         sizeMenu = new Menu("Size");
         Slider sizeSlider = new Slider();
         sizeSlider.setMin(1);
-        sizeSlider.setMax(30);
+        sizeSlider.setMax(20);
         sizeSlider.setValue(10);
-        //sizeSlider.setShowTickMarks(true);
+
+       // sizeSlider.setShowTickMarks(true);
         //sizeSlider.setMinorTickCount(20);
         sm_slider = new CustomMenuItem(sizeSlider);
 

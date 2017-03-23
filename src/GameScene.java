@@ -51,8 +51,29 @@ public class GameScene extends Pane {
     private int xClick;
     private int yClick;
 
+
     public GameScene() {
         final LongProperty lastUpdateTime = new SimpleLongProperty(0);
+
+        cellColor = Color.web("#1a3399");
+        conwayRules = true; //initially set conway rules
+        devmode = false;
+
+        xClick = 1;
+        yClick = 1;
+
+        //set width and height perfectly fit on scene even with user resize operation
+//        gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
+//        gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
+
+        //setup labels indicating generation and alive cells numbers
+        generationLabel = new Label("Number of generation: 0");
+        getChildren().add(generationLabel);
+
+        aliveCellsOnBoard = new Label("Number of alive cells: " + cell.size());
+        getChildren().add(aliveCellsOnBoard);
+        getChildren().add(canvas); //add canvas to pane
+
         timer = new AnimationTimer() {
             @Override
             public void handle(long timestamp) {
@@ -302,7 +323,7 @@ public class GameScene extends Pane {
                         resetBoard(); //clear existing cells
                         cell.addAll(nextGeneration); //add next generation to main cell list
                         requestLayout(); //show it on screen
-                        Thread.sleep(1000 / ANIMATION_SPEED + 1); //sleep thread every x seconds - here is set animation speed
+                        Thread.sleep(1000 / ANIMATION_SPEED); //sleep thread every x seconds - here is set animation speed
                     } catch (InterruptedException e) {
 
                     } catch (StackOverflowError e) {
@@ -314,39 +335,16 @@ public class GameScene extends Pane {
             }
         };
 
-        cellColor = Color.web("#1a3399");
-        conwayRules = true; //initially set conway rules
-        devmode = false;
-
-        xClick = 1;
-        yClick = 1;
-
-        //set width and height perfectly fit on scene even with user resize operation
-        gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
-        gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
-
-        //setup labels indicating generation and alive cells numbers
-        generationLabel = new Label("Number of generation: " + evolutionNum);
-        getChildren().add(generationLabel);
-
-        aliveCellsOnBoard = new Label("Number of alive cells: " + cell.size());
-        aliveCellsOnBoard.setLayoutX(160); // position of alive cells label
-        getChildren().add(aliveCellsOnBoard);
-        getChildren().add(canvas); //add canvas to pane
-
         //create listeners of resize operation
-        widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-                gameSceneWidth = newSceneWidth.intValue();
-                gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE + 1);
-                updateArraySize();
-            }
+        widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
+            gameSceneWidth = newSceneWidth.intValue();
+            gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE + 1);
+            updateArraySize();
         });
 
         heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
             gameSceneHeight = newSceneHeight.intValue();
-            gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE + 1);
+            gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE + 1) - 10;
             updateArraySize();
 
         });
@@ -355,10 +353,7 @@ public class GameScene extends Pane {
         addEventHandler(MouseEvent.MOUSE_CLICKED, event -> addPoint(event));
 
         //create drag listerer - as above
-        addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
-            addPoint(event);
-
-        });
+        addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> addPoint(event));
     }
 
 
@@ -370,6 +365,10 @@ public class GameScene extends Pane {
         canvas.setWidth(gameSceneWidth - CELL_SIZE + 1);
         canvas.setHeight(gameSceneHeight - CELL_SIZE + 1);
 
+        aliveCellsOnBoard.setLayoutY(gameSceneHeight - 3); // position of alive cells label
+        generationLabel.setLayoutY(gameSceneHeight - 3);
+        aliveCellsOnBoard.setLayoutX(CELL_SIZE); // position of alive cells label
+        generationLabel.setLayoutX(160);
         generationLabel.setText("Number of generation: " + String.valueOf(evolutionNum));
         aliveCellsOnBoard.setText("Number of alive cells: " + cell.size());
 
@@ -599,6 +598,11 @@ public class GameScene extends Pane {
 
     public Color getCellColor() {
         return cellColor;
+    }
+
+
+    public int getCELL_SIZE() {
+        return CELL_SIZE;
     }
 
     public AnimationTimer getTimer() {
