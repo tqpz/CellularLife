@@ -98,7 +98,7 @@ public class GameOfLife extends Application {
             @Override
             public synchronized void handle(ActionEvent event) {
                 paused = false;
-                gameScene.startAnimation(gameScene.timer);
+                gameScene.startAnimation(gameScene.getTimer());
             }
         });
 

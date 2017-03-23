@@ -601,6 +601,10 @@ public class GameScene extends Pane {
         return cellColor;
     }
 
+    public AnimationTimer getTimer() {
+        return timer;
+    }
+
     public void startAnimation(AnimationTimer timer) {
         timer.start();
     }
