@@ -51,16 +51,17 @@ public class GameScene extends Pane {
 
 
     public GameScene() {
+        canvas.setStyle("-fx-background-color: #222222;");
+        //set width and height perfectly fit on scene even with user resize operation
+        gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
+        gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
+
         cellColor = Color.web("#1a3399");
         conwayRules = true; //initially set conway rules
         devmode = false;
 
         xClick = 1;
         yClick = 1;
-
-        //set width and height perfectly fit on scene even with user resize operation
-//        gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
-//        gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
 
         //setup labels indicating generation and alive cells numbers
         generationLabel = new Label("Number of generation: 0");
@@ -350,10 +351,21 @@ public class GameScene extends Pane {
             resetBoard(); //clear existing cells
             cell.addAll(nextGeneration); //add next generation to main cell list
             requestLayout(); //show it on screen
-            //Thread.sleep(1000 / ANIMATION_SPEED); //sleep thread every x seconds - here is set animation speed
         } catch (StackOverflowError e) {
             System.out.println("Overflow error");
         }
+    }
+
+    public void drawCanvasFrame() {
+        gc.strokeLine(CELL_SIZE,
+                (canvas.getHeight()),
+                canvas.getWidth(),
+                canvas.getHeight());
+
+        gc.strokeLine(canvas.getWidth(),
+                (CELL_SIZE),
+                canvas.getWidth(),
+                canvas.getHeight());
     }
 
     public void drawGrid() {
@@ -375,6 +387,7 @@ public class GameScene extends Pane {
                         CELL_SIZE * (gameSceneWidth / CELL_SIZE),
                         ((i * CELL_SIZE) + CELL_SIZE));
             }
+            drawCanvasFrame();
         } catch (NullPointerException e) {
         }
     }

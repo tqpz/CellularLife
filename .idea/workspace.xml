@@ -7,13 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6fd60eb5-8784-47bc-a05c-671e285c517e" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$3.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$4.class" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$1.class" afterPath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$2.class" afterPath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife$2.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife.class" afterPath="$PROJECT_DIR$/out/production/GameOfLife/GameOfLife.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameScene$1.class" afterPath="$PROJECT_DIR$/out/production/GameOfLife/GameScene$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/GameOfLife/GameScene.class" afterPath="$PROJECT_DIR$/out/production/GameOfLife/GameScene.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameOfLife.java" afterPath="$PROJECT_DIR$/src/GameOfLife.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameScene.java" afterPath="$PROJECT_DIR$/src/GameScene.java" />
     </list>
     <ignored path="GameOfLife.iws" />
@@ -38,8 +37,8 @@
       <file leaf-file-name="GameOfLife.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameOfLife.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="534">
-              <caret line="448" column="42" selection-start-line="448" selection-start-column="42" selection-end-line="448" selection-end-column="42" />
+            <state relative-caret-position="7701">
+              <caret line="465" column="49" selection-start-line="465" selection-start-column="49" selection-end-line="465" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -48,12 +47,10 @@
       <file leaf-file-name="GameScene.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameScene.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="85" column="38" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
+            <state relative-caret-position="136">
+              <caret line="372" column="0" selection-start-line="372" selection-start-column="0" selection-end-line="372" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#692#699#0" expanded="true" />
-                <element signature="e#4855#4862#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -85,8 +82,8 @@
         <option value="$PROJECT_DIR$/src/Structure.java" />
         <option value="$PROJECT_DIR$/src/AnimationTimerExt.java" />
         <option value="$PROJECT_DIR$/src/AnimationTimerTest.java" />
-        <option value="$PROJECT_DIR$/src/GameScene.java" />
         <option value="$PROJECT_DIR$/src/GameOfLife.java" />
+        <option value="$PROJECT_DIR$/src/GameScene.java" />
       </list>
     </option>
   </component>
@@ -131,8 +128,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -143,7 +139,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -425,6 +422,14 @@
       <option name="presentableId" value="Default" />
       <updated>1486811061367</updated>
     </task>
+    <task id="LOCAL-00001" summary="fixed AnimationTimer">
+      <created>1490869215617</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1490869215617</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -438,7 +443,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -450,7 +455,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22705314" sideWeight="0.7019667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850242" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.102874435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.102874435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18443497" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -501,6 +506,13 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed AnimationTimer" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed AnimationTimer" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="1" />
@@ -526,8 +538,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -546,8 +556,6 @@
           <caret line="306" column="24" selection-start-line="306" selection-start-column="24" selection-end-line="306" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -566,8 +574,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -586,8 +592,6 @@
           <caret line="86" column="21" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -606,8 +610,6 @@
           <caret line="86" column="21" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -626,8 +628,6 @@
           <caret line="86" column="21" selection-start-line="86" selection-start-column="21" selection-end-line="86" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -646,8 +646,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -666,8 +664,6 @@
           <caret line="245" column="0" selection-start-line="245" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -686,8 +682,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -706,8 +700,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -726,8 +718,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -746,8 +736,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -766,8 +754,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -793,8 +779,6 @@
           <caret line="81" column="42" selection-start-line="81" selection-start-column="42" selection-end-line="81" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -820,8 +804,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -885,7 +867,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="251">
           <caret line="1625" column="23" selection-start-line="1625" selection-start-column="23" selection-end-line="1625" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -907,26 +888,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="333">
           <caret line="141" column="39" selection-start-line="141" selection-start-column="39" selection-end-line="141" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameOfLife.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="448" column="42" selection-start-line="448" selection-start-column="42" selection-end-line="448" selection-end-column="42" />
+        <state relative-caret-position="7701">
+          <caret line="465" column="49" selection-start-line="465" selection-start-column="49" selection-end-line="465" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameScene.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="85" column="38" selection-start-line="85" selection-start-column="38" selection-end-line="85" selection-end-column="38" />
+        <state relative-caret-position="136">
+          <caret line="372" column="0" selection-start-line="372" selection-start-column="0" selection-end-line="372" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#692#699#0" expanded="true" />
-            <element signature="e#4855#4862#0" expanded="true" />
           </folding>
         </state>
       </provider>
