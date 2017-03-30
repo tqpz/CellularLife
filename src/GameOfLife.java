@@ -1,4 +1,3 @@
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -47,6 +46,10 @@ public class GameOfLife extends Application {
 
     //create slider objects
     private CustomMenuItem om_slider, sm_slider;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -365,9 +368,7 @@ public class GameOfLife extends Application {
 
         structuresMenu.getItems().addAll(s_oscilators, s_spaceships, s_stillLifes, s_methuselah, s_puffers, s_guns);
 
-        s_Rpentomino.setOnAction(event -> {
-            struct.Rpentomino(gameScene.getxClick(), gameScene.getyClick());
-        });
+        s_Rpentomino.setOnAction(event -> struct.Rpentomino(gameScene.getxClick(), gameScene.getyClick()));
 
         s_glider.setOnAction(event -> struct.glider(gameScene.getxClick(), gameScene.getyClick() + 1));
 
@@ -449,9 +450,10 @@ public class GameOfLife extends Application {
         //initialize slider that indicates speed of simulation
         speedMenu = new Menu("Speed");
         Slider speedSlider = new Slider();
-        speedSlider.setMin(1);
-        speedSlider.setMax(100);
-        speedSlider.setValue(20);
+        speedSlider.setMin(0);
+        speedSlider.setMax(1000);
+        speedSlider.setValue(480);
+        speedSlider.setOrientation(Orientation.HORIZONTAL);
         //speedSlider.setShowTickLabels(true);
         // speedSlider.setShowTickMarks(true);
         //speedSlider.setMinorTickCount(20);
@@ -460,13 +462,8 @@ public class GameOfLife extends Application {
 
         om_slider.setHideOnClick(false);
 
-        om_slider.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.setANIMATION_SPEED((int)
-                        speedSlider.getValue());
-            }
-        });
+        om_slider.setOnAction(event -> gameScene.setANIMATION_SPEED((int)
+                (500 - speedSlider.getValue())));
 
         //initialize slider responsible for grid size
         sizeMenu = new Menu("Size");
@@ -479,12 +476,9 @@ public class GameOfLife extends Application {
         //sizeSlider.setMinorTickCount(20);
         sm_slider = new CustomMenuItem(sizeSlider);
 
-        sm_slider.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                gameScene.setCELL_SIZE((int) sizeSlider.getValue());
-                gameScene.requestLayout();
-            }
+        sm_slider.setOnAction(event -> {
+            gameScene.setCELL_SIZE((int) sizeSlider.getValue());
+            gameScene.requestLayout();
         });
 
         //create ColorPicker and add it to menubar with css styling
@@ -517,9 +511,5 @@ public class GameOfLife extends Application {
             Platform.exit();
             System.exit(0);
         });
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

@@ -1,8 +1,4 @@
 import javafx.animation.AnimationTimer;
-import javafx.beans.property.LongProperty;
-import javafx.beans.property.SimpleLongProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
@@ -24,8 +20,10 @@ public class GameScene extends Pane {
     private int ANIMATION_SPEED = 20; //speed of animation
 
     private AnimationTimer timer;
+
     //create canvas with width and height of window
     private Canvas canvas = new Canvas(gameSceneWidth, gameSceneHeight);
+    private GraphicsContext gc = canvas.getGraphicsContext2D();
 
     //create boolean variables representing every rule
     private boolean conwayRules, labirynth, seeds,
@@ -53,8 +51,6 @@ public class GameScene extends Pane {
 
 
     public GameScene() {
-        final LongProperty lastUpdateTime = new SimpleLongProperty(0);
-
         cellColor = Color.web("#1a3399");
         conwayRules = true; //initially set conway rules
         devmode = false;
@@ -75,263 +71,14 @@ public class GameScene extends Pane {
         getChildren().add(canvas); //add canvas to pane
 
         timer = new AnimationTimer() {
+            private long lastUpdateTime = 0;
+
             @Override
             public void handle(long timestamp) {
-                if (lastUpdateTime.get() > 0) {
-                    //create boolean 2D array representing grid
-                    //this array is created to capture better performance
-                    boolean[][] cellsBoard = new boolean[gameSceneWidth / CELL_SIZE + 2][gameSceneHeight / CELL_SIZE + 2];
-                    //  this for iterates through cell list
-                    // if there are cells - sets their position in bool array
-                    try {
-                        for (int i = 0; i < cell.size(); i++) {
-                            cellsBoard[cell.get(i).x + 1][cell.get(i).y + 1] = true;
-                        }
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        System.out.println("Out of bounds at thread start");
-                    } catch (NullPointerException e) {
-                        System.out.println("Nullpointer at thread start");
-                    }
-
-                    //create array that contains points wchich are added in next generation
-                    ArrayList<Point> nextGeneration = new ArrayList<Point>(0);
-
-                    //nested for loop iterating through all board
-                    for (int i = 1; i < cellsBoard.length - 1; i++) {
-                        for (int j = 1; j < cellsBoard[0].length - 1; j++) {
-                            int neighbours = 0; //variable contains number of neighbours of the cell
-
-                            //checking every cell in the Moore neighbourhood
-                            if (cellsBoard[i - 1][j - 1]) neighbours++;
-                            if (cellsBoard[i][j - 1]) neighbours++;
-                            if (cellsBoard[i + 1][j - 1]) neighbours++;
-                            if (cellsBoard[i - 1][j]) neighbours++;
-                            if (cellsBoard[i + 1][j]) neighbours++;
-                            if (cellsBoard[i - 1][j + 1]) neighbours++;
-                            if (cellsBoard[i][j + 1]) neighbours++;
-                            if (cellsBoard[i + 1][j + 1]) neighbours++;
-
-                            //this conditional statements are representing chosen rule by the user
-                            //if some rule is chosen apply their transfer function
-                            if (conwayRules) {
-                                if (cellsBoard[i][j]) {
-                                    if ((neighbours == 2) || (neighbours == 3)) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-
-                            } else if (labirynth) {
-                                if (cellsBoard[i][j]) {
-                                    if ((neighbours >= 1) && (neighbours <= 5)) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-
-                            } else if (seeds) {
-                                if (!cellsBoard[i][j]) {
-                                    if (neighbours == 2) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (coral) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours >= 4 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-
-                            } else if (highLife) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 2 || neighbours == 3) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3 || neighbours == 6) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-
-                            } else if (replicator) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 7) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 7) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-
-                            } else if (assimilation) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours >= 4 && neighbours <= 7) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours >= 3 && neighbours <= 5) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (walledCities) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours >= 2 && neighbours <= 5) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours >= 4 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (coagulations) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 2 || neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3 || neighbours == 7 || neighbours == 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (twoXtwo) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 1 || neighbours == 2 || neighbours == 5) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3 || neighbours == 6) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (dayAndNight) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 3 || neighbours == 4 || neighbours >= 6 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3 || neighbours >= 6 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (amoeba) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3 || neighbours == 5 || neighbours == 7) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (diamoeba) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours >= 5 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (the34) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 3 || neighbours == 4) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3 || neighbours == 4) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (longLife) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 5) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours >= 3 && neighbours <= 5) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (stains) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 2 || neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3 || neighbours >= 6 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (gnarl) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 1) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 1) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (mystery) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 0 || neighbours >= 5 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3 || neighbours == 4 || neighbours == 5 || neighbours == 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (flakes) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours >= 0 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 3) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            } else if (spiralGrowth) {
-                                if (cellsBoard[i][j]) {
-                                    if (neighbours == 1 || neighbours >= 5 && neighbours <= 8) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                } else {
-                                    if (neighbours == 8 || neighbours >= 3 && neighbours <= 6) {
-                                        nextGeneration.add(new Point(i - 1, j - 1));
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    try {
-                        evolutionNum++; //increment generation variable
-                        resetBoard(); //clear existing cells
-                        cell.addAll(nextGeneration); //add next generation to main cell list
-                        requestLayout(); //show it on screen
-                        Thread.sleep(1000 / ANIMATION_SPEED); //sleep thread every x seconds - here is set animation speed
-                    } catch (InterruptedException e) {
-
-                    } catch (StackOverflowError e) {
-
-                        System.out.println("Overflow error");
-                    }
+                if (timestamp - lastUpdateTime >= ANIMATION_SPEED * 1_000_000) {
+                    updateScene();
+                    lastUpdateTime = timestamp;
                 }
-                lastUpdateTime.set(timestamp);
             }
         };
 
@@ -354,41 +101,263 @@ public class GameScene extends Pane {
 
         //create drag listerer - as above
         addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> addPoint(event));
+
     }
 
-
-    //this method is responsible for refreshing view, on every next generation this method is called
-    @Override
-    protected void layoutChildren() {
-        super.layoutChildren();
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        canvas.setWidth(gameSceneWidth - CELL_SIZE + 1);
-        canvas.setHeight(gameSceneHeight - CELL_SIZE + 1);
-
-        aliveCellsOnBoard.setLayoutY(gameSceneHeight - 3); // position of alive cells label
-        generationLabel.setLayoutY(gameSceneHeight - 3);
-        aliveCellsOnBoard.setLayoutX(CELL_SIZE); // position of alive cells label
-        generationLabel.setLayoutX(160);
-        generationLabel.setText("Number of generation: " + String.valueOf(evolutionNum));
-        aliveCellsOnBoard.setText("Number of alive cells: " + cell.size());
-
-        gc.clearRect(0, 0, getWidth(), getHeight()); //clear canvas after each generation
-        gc.setLineWidth(0.2);
-
+    public void updateScene() {
+        //create boolean 2D array representing grid
+        //this array is created to capture better performance
+        boolean[][] cellsBoard = new boolean[gameSceneWidth / CELL_SIZE + 2][gameSceneHeight / CELL_SIZE + 2];
+        //  this for iterates through cell list
+        // if there are cells - sets their position in bool array
         try {
-            //iterate through cell array and set its color, size and shape
-            for (Point newPoint : cell) {
-                gc.setFill(cellColor);
-                gc.fillRect(CELL_SIZE + (CELL_SIZE * newPoint.x),
-                        CELL_SIZE + (CELL_SIZE * newPoint.y),
-                        CELL_SIZE,
-                        CELL_SIZE);
+            for (int i = 0; i < cell.size(); i++) {
+                cellsBoard[cell.get(i).x + 1][cell.get(i).y + 1] = true;
             }
-        } catch (ConcurrentModificationException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Out of bounds at thread start");
         } catch (NullPointerException e) {
+            System.out.println("Nullpointer at thread start");
         }
 
-        /*this block is responsible for painting grid,
+        //create array that contains points wchich are added in next generation
+        ArrayList<Point> nextGeneration = new ArrayList<Point>(0);
+
+        //nested for loop iterating through all board
+        for (int i = 1; i < cellsBoard.length - 1; i++) {
+            for (int j = 1; j < cellsBoard[0].length - 1; j++) {
+                int neighbours = 0; //variable contains number of neighbours of the cell
+
+                //checking every cell in the Moore neighbourhood
+                if (cellsBoard[i - 1][j - 1]) neighbours++;
+                if (cellsBoard[i][j - 1]) neighbours++;
+                if (cellsBoard[i + 1][j - 1]) neighbours++;
+                if (cellsBoard[i - 1][j]) neighbours++;
+                if (cellsBoard[i + 1][j]) neighbours++;
+                if (cellsBoard[i - 1][j + 1]) neighbours++;
+                if (cellsBoard[i][j + 1]) neighbours++;
+                if (cellsBoard[i + 1][j + 1]) neighbours++;
+
+                //this conditional statements are representing chosen rule by the user
+                //if some rule is chosen apply their transfer function
+                if (conwayRules) {
+                    if (cellsBoard[i][j]) {
+                        if ((neighbours == 2) || (neighbours == 3)) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+
+                } else if (labirynth) {
+                    if (cellsBoard[i][j]) {
+                        if ((neighbours >= 1) && (neighbours <= 5)) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+
+                } else if (seeds) {
+                    if (!cellsBoard[i][j]) {
+                        if (neighbours == 2) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (coral) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours >= 4 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+
+                } else if (highLife) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 2 || neighbours == 3) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3 || neighbours == 6) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+
+                } else if (replicator) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 7) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 7) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+
+                } else if (assimilation) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours >= 4 && neighbours <= 7) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours >= 3 && neighbours <= 5) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (walledCities) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours >= 2 && neighbours <= 5) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours >= 4 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (coagulations) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 2 || neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3 || neighbours == 7 || neighbours == 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (twoXtwo) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 1 || neighbours == 2 || neighbours == 5) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3 || neighbours == 6) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (dayAndNight) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 3 || neighbours == 4 || neighbours >= 6 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3 || neighbours >= 6 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (amoeba) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3 || neighbours == 5 || neighbours == 7) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (diamoeba) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours >= 5 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (the34) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 3 || neighbours == 4) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3 || neighbours == 4) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (longLife) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 5) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours >= 3 && neighbours <= 5) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (stains) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 2 || neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3 || neighbours >= 6 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (gnarl) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 1) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 1) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (mystery) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 0 || neighbours >= 5 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3 || neighbours == 4 || neighbours == 5 || neighbours == 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (flakes) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours >= 0 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 3) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (spiralGrowth) {
+                    if (cellsBoard[i][j]) {
+                        if (neighbours == 1 || neighbours >= 5 && neighbours <= 8) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    } else {
+                        if (neighbours == 8 || neighbours >= 3 && neighbours <= 6) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                }
+            }
+        }
+
+        try {
+            evolutionNum++; //increment generation variable
+            resetBoard(); //clear existing cells
+            cell.addAll(nextGeneration); //add next generation to main cell list
+            requestLayout(); //show it on screen
+            //Thread.sleep(1000 / ANIMATION_SPEED); //sleep thread every x seconds - here is set animation speed
+        } catch (StackOverflowError e) {
+            System.out.println("Overflow error");
+        }
+    }
+
+    public void drawGrid() {
+         /*this block is responsible for painting grid,
          grid is drawn regardless of cell*/
         try {
             //create lines horizontally
@@ -408,6 +377,42 @@ public class GameScene extends Pane {
             }
         } catch (NullPointerException e) {
         }
+    }
+
+    public void drawCells() {
+        try {
+            //iterate through cell array and set its color, size and shape
+            for (Point newPoint : cell) {
+                gc.setFill(cellColor);
+                gc.fillRect(CELL_SIZE + (CELL_SIZE * newPoint.x),
+                        CELL_SIZE + (CELL_SIZE * newPoint.y),
+                        CELL_SIZE,
+                        CELL_SIZE);
+            }
+        } catch (ConcurrentModificationException | NullPointerException e) {
+        }
+    }
+
+
+    //this method is responsible for refreshing view, on every next generation this method is called
+    @Override
+    protected void layoutChildren() {
+        super.layoutChildren();
+        canvas.setWidth(gameSceneWidth - CELL_SIZE + 1);
+        canvas.setHeight(gameSceneHeight - CELL_SIZE + 1);
+
+        aliveCellsOnBoard.setLayoutY(gameSceneHeight - 3); // position of alive cells label
+        generationLabel.setLayoutY(gameSceneHeight - 3);
+        aliveCellsOnBoard.setLayoutX(CELL_SIZE); // position of alive cells label
+        generationLabel.setLayoutX(160);
+        generationLabel.setText("Number of generation: " + String.valueOf(evolutionNum));
+        aliveCellsOnBoard.setText("Number of alive cells: " + cell.size());
+
+        gc.clearRect(0, 0, getWidth(), getHeight()); //clear canvas after each generation
+        gc.setLineWidth(0.2);
+
+        drawGrid();
+        drawCells();
     }
 
     //on call add cell to a cell list
@@ -586,9 +591,8 @@ public class GameScene extends Pane {
         this.ANIMATION_SPEED = ANIMATION_SPEED;
     }
 
-    //this method is connected to size slider item
-    void setCELL_SIZE(int CELL_SIZE) {
-        this.CELL_SIZE = CELL_SIZE;
+    public Color getCellColor() {
+        return cellColor;
     }
 
     void setCellColor(Color cellColor) {
@@ -596,13 +600,13 @@ public class GameScene extends Pane {
         requestLayout();
     }
 
-    public Color getCellColor() {
-        return cellColor;
-    }
-
-
     public int getCELL_SIZE() {
         return CELL_SIZE;
+    }
+
+    //this method is connected to size slider item
+    void setCELL_SIZE(int CELL_SIZE) {
+        this.CELL_SIZE = CELL_SIZE;
     }
 
     public AnimationTimer getTimer() {
