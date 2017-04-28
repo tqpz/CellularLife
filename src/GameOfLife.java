@@ -29,7 +29,7 @@ public class GameOfLife extends Application {
             rm_coagulations, rm_twoXtwo, rm_dayAndNight,
             rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
             rm_stains, rm_gnarl, rm_mystery, rm_flakes,
-            rm_spiralGrowth;
+            rm_spiralGrowth, rm_serviettes;
 
     private MenuItem fm_exit, gm_start, gm_stop, gm_reset;
 
@@ -189,6 +189,8 @@ public class GameOfLife extends Application {
         rm_spiralGrowth = new RadioMenuItem("Spiral Growth");
         rm_spiralGrowth.setToggleGroup(rulesGroup);
 
+        rm_serviettes = new RadioMenuItem("Serviettes");
+        rm_serviettes.setToggleGroup(rulesGroup);
 
         //on click all rules ale set to false and afterwards choosen rule is set true
         rm_conwayRules.setOnAction(event -> {
@@ -292,13 +294,19 @@ public class GameOfLife extends Application {
             struct.spiralGrowth(gameScene.getxClick() - 1, gameScene.getyClick());
         });
 
+        rm_serviettes.setOnAction(event -> {
+            gameScene.resetRules();
+            gameScene.setServiettes(true);
+        });
+
         //add initialized items to menubar
         rulesMenu.getItems().addAll(rm_conwayRules, rm_labirynth, rm_seeds,
                 rm_coral, rm_highLife, rm_replicator,
                 rm_assimilation, rm_walledCities,
                 rm_coagulations, rm_twoXtwo, rm_dayAndNight,
                 rm_amoeba, rm_diamoeba, rm_the34, rm_longLife,
-                rm_stains, rm_gnarl, rm_mystery, rm_flakes, rm_spiralGrowth);
+                rm_stains, rm_gnarl, rm_mystery, rm_flakes, rm_spiralGrowth,
+                rm_serviettes);
 
         //initialize and add "Structures" menu items
         Menu s_oscilators = new Menu("Oscillators");
@@ -469,7 +477,7 @@ public class GameOfLife extends Application {
         sizeMenu = new Menu("Size");
         Slider sizeSlider = new Slider();
         sizeSlider.setMin(1);
-        sizeSlider.setMax(20);
+        sizeSlider.setMax(80);
         sizeSlider.setValue(10);
 
        // sizeSlider.setShowTickMarks(true);

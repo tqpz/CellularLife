@@ -31,7 +31,8 @@ public class GameScene extends Pane {
             assimilation, walledCities,
             coagulations, twoXtwo, dayAndNight,
             amoeba, diamoeba, the34, longLife,
-            stains, gnarl, mystery, flakes, spiralGrowth;
+            stains, gnarl, mystery, flakes, spiralGrowth,
+            serviettes;
 
     private boolean devmode;
 
@@ -98,10 +99,10 @@ public class GameScene extends Pane {
         });
 
         //create click listener - on click add alive cell
-        addEventHandler(MouseEvent.MOUSE_CLICKED, event -> addPoint(event));
+        addEventHandler(MouseEvent.MOUSE_CLICKED, this::addPoint);
 
         //create drag listerer - as above
-        addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> addPoint(event));
+        addEventHandler(MouseEvent.MOUSE_DRAGGED, this::addPoint);
 
     }
 
@@ -199,6 +200,7 @@ public class GameScene extends Pane {
                     } else {
                         if (neighbours == 1 || neighbours == 3 || neighbours == 5 || neighbours == 7) {
                             nextGeneration.add(new Point(i - 1, j - 1));
+
                         }
                     }
 
@@ -224,7 +226,7 @@ public class GameScene extends Pane {
                     }
                 } else if (coagulations) {
                     if (cellsBoard[i][j]) {
-                        if (neighbours == 2 || neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
+                        if (neighbours == 2 || neighbours == 3 || (neighbours >= 5 && neighbours <= 8)) {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     } else {
@@ -244,11 +246,11 @@ public class GameScene extends Pane {
                     }
                 } else if (dayAndNight) {
                     if (cellsBoard[i][j]) {
-                        if (neighbours == 3 || neighbours == 4 || neighbours >= 6 && neighbours <= 8) {
+                        if (neighbours == 3 || neighbours == 4 || (neighbours >= 6 && neighbours <= 8)) {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     } else {
-                        if (neighbours == 3 || neighbours >= 6 && neighbours <= 8) {
+                        if (neighbours == 3 || (neighbours >= 6 && neighbours <= 8)) {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     }
@@ -268,7 +270,7 @@ public class GameScene extends Pane {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     } else {
-                        if (neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
+                        if (neighbours == 3 || (neighbours >= 5 && neighbours <= 8)) {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     }
@@ -294,11 +296,11 @@ public class GameScene extends Pane {
                     }
                 } else if (stains) {
                     if (cellsBoard[i][j]) {
-                        if (neighbours == 2 || neighbours == 3 || neighbours >= 5 && neighbours <= 8) {
+                        if (neighbours == 2 || neighbours == 3 || (neighbours >= 5 && neighbours <= 8)) {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     } else {
-                        if (neighbours == 3 || neighbours >= 6 && neighbours <= 8) {
+                        if (neighbours == 3 || (neighbours >= 6 && neighbours <= 8)) {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     }
@@ -314,7 +316,7 @@ public class GameScene extends Pane {
                     }
                 } else if (mystery) {
                     if (cellsBoard[i][j]) {
-                        if (neighbours == 0 || neighbours >= 5 && neighbours <= 8) {
+                        if (neighbours == 0 || (neighbours >= 5 && neighbours <= 8)) {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     } else {
@@ -334,11 +336,17 @@ public class GameScene extends Pane {
                     }
                 } else if (spiralGrowth) {
                     if (cellsBoard[i][j]) {
-                        if (neighbours == 1 || neighbours >= 5 && neighbours <= 8) {
+                        if (neighbours == 1 || (neighbours >= 5 && neighbours <= 8)) {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     } else {
-                        if (neighbours == 8 || neighbours >= 3 && neighbours <= 6) {
+                        if (neighbours == 8 || (neighbours >= 3 && neighbours <= 6)) {
+                            nextGeneration.add(new Point(i - 1, j - 1));
+                        }
+                    }
+                } else if (serviettes) {
+                    if (!cellsBoard[i][j]) {
+                        if (neighbours >= 2 && neighbours <= 4) {
                             nextGeneration.add(new Point(i - 1, j - 1));
                         }
                     }
@@ -356,7 +364,7 @@ public class GameScene extends Pane {
         }
     }
 
-    public void drawCanvasFrame() {
+    private void drawCanvasFrame() {
         gc.strokeLine(CELL_SIZE,
                 (canvas.getHeight()),
                 canvas.getWidth(),
@@ -561,6 +569,10 @@ public class GameScene extends Pane {
         this.spiralGrowth = spiralGrowth;
     }
 
+    void setServiettes(boolean serviettes) {
+        this.serviettes = serviettes;
+    }
+
     //this method is called when user is changing rule to another
     void resetRules() {
         setConwayRules(false);
@@ -581,6 +593,7 @@ public class GameScene extends Pane {
         setStains(false);
         setGnarl(false);
         setMystery(false);
+        setServiettes(false);
     }
 
 
