@@ -2,13 +2,28 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class GameOfLife extends Application {
     //set primary window size
@@ -18,12 +33,11 @@ public class GameOfLife extends Application {
 
     //create Menu bar objects - they are representing clickable items on menubar
     private MenuBar menuBar;
-    private Menu fileMenu, gameMenu, rulesMenu, structuresMenu, speedMenu, sizeMenu, colorMenu;
+    private Menu fileMenu, gameMenu, rulesMenu, structuresMenu, speedMenu, sizeMenu, colorMenu, aboutMenu;
     private ToggleGroup rulesGroup = new ToggleGroup();
     private boolean paused;
 
-    private RadioMenuItem
-            rm_conwayRules, rm_labirynth, rm_seeds,
+    private RadioMenuItem rm_conwayRules, rm_labirynth, rm_seeds,
             rm_coral, rm_highLife, rm_replicator,
             rm_assimilation, rm_walledCities,
             rm_coagulations, rm_twoXtwo, rm_dayAndNight,
@@ -60,7 +74,7 @@ public class GameOfLife extends Application {
 
         GameScene gameScene = new GameScene();
 
-        Structure struct = new Structure(gameScene, gameScene.getCell());
+        Structure struct = new Structure(gameScene, gameScene.getCells());
 
         //set window title
         primaryStage.setTitle("Game of Life");
@@ -88,7 +102,7 @@ public class GameOfLife extends Application {
 
         gameScene.setOnMouseExited(event -> gameScene.getTimer().stop());
         gameScene.setOnMouseEntered(event -> {
-            if(!paused)
+            if (!paused)
                 gameScene.getTimer().start();
         });
 
@@ -105,6 +119,57 @@ public class GameOfLife extends Application {
         gm_stop = new MenuItem("Stop");
         gm_reset = new MenuItem("Reset");
         gameMenu.getItems().addAll(gm_start, gm_stop, gm_reset);
+
+        aboutMenu = new Menu();
+
+        Label menuLabel = new Label("About");
+        // menuLabel.setStyle("-fx-background-color: yellow; -fx-padding: 0px;");
+        menuLabel.setOnMouseClicked(event -> {
+            Stage myDialog = new Stage();
+            myDialog.initModality(Modality.WINDOW_MODAL);
+            myDialog.setTitle("About");
+
+
+            Hyperlink link = new Hyperlink();
+            link.setText("mateusz.tapa@gmail.com");
+
+            TextFlow flow = new TextFlow(
+                    new Text("Program created as part of the work 'TITLE' by Mateusz Tapa\n" +
+                            "contact: "), link
+            );
+
+            link.setOnAction(event1 -> {
+                Desktop desktop;
+                if (Desktop.isDesktopSupported()
+                        && (desktop = Desktop.getDesktop()).isSupported(Desktop.Action.MAIL)) {
+                    URI mailto = null;
+                    try {
+                        mailto = new URI("mailto:mateusz.tapa@gmail.com?subject=Cellular%20Life");
+                        desktop.mail(mailto);
+                    } catch (URISyntaxException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    // TODO fallback to some Runtime.exec(..) voodoo?
+                    throw new RuntimeException("desktop doesn't support mailto; mail is dead anyway ;)");
+                }
+            });
+
+            flow.setPadding(new Insets(10));
+
+            Scene myDialogScene = new Scene(VBoxBuilder.create()
+                    .children(flow)
+                    .alignment(Pos.CENTER)
+                    .padding(new Insets(100))
+                    .build());
+
+            myDialog.setScene(myDialogScene);
+            myDialog.show();
+        });
+        aboutMenu.setGraphic(menuLabel);
 
         //operations on simulation thread
         gm_start.setOnAction(new EventHandler<ActionEvent>() {
@@ -480,7 +545,7 @@ public class GameOfLife extends Application {
         sizeSlider.setMax(80);
         sizeSlider.setValue(10);
 
-       // sizeSlider.setShowTickMarks(true);
+        // sizeSlider.setShowTickMarks(true);
         //sizeSlider.setMinorTickCount(20);
         sm_slider = new CustomMenuItem(sizeSlider);
 
@@ -502,7 +567,8 @@ public class GameOfLife extends Application {
         //add items to menu
         sizeMenu.getItems().addAll(sm_slider);
 
-        menuBar.getMenus().addAll(fileMenu, gameMenu, structuresMenu, rulesMenu, speedMenu, sizeMenu, colorMenu);
+        menuBar.getMenus().addAll(fileMenu, gameMenu, structuresMenu, rulesMenu,
+                speedMenu, sizeMenu, colorMenu, aboutMenu);
 
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 
