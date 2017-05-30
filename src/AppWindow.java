@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class GameOfLife extends Application {
+public class AppWindow extends Application {
     //set primary window size
 
     private static final int PRIMARY_STAGE_HEIGHT = 600;
@@ -33,7 +33,7 @@ public class GameOfLife extends Application {
 
     //create Menu bar objects - they are representing clickable items on menubar
     private MenuBar menuBar;
-    private Menu fileMenu, gameMenu, rulesMenu, structuresMenu, speedMenu, sizeMenu, colorMenu, aboutMenu;
+    private Menu gameMenu, rulesMenu, structuresMenu, speedMenu, sizeMenu, colorMenu, aboutMenu;
     private ToggleGroup rulesGroup = new ToggleGroup();
     private boolean paused;
 
@@ -45,7 +45,7 @@ public class GameOfLife extends Application {
             rm_stains, rm_gnarl, rm_mystery, rm_flakes,
             rm_spiralGrowth, rm_serviettes;
 
-    private MenuItem fm_exit, gm_start, gm_stop, gm_reset;
+    private MenuItem gm_start, gm_stop, gm_reset;
 
     private MenuItem s_glider, s_acorn, s_Rpentomino, s_lightweightSpaceship,
             s_gliderGun, s_pulsar, s_dart, s_puffer1, s_loaf,
@@ -67,28 +67,28 @@ public class GameOfLife extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.getIcons().add(new Image("file:img/logo.png"));
+        primaryStage.getIcons().add(new Image("file:img/logo.jpg"));
         paused = true;
 
         BorderPane root = new BorderPane();
 
-        GameScene gameScene = new GameScene();
+        SimulationScene simulationScene = new SimulationScene();
 
-        Structure struct = new Structure(gameScene, gameScene.getCells());
+        Structure struct = new Structure(simulationScene, simulationScene.getCells());
 
         //set window title
-        primaryStage.setTitle("Game of Life");
+        primaryStage.setTitle("Cellular life");
 
-        gameScene.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+        simulationScene.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             // test.suspend();
-            gameScene.getTimer().stop();
+            simulationScene.getTimer().stop();
             //paused = true;
         });
 
-        gameScene.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
+        simulationScene.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> {
             if (!paused) {
                 //test.resume();
-                gameScene.getTimer().start();
+                simulationScene.getTimer().start();
             }
         });
 
@@ -100,21 +100,15 @@ public class GameOfLife extends Application {
         //initialize "file" drop-down menu items and add eventhandlers
         menuBar = new MenuBar();
 
-        gameScene.setOnMouseExited(event -> gameScene.getTimer().stop());
-        gameScene.setOnMouseEntered(event -> {
+        simulationScene.setOnMouseExited(event -> simulationScene.getTimer().stop());
+        simulationScene.setOnMouseEntered(event -> {
             if (!paused)
-                gameScene.getTimer().start();
+                simulationScene.getTimer().start();
         });
 
 
-        fileMenu = new Menu("File");
-        fm_exit = new MenuItem("Exit");
-        fileMenu.getItems().add(fm_exit);
-
-        fm_exit.setOnAction(event -> primaryStage.close());
-
         //initialize "Game" menu item, add drop-down menu items and event handlers
-        gameMenu = new Menu("Game");
+        gameMenu = new Menu("Simulation");
         gm_start = new MenuItem("Start");
         gm_stop = new MenuItem("Stop");
         gm_reset = new MenuItem("Reset");
@@ -146,14 +140,11 @@ public class GameOfLife extends Application {
                     try {
                         mailto = new URI("mailto:mateusz.tapa@gmail.com?subject=Cellular%20Life");
                         desktop.mail(mailto);
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
+                    } catch (URISyntaxException | IOException e) {
                         e.printStackTrace();
                     }
 
                 } else {
-                    // TODO fallback to some Runtime.exec(..) voodoo?
                     throw new RuntimeException("desktop doesn't support mailto; mail is dead anyway ;)");
                 }
             });
@@ -176,7 +167,7 @@ public class GameOfLife extends Application {
             @Override
             public synchronized void handle(ActionEvent event) {
                 paused = false;
-                gameScene.startAnimation(gameScene.getTimer());
+                simulationScene.startAnimation(simulationScene.getTimer());
             }
         });
 
@@ -184,11 +175,11 @@ public class GameOfLife extends Application {
             @Override
             public synchronized void handle(ActionEvent event) {
                 paused = true;
-                gameScene.getTimer().stop();
+                simulationScene.getTimer().stop();
             }
         });
 
-        gm_reset.setOnAction(event -> gameScene.resetAll());
+        gm_reset.setOnAction(event -> simulationScene.resetAll());
 
         //initialize all "Rules" menu items and add on click event handlers
         rulesMenu = new Menu("Rules");
@@ -259,109 +250,109 @@ public class GameOfLife extends Application {
 
         //on click all rules ale set to false and afterwards choosen rule is set true
         rm_conwayRules.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setConwayRules(true);
+            simulationScene.resetRules();
+            simulationScene.setConwayRules(true);
         });
 
         rm_labirynth.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setLabirynth(true);
+            simulationScene.resetRules();
+            simulationScene.setLabirynth(true);
         });
 
         rm_seeds.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setSeeds(true);
+            simulationScene.resetRules();
+            simulationScene.setSeeds(true);
         });
 
         rm_coral.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setCoral(true);
+            simulationScene.resetRules();
+            simulationScene.setCoral(true);
         });
 
         rm_highLife.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setHighLife(true);
+            simulationScene.resetRules();
+            simulationScene.setHighLife(true);
         });
 
         rm_replicator.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setReplicator(true);
+            simulationScene.resetRules();
+            simulationScene.setReplicator(true);
         });
 
         rm_assimilation.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setAssimilation(true);
+            simulationScene.resetRules();
+            simulationScene.setAssimilation(true);
         });
 
         rm_walledCities.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setWalledCities(true);
+            simulationScene.resetRules();
+            simulationScene.setWalledCities(true);
         });
 
         rm_coagulations.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setCoagulations(true);
+            simulationScene.resetRules();
+            simulationScene.setCoagulations(true);
         });
 
         rm_twoXtwo.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setTwoXtwo(true);
+            simulationScene.resetRules();
+            simulationScene.setTwoXtwo(true);
         });
 
         rm_dayAndNight.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setDayAndNight(true);
+            simulationScene.resetRules();
+            simulationScene.setDayAndNight(true);
         });
 
         rm_amoeba.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setAmoeba(true);
+            simulationScene.resetRules();
+            simulationScene.setAmoeba(true);
         });
 
         rm_diamoeba.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setDiamoeba(true);
+            simulationScene.resetRules();
+            simulationScene.setDiamoeba(true);
         });
 
         rm_the34.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setThe34(true);
+            simulationScene.resetRules();
+            simulationScene.setThe34(true);
         });
 
         rm_longLife.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setLongLife(true);
+            simulationScene.resetRules();
+            simulationScene.setLongLife(true);
         });
 
         rm_stains.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setStains(true);
+            simulationScene.resetRules();
+            simulationScene.setStains(true);
         });
 
         rm_gnarl.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setGnarl(true);
+            simulationScene.resetRules();
+            simulationScene.setGnarl(true);
         });
 
         rm_mystery.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setMystery(true);
+            simulationScene.resetRules();
+            simulationScene.setMystery(true);
         });
 
         rm_flakes.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setFlakes(true);
+            simulationScene.resetRules();
+            simulationScene.setFlakes(true);
         });
 
         rm_spiralGrowth.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setSpiralGrowth(true);
-            struct.spiralGrowth(gameScene.getxClick() - 1, gameScene.getyClick());
+            simulationScene.resetRules();
+            simulationScene.setSpiralGrowth(true);
+            struct.spiralGrowth(simulationScene.getxClick() - 1, simulationScene.getyClick());
         });
 
         rm_serviettes.setOnAction(event -> {
-            gameScene.resetRules();
-            gameScene.setServiettes(true);
+            simulationScene.resetRules();
+            simulationScene.setServiettes(true);
         });
 
         //add initialized items to menubar
@@ -441,83 +432,83 @@ public class GameOfLife extends Application {
 
         structuresMenu.getItems().addAll(s_oscilators, s_spaceships, s_stillLifes, s_methuselah, s_puffers, s_guns);
 
-        s_Rpentomino.setOnAction(event -> struct.Rpentomino(gameScene.getxClick(), gameScene.getyClick()));
+        s_Rpentomino.setOnAction(event -> struct.Rpentomino(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_glider.setOnAction(event -> struct.glider(gameScene.getxClick(), gameScene.getyClick() + 1));
+        s_glider.setOnAction(event -> struct.glider(simulationScene.getxClick(), simulationScene.getyClick() + 1));
 
-        s_acorn.setOnAction(event -> struct.acorn(gameScene.getxClick() - 1, gameScene.getyClick()));
+        s_acorn.setOnAction(event -> struct.acorn(simulationScene.getxClick() - 1, simulationScene.getyClick()));
 
-        s_lightweightSpaceship.setOnAction(event -> struct.lightweightSpaceship(gameScene.getxClick() - 1, gameScene.getyClick()));
+        s_lightweightSpaceship.setOnAction(event -> struct.lightweightSpaceship(simulationScene.getxClick() - 1, simulationScene.getyClick()));
 
-        s_gliderGun.setOnAction(event -> struct.gliderGun(gameScene.getxClick(), gameScene.getyClick()));
+        s_gliderGun.setOnAction(event -> struct.gliderGun(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_pulsar.setOnAction(event -> struct.pulsar(gameScene.getxClick(), gameScene.getyClick() - 2));
+        s_pulsar.setOnAction(event -> struct.pulsar(simulationScene.getxClick(), simulationScene.getyClick() - 2));
 
-        s_dart.setOnAction(event -> struct.dart(gameScene.getxClick() - 1, gameScene.getyClick()));
+        s_dart.setOnAction(event -> struct.dart(simulationScene.getxClick() - 1, simulationScene.getyClick()));
 
-        s_puffer1.setOnAction(event -> struct.puffer1(gameScene.getxClick(), gameScene.getyClick() + 2));
+        s_puffer1.setOnAction(event -> struct.puffer1(simulationScene.getxClick(), simulationScene.getyClick() + 2));
 
-        s_loaf.setOnAction(event -> struct.loaf(gameScene.getxClick() - 1, gameScene.getyClick()));
+        s_loaf.setOnAction(event -> struct.loaf(simulationScene.getxClick() - 1, simulationScene.getyClick()));
 
-        s_pond.setOnAction(event -> struct.pond(gameScene.getxClick() - 1, gameScene.getyClick()));
+        s_pond.setOnAction(event -> struct.pond(simulationScene.getxClick() - 1, simulationScene.getyClick()));
 
-        s_elevener.setOnAction(event -> struct.elevener(gameScene.getxClick(), gameScene.getyClick()));
+        s_elevener.setOnAction(event -> struct.elevener(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_honeycomb.setOnAction(event -> struct.honeycomb(gameScene.getxClick() - 2, gameScene.getyClick()));
+        s_honeycomb.setOnAction(event -> struct.honeycomb(simulationScene.getxClick() - 2, simulationScene.getyClick()));
 
-        s_paperclip.setOnAction(event -> struct.paperclip(gameScene.getxClick(), gameScene.getyClick()));
+        s_paperclip.setOnAction(event -> struct.paperclip(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_moose.setOnAction(event -> struct.moose(gameScene.getxClick(), gameScene.getyClick()));
+        s_moose.setOnAction(event -> struct.moose(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_eater2.setOnAction(event -> struct.eater2(gameScene.getxClick() - 1, gameScene.getyClick() - 1));
+        s_eater2.setOnAction(event -> struct.eater2(simulationScene.getxClick() - 1, simulationScene.getyClick() - 1));
 
-        s_spiral.setOnAction(event -> struct.spiral(gameScene.getxClick(), gameScene.getyClick()));
+        s_spiral.setOnAction(event -> struct.spiral(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_lake2.setOnAction(event -> struct.lake2(gameScene.getxClick(), gameScene.getyClick()));
+        s_lake2.setOnAction(event -> struct.lake2(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_mickeyMouse.setOnAction(event -> struct.mickeyMouse(gameScene.getxClick() - 1, gameScene.getyClick()));
+        s_mickeyMouse.setOnAction(event -> struct.mickeyMouse(simulationScene.getxClick() - 1, simulationScene.getyClick()));
 
-        s_pentadecathlon.setOnAction(event -> struct.pentadecathlon(gameScene.getxClick(), gameScene.getyClick() - 1));
+        s_pentadecathlon.setOnAction(event -> struct.pentadecathlon(simulationScene.getxClick(), simulationScene.getyClick() - 1));
 
-        s_galaxy.setOnAction(event -> struct.galaxy(gameScene.getxClick(), gameScene.getyClick()));
+        s_galaxy.setOnAction(event -> struct.galaxy(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_pinwheel.setOnAction(event -> struct.pinwheel(gameScene.getxClick(), gameScene.getyClick()));
+        s_pinwheel.setOnAction(event -> struct.pinwheel(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_sixBits.setOnAction(event -> struct.sixBits(gameScene.getxClick(), gameScene.getyClick()));
+        s_sixBits.setOnAction(event -> struct.sixBits(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_gabrielsp138.setOnAction(event -> struct.gabrielsp138(gameScene.getxClick(), gameScene.getyClick()));
+        s_gabrielsp138.setOnAction(event -> struct.gabrielsp138(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_archimsp144.setOnAction(event -> struct.archimsp144(gameScene.getxClick(), gameScene.getyClick()));
+        s_archimsp144.setOnAction(event -> struct.archimsp144(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_78P70.setOnAction(event -> struct.seven_eight_p_seven_zero(gameScene.getxClick(), gameScene.getyClick()));
+        s_78P70.setOnAction(event -> struct.seven_eight_p_seven_zero(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_p60hassler.setOnAction(event -> struct.p60_hassler(gameScene.getxClick(), gameScene.getyClick()));
+        s_p60hassler.setOnAction(event -> struct.p60_hassler(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_70P2H1V01.setOnAction(event -> struct.seven_0P2H1V01(gameScene.getxClick(), gameScene.getyClick()));
+        s_70P2H1V01.setOnAction(event -> struct.seven_0P2H1V01(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_sparky.setOnAction(event -> struct.sparky(gameScene.getxClick(), gameScene.getyClick()));
+        s_sparky.setOnAction(event -> struct.sparky(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_backrake1.setOnAction(event -> struct.backrake1(gameScene.getxClick(), gameScene.getyClick()));
+        s_backrake1.setOnAction(event -> struct.backrake1(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_blinkerPuffer.setOnAction(event -> struct.blinkerPuffer(gameScene.getxClick(), gameScene.getyClick()));
+        s_blinkerPuffer.setOnAction(event -> struct.blinkerPuffer(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_spacefiller.setOnAction(event -> struct.spacefiller(gameScene.getxClick(), gameScene.getyClick()));
+        s_spacefiller.setOnAction(event -> struct.spacefiller(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_pufferTrain.setOnAction(event -> struct.pufferTrain(gameScene.getxClick(), gameScene.getyClick()));
+        s_pufferTrain.setOnAction(event -> struct.pufferTrain(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_bloom.setOnAction(event -> struct.bloom(gameScene.getxClick(), gameScene.getyClick()));
+        s_bloom.setOnAction(event -> struct.bloom(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_lidka.setOnAction(event -> struct.lidka(gameScene.getxClick(), gameScene.getyClick()));
+        s_lidka.setOnAction(event -> struct.lidka(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_naturalLWSS.setOnAction(event -> struct.naturalLWSS(gameScene.getxClick(), gameScene.getyClick()));
+        s_naturalLWSS.setOnAction(event -> struct.naturalLWSS(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_rabbits17423.setOnAction(event -> struct.rabbits17423(gameScene.getxClick(), gameScene.getyClick()));
+        s_rabbits17423.setOnAction(event -> struct.rabbits17423(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_rabbits17465.setOnAction(event -> struct.rabbits17465(gameScene.getxClick(), gameScene.getyClick()));
+        s_rabbits17465.setOnAction(event -> struct.rabbits17465(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_rabbits.setOnAction(event -> struct.rabbits(gameScene.getxClick(), gameScene.getyClick()));
+        s_rabbits.setOnAction(event -> struct.rabbits(simulationScene.getxClick(), simulationScene.getyClick()));
 
-        s_pulsars.setOnAction(event -> struct.pulsars(gameScene.getxClick() - 1, gameScene.getyClick() - 1));
+        s_pulsars.setOnAction(event -> struct.pulsars(simulationScene.getxClick() - 1, simulationScene.getyClick() - 1));
 
 
         //initialize slider that indicates speed of simulation
@@ -535,14 +526,14 @@ public class GameOfLife extends Application {
 
         om_slider.setHideOnClick(false);
 
-        om_slider.setOnAction(event -> gameScene.setANIMATION_SPEED((int)
+        om_slider.setOnAction(event -> simulationScene.setAnimationSpeed((int)
                 (500 - speedSlider.getValue())));
 
         //initialize slider responsible for grid size
         sizeMenu = new Menu("Size");
         Slider sizeSlider = new Slider();
         sizeSlider.setMin(1);
-        sizeSlider.setMax(80);
+        sizeSlider.setMax(50);
         sizeSlider.setValue(10);
 
         // sizeSlider.setShowTickMarks(true);
@@ -550,15 +541,15 @@ public class GameOfLife extends Application {
         sm_slider = new CustomMenuItem(sizeSlider);
 
         sm_slider.setOnAction(event -> {
-            gameScene.setCELL_SIZE((int) sizeSlider.getValue());
-            gameScene.requestLayout();
+            simulationScene.setCellSize((int) sizeSlider.getValue());
+            simulationScene.requestLayout();
         });
 
         //create ColorPicker and add it to menubar with css styling
         root.getStylesheets().addAll("style.css");
         ColorPicker colorPicker = new ColorPicker();
-        colorPicker.setValue(gameScene.getCellColor());
-        colorPicker.setOnAction(event -> gameScene.setCellColor(colorPicker.getValue()));
+        colorPicker.setValue(simulationScene.getCellColor());
+        colorPicker.setOnAction(event -> simulationScene.setCellColor(colorPicker.getValue()));
         colorPicker.getStyleClass().add("button");
         colorPicker.getStyleClass().add("color-button");
         colorPicker.setPrefSize(30, 10);
@@ -567,14 +558,14 @@ public class GameOfLife extends Application {
         //add items to menu
         sizeMenu.getItems().addAll(sm_slider);
 
-        menuBar.getMenus().addAll(fileMenu, gameMenu, structuresMenu, rulesMenu,
-                speedMenu, sizeMenu, colorMenu, aboutMenu);
+        menuBar.getMenus().addAll(gameMenu, structuresMenu, rulesMenu, speedMenu,
+                sizeMenu, colorMenu, aboutMenu);
 
         menuBar.prefWidthProperty().bind(primaryStage.widthProperty());
 
         //set posiotion of components in the window
         root.setTop(menuBar);
-        root.setCenter(gameScene);
+        root.setCenter(simulationScene);
 
         //set primary scene and show it
         primaryStage.setScene(scene);

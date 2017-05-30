@@ -6,16 +6,17 @@ import java.util.ArrayList;
 /**
  * Created by Mateusz on 14.03.2017.
  */
-public class Structure {
+@SuppressWarnings("ALL")
+class Structure {
     private Pane scene;
     private ArrayList<Point> aliveCells = new ArrayList<Point>(0);
 
-    public Structure(Pane scene, ArrayList<Point> aliveCells) {
+    Structure(Pane scene, ArrayList<Point> aliveCells) {
         this.scene = scene;
         this.aliveCells = aliveCells;
     }
 
-    public void glider(int x, int y) {
+    void glider(int x, int y) {
         aliveCells.add(new Point(x, y - 1));
         aliveCells.add(new Point(x + 1, y));
         aliveCells.add(new Point(x - 1, y + 1));

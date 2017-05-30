@@ -10,14 +10,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 
-public class GameScene extends Pane {
+class SimulationScene extends Pane {
     private ArrayList<Point> cells = new ArrayList<Point>(0); //this array is representing all alive cells on board
 
     private int gameSceneWidth;
     private int gameSceneHeight;
 
-    private int CELL_SIZE = 10; //size of one cells
-    private int ANIMATION_SPEED = 20; //speed of animation
+    private int cellSize = 10; //size of one cells
+    private int animationSpeed = 20; //speed of animation
 
     private AnimationTimer timer;
 
@@ -51,11 +51,11 @@ public class GameScene extends Pane {
     private int yClick;
 
 
-    public GameScene() {
+    SimulationScene() {
         canvas.setStyle("-fx-background-color: #222222;");
         //set width and height perfectly fit on scene even with user resize operation
-        gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE);
-        gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE);
+        gameSceneWidth = gameSceneWidth - (gameSceneWidth % cellSize);
+        gameSceneHeight = gameSceneHeight - (gameSceneHeight % cellSize);
 
         cellColor = Color.web("#1a3399");
         conwayRules = true; //initially set conway rules
@@ -65,10 +65,10 @@ public class GameScene extends Pane {
         yClick = 1;
 
         //setup labels indicating generation and alive cells numbers
-        generationLabel = new Label("Number of generation: 0");
+        generationLabel = new Label("Generation: 0");
         getChildren().add(generationLabel);
 
-        aliveCellsOnBoard = new Label("Number of alive cells: " + cells.size());
+        aliveCellsOnBoard = new Label("Alive cells: " + cells.size());
         getChildren().add(aliveCellsOnBoard);
         getChildren().add(canvas); //add canvas to pane
 
@@ -77,7 +77,7 @@ public class GameScene extends Pane {
 
             @Override
             public void handle(long timestamp) {
-                if (timestamp - lastUpdateTime >= ANIMATION_SPEED * 1_000_000) {
+                if (timestamp - lastUpdateTime >= animationSpeed * 1_000_000) {
                     updateScene();
                     lastUpdateTime = timestamp;
                 }
@@ -87,29 +87,28 @@ public class GameScene extends Pane {
         //create listeners of resize operation
         widthProperty().addListener((observableValue, oldSceneWidth, newSceneWidth) -> {
             gameSceneWidth = newSceneWidth.intValue();
-            gameSceneWidth = gameSceneWidth - (gameSceneWidth % CELL_SIZE + 1);
+            gameSceneWidth = gameSceneWidth - (gameSceneWidth % cellSize + 1);
             updateArraySize();
         });
 
         heightProperty().addListener((observableValue, oldSceneHeight, newSceneHeight) -> {
             gameSceneHeight = newSceneHeight.intValue();
-            gameSceneHeight = gameSceneHeight - (gameSceneHeight % CELL_SIZE + 1) - 10;
+            gameSceneHeight = gameSceneHeight - (gameSceneHeight % cellSize + 1) - 10;
             updateArraySize();
 
         });
 
         //create click listener - on click add alive cells
-        addEventHandler(MouseEvent.MOUSE_CLICKED, this::addPoint);
+        addEventHandler(MouseEvent.MOUSE_CLICKED, this::addCell);
 
         //create drag listerer - as above
-        addEventHandler(MouseEvent.MOUSE_DRAGGED, this::addPoint);
-
+        addEventHandler(MouseEvent.MOUSE_DRAGGED, this::addCell);
     }
 
-    public void updateScene() {
+    private void updateScene() {
         //create boolean 2D array representing grid
         //this array is created to capture better performance
-        boolean[][] cellsBoard = new boolean[gameSceneWidth / CELL_SIZE + 2][gameSceneHeight / CELL_SIZE + 2];
+        boolean[][] cellsBoard = new boolean[gameSceneWidth / cellSize + 2][gameSceneHeight / cellSize + 2];
         //  this for iterates through cells list
         // if there are cells - sets their position in bool array
         try {
@@ -117,9 +116,9 @@ public class GameScene extends Pane {
                 cellsBoard[cells.get(i).x + 1][cells.get(i).y + 1] = true;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Out of bounds at thread start");
+            System.out.println("Out of bounds");
         } catch (NullPointerException e) {
-            System.out.println("Nullpointer at thread start");
+            System.out.println("Nullpointer");
         }
 
         //create array that contains points wchich are added in next generation
@@ -365,52 +364,52 @@ public class GameScene extends Pane {
     }
 
     private void drawCanvasFrame() {
-        gc.strokeLine(CELL_SIZE,
+        gc.strokeLine(cellSize,
                 (canvas.getHeight()),
                 canvas.getWidth(),
                 canvas.getHeight());
 
         gc.strokeLine(canvas.getWidth(),
-                (CELL_SIZE),
+                (cellSize),
                 canvas.getWidth(),
                 canvas.getHeight());
     }
 
-    public void drawGrid() {
+    private void drawGrid() {
          /*this block is responsible for painting grid,
          grid is drawn regardless of cells*/
         try {
             //create lines horizontally
-            for (int i = 0; i <= gameSceneWidth / CELL_SIZE; i++) {
-                gc.strokeLine(((i * CELL_SIZE) + CELL_SIZE),
-                        CELL_SIZE,
-                        (i * CELL_SIZE) + CELL_SIZE,
-                        CELL_SIZE + (CELL_SIZE * gameSceneHeight / CELL_SIZE));
+            for (int i = 0; i <= gameSceneWidth / cellSize; i++) {
+                gc.strokeLine(((i * cellSize) + cellSize),
+                        cellSize,
+                        (i * cellSize) + cellSize,
+                        cellSize + (cellSize * gameSceneHeight / cellSize));
             }
 
             //create lines vertically
-            for (int i = 0; i <= gameSceneHeight / CELL_SIZE; i++) {
-                gc.strokeLine(CELL_SIZE,
-                        ((i * CELL_SIZE) + CELL_SIZE),
-                        CELL_SIZE * (gameSceneWidth / CELL_SIZE),
-                        ((i * CELL_SIZE) + CELL_SIZE));
+            for (int i = 0; i <= gameSceneHeight / cellSize; i++) {
+                gc.strokeLine(cellSize,
+                        ((i * cellSize) + cellSize),
+                        cellSize * (gameSceneWidth / cellSize),
+                        ((i * cellSize) + cellSize));
             }
             drawCanvasFrame();
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
         }
     }
 
-    public void drawCells() {
+    private void drawCells() {
         try {
             //iterate through cells array and set its color, size and shape
             for (Point newPoint : cells) {
                 gc.setFill(cellColor);
-                gc.fillRect(CELL_SIZE + (CELL_SIZE * newPoint.x),
-                        CELL_SIZE + (CELL_SIZE * newPoint.y),
-                        CELL_SIZE,
-                        CELL_SIZE);
+                gc.fillRect(cellSize + (cellSize * newPoint.x),
+                        cellSize + (cellSize * newPoint.y),
+                        cellSize,
+                        cellSize);
             }
-        } catch (ConcurrentModificationException | NullPointerException e) {
+        } catch (ConcurrentModificationException | NullPointerException ignored) {
         }
     }
 
@@ -419,15 +418,15 @@ public class GameScene extends Pane {
     @Override
     protected void layoutChildren() {
         super.layoutChildren();
-        canvas.setWidth(gameSceneWidth - CELL_SIZE + 1);
-        canvas.setHeight(gameSceneHeight - CELL_SIZE + 1);
+        canvas.setWidth(gameSceneWidth - cellSize + 1);
+        canvas.setHeight(gameSceneHeight - cellSize + 1);
 
         aliveCellsOnBoard.setLayoutY(gameSceneHeight - 3); // position of alive cells label
         generationLabel.setLayoutY(gameSceneHeight - 3);
-        aliveCellsOnBoard.setLayoutX(CELL_SIZE); // position of alive cells label
+        aliveCellsOnBoard.setLayoutX(cellSize); // position of alive cells label
         generationLabel.setLayoutX(160);
-        generationLabel.setText("Number of generation: " + String.valueOf(evolutionNum));
-        aliveCellsOnBoard.setText("Number of alive cells: " + cells.size());
+        generationLabel.setText("Generation: " + String.valueOf(evolutionNum));
+        aliveCellsOnBoard.setText("Alive cells: " + cells.size());
 
         gc.clearRect(0, 0, getWidth(), getHeight()); //clear canvas after each generation
         gc.setLineWidth(0.2);
@@ -437,7 +436,7 @@ public class GameScene extends Pane {
     }
 
     //on call add cells to a cells list
-    public void addPoint(int x, int y) {
+    private void addCell(int x, int y) {
         if (!cells.contains(new Point(x, y))) {
             cells.add(new Point(x, y));
         }
@@ -445,27 +444,26 @@ public class GameScene extends Pane {
     }
 
     //mouse click indicates values of x and y
-    public void addPoint(MouseEvent me) {
-        int x = (int) me.getX() / CELL_SIZE - 1;
-        int y = (int) me.getY() / CELL_SIZE - 1;
+    private void addCell(MouseEvent me) {
+        int x = (int) me.getX() / cellSize - 1;
+        int y = (int) me.getY() / cellSize - 1;
         xClick = x;
         yClick = y;
         if ((x >= 0) && (x < gameSceneWidth) && (y >= 0) && (y < gameSceneHeight)) {
-            addPoint(x, y);
+            addCell(x, y);
         }
 
-        if (devmode) {
+        if (devmode)
             System.out.println("aliveCells.add(new Point(x + " + x + ", y + " + y + "));");
-        }
     }
 
     //this method is called when user is resizing window, if there were alive
     // cells on position which is not existing after resize - delete that cells
     private void updateArraySize() {
-        ArrayList<Point> removeList = new ArrayList<Point>(0);
+        ArrayList<Point> removeList = new ArrayList<>(0);
 
         for (Point current : cells) {
-            if ((current.x > gameSceneWidth / CELL_SIZE - 3) || (current.y > gameSceneHeight / CELL_SIZE - 3)) {
+            if ((current.x > gameSceneWidth / cellSize - 3) || (current.y > gameSceneHeight / cellSize - 3)) {
                 removeList.add(current);
             }
         }
@@ -479,7 +477,7 @@ public class GameScene extends Pane {
     }
 
     //this method is called when user clicks on reset menu item
-    public void resetAll() {
+    void resetAll() {
         cells.clear(); //clears layout
         evolutionNum = 0; // set evolution number to 0
         if (devmode) {
@@ -613,11 +611,11 @@ public class GameScene extends Pane {
     }
 
     //this method is connected to speed slider item
-    void setANIMATION_SPEED(int ANIMATION_SPEED) {
-        this.ANIMATION_SPEED = ANIMATION_SPEED;
+    void setAnimationSpeed(int animationSpeed) {
+        this.animationSpeed = animationSpeed;
     }
 
-    public Color getCellColor() {
+    Color getCellColor() {
         return cellColor;
     }
 
@@ -626,20 +624,16 @@ public class GameScene extends Pane {
         requestLayout();
     }
 
-    public int getCELL_SIZE() {
-        return CELL_SIZE;
-    }
-
     //this method is connected to size slider item
-    void setCELL_SIZE(int CELL_SIZE) {
-        this.CELL_SIZE = CELL_SIZE;
+    void setCellSize(int cellSize) {
+        this.cellSize = cellSize;
     }
 
-    public AnimationTimer getTimer() {
+    AnimationTimer getTimer() {
         return timer;
     }
 
-    public void startAnimation(AnimationTimer timer) {
+    void startAnimation(AnimationTimer timer) {
         timer.start();
     }
 }
